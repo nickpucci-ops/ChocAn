@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset = "utf-8">
+		<title>Team 6 Report</title>  	
+		
+		<style>
+			.case-description {
+				border-bottom: 3px solid black;
+				padding: 7px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div id="paragraph">
+			<h2><u>Short Paragraph</u></h2>
+			
+			<p>Our solution for Chocolate Anonymous is data processing software that is capable of many
+			 tasks and features that facilitate data management, billing and finances, and additional 
+			 provider features. The feature of this solution is a main accounting procedure that will 
+			 collect reports from members and providers and also EFT data to be summarized into an 
+			 comprehensive report for the manager to evaluate. Additionally, providers will have access to 
+			 a provider directory that will allow them to verify and bill ChocAn members for their services
+			  which are then recorded onto a disk. Lastly, the operator of the data center will have access
+			   to the records and ability to add, remove, and update the status of active members and 
+			   providers with ChocAn. The Use Case Diagram, included below the glossary, shows the 
+			   associations of these tasks and actors. Bitbucket statistics are also included at the bottom
+			    of the report. The submitter of this report is Logan Millet and it was written fully in HTML.</p>
+			
+			<br />
+		
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse; 
+}
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<body>
+<table class="center">
+    
+    <tr>
+        <th colspan="2"><b><big>Glossary</big></b></th>
+    </tr>
+
+    <tr>
+        <td><b> Acme Accounting Services </b></td>
+        <td> A third party organization responsible for a number of membership-related actions including updating the ChocAn Data Center.
+        </td>
+    </tr>
+    <tr>
+        <td><b> ChocAn Data Center </b></td>
+        <td> Service used for member verification, the main accounting procedure, and updating member data. </td>
+    </tr>
+    <tr>
+        <td><b> ChocAn Operator </b></td>
+        <td> Operators are allowed to add new members to ChocAn, delete members who have resigned, and update member records. </td>
+    </tr>
+    <tr>
+        <td><b> Chocoholics Anonymous (ChocAn) </b></td>
+        <td> Organization dedicated to helping people addicted to chocolate. </td>
+    </tr>
+    <tr>
+        <td><b> Electronic Funds Transfer (EFT) </b></td>
+        <td> An online transaction typically used for paying for services from providers. </td>
+    </tr>
+    <tr>
+        <td><b> Main Accounting Procedure </b></td>
+        <td> Procedure that involves reading the week’s file of services and prints reports. </td>
+    </tr>
+    <tr>
+        <td><b> Manager Summary Report </b></td>
+        <td> Report that lists every provider to be paid that week, the number of consultations each had, and total fees for the week. </td>
+    </tr>
+    <tr>
+        <td><b> Manager </b></td>
+        <td> Person who works for ChocAn and can update member information. </td>
+    </tr>
+    <tr>
+        <td><b> Member Card </b></td>
+        <td> A plastic card embossed with the member’s name and a nine-digit member number and incorporating a magnetic strip on which that information is encoded. </td>
+    </tr>
+    <tr>
+        <td><b> Member </b></td>
+        <td> Person who pays monthly fee to ChocAn for unlimited consultations and treatments. </td>
+    </tr>
+    <tr>
+        <td><b> Provider Directory </b></td>
+        <td> An alphabetically ordered list of service names and corresponding service codes and fees. </td>
+    </tr>
+    <tr>
+        <td><b> Provider Number </b></td>
+        <td> Verification of the identification of the provider to correctly bill ChocAn. </td>
+    </tr>
+    <tr>
+        <td><b> Provider Report </b></td>
+        <td> Report containing the list of services he or she provided to members and a summary. </td>
+    </tr>
+    <tr>
+        <td><b> Provider </b></td>
+        <td> Health care professional who provides services to ChocAn members. </td>
+    </tr>
+    <tr>
+        <td><b> Report </b></td>
+        <td>  A summary including the number of consultations with members and the total fee for that week. The fields of the report include provider’s information and details of the service provided. </td>
+    </tr>
+    <tr>
+        <td><b> System Timer </b></td>
+        <td> Timer that allows the system to begin the main accounting procedure on Friday at midnight. </td>
+    </tr>
+    <tr>
+</table>
+</body>
+		<div id="use-case-diagrams">
+			<h2>Use Case Diagram</h2>
+			<img src="UseCaseFinal.png" />
+			
+			<br />
+			<h2><u>Use Case Descriptions</u></h2>
+			
+			<div id="enter-provider-number" class="case-description">
+				<strong>Use Case:</strong> Enter Provider Number <br />
+				<strong>Context:</strong> The provider intends to provide service to a ChocAn member but the system needs the provider's identification number. <br />
+				<strong>Actors:</strong> Provider <br />
+				<strong>Main Success Scenario:</strong>  <br />
+				<ol>
+					<li>Provider’s terminal is turned on</li>
+					<li>The terminal prompts the provider to enter his or her provider number.</li>
+					<li>The system identifies the provider.</li>
+					<li>Provider is prompted to slide the member's card.</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>3a. Provider incorrectly entered his or her number.</span> </br>
+				<span>&emsp; 3a.1. The terminal lets the provider know the number was unidentified.</span> </br>
+				<span>&emsp; 3a.2. The use case continues at step 2.</span> </br>
+				
+			</div>
+			
+			<div id="verify-member-card" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Verify Member Card <br />
+				<strong>Context:</strong> The provider intends to provide service to a ChocAn member but the system needs to verify the member's status. <br />
+				<strong>Actors:</strong> Provider <br />
+				<strong>Main Success Scenario:</strong>  <br />
+				<ol>
+					<li>The member hands his or her card to the provider.</li>
+					<li>The provider slides the card through the card reader on the terminal.</li>
+					<li>The terminal dials the ChocAn Data Center.</li>
+					<li>The ChocAn Data Center computer verifies the member number.</li>
+					<li>The word “Validated” appears on the one-line display.</li>
+					<li>The provider returns the card back to the member.</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>4a. The ChocAnData Center computer denies the member number.</span> </br>
+				<span>&emsp; 4a.1. The reason is displayed.</span> </br>
+				<span>&emsp; 4a.2. The use case continues at step 6.</span> </br>
+			</div>
+			
+			<div id="bill-member" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Bill Member <br />
+				<strong>Context:</strong> The provider bills ChocAn after a health care service has been provided to the member. <br />
+				<strong>Actors:</strong> Provider <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>The provider passes the member’s card through the card reader, or keys in member number.</li>
+					<li>When the word “Validated” appears, the provider keys in the date the service was provided.</li>
+					<li>The provider uses the Provider Directory to look up the appropriate six-digit served code corresponding to the service provided.</li>
+					<span>&emsp; 3.1. The provider keys in the service code. </span><br />
+					<span>&emsp; 3.2. To check that the service code has been correctly looked up and keyed in, the software product displays the name of the service corresponding to the code. </span><br />
+					<span>&emsp; 3.3. The provider is then asked to verify that this was the correct service that was provided. </span>
+				</ol>
+				<strong>Extensions:</strong> <br />
+				<span>3a. If the provider has entered a nonexistent code, an error message is printed.</span> </br>				
+			</div>
+			
+			<div id="write-record-to-disk" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Write Record To Disk <br />
+				<strong>Context:</strong> Records the details of the service provided to a ChocAn member for the data processing software <br />
+				<strong>Actors:</strong> Provider <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>The Provider finishes entering the details for the service provided.</li>
+					<li>The software product reads the data provided.</li>
+					<li>The software product writes a record that contains the following: Current date and time, date service was provided, provider number, member number, and service code.</li>
+					<li>The software product proceeds to look up the fee to be paid for the service.</li>
+					<li>The price of service is displayed on the provider’s terminal.</li>
+				</ol>
+				<strong>Extensions:</strong> <br />
+				<span>3a. The software product’s record also includes a comments field.</span> </br>
+				<span>&emsp; 3a.1 The use case continues at step 4.</span> </br>
+			</div>
+			
+			<div id="request-provider-directory" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Request Provider Directory <br />
+				<strong>Context:</strong> Provider is unsure of service names, service codes, or fees. <br />
+				<strong>Actors:</strong> Provider <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>Provider selects to request Provider Directory.</li>
+					<li>The software product emails the Provider Directory to the provider.</li>
+				</ol>
+				<strong>Extensions:</strong> <br />
+				<span>2a. The software product has a communication failure.</span> </br>
+			</div>
+			
+			<div id="main-accounting-procedure" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Main Accounting Procedure <br />
+				<strong>Context:</strong>  It’s Friday at midnight and the main accounting procedure is automatically run. <br />
+				<strong>Actors:</strong> System Timer <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>The software product accesses the file containing the past week’s services</li>
+					<li>Using this file, the software product <a href="#send-member-report">software product sends each member who consulted a provider a report</a></li>
+					<li>The software product <a href="#send-provider-report">sends each provider a report</a></li>
+					<li>The software product <a href="#write-eft-data-to-disk">writes electronic funds transfer (EFT) data to disk</a></li>
+					<li>The software product <a href="#send-summary-report">sends each manager a summary report for accounts payable</a></li>
+				</ol>
+				<strong>Extensions:</strong> N/A <br />
+			</div>
+			
+			<div id="send-member-report" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Send Member Report <br />
+				<strong>Context:</strong>  Report is generated on Friday at midnight or a manager manually requested a report <br />
+				<strong>Actors:</strong> System Timer, ChocAn Manager <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>The software product gathers the member’s name, number, street address, city, state, and ZIP code</li>
+					<li>For every service the member used, the software product gathers the date of service, provider name, and service name</li>
+					<li>The software product generates a new report</li>
+					<li>The report is populated with member data at the top</li>
+					<li>The report is populated with the services data, sorted by service date, below</li>
+					<li>The software product sends the member the newly generated report via email</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>6a. The software product has a communication failure</br>
+				<span>&emsp; 6a.1. The member is notified of the failure through other contact</span> </br>
+				<span>&emsp; 6a.2. When the issue is resolved, the use case starts back at step 1</span> </br>
+			</div>
+			
+			<div id="send-provider-report" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Send Provider Report <br />
+				<strong>Context:</strong>  Report is generated on Friday at midnight or a manager manually requested a report <br />
+				<strong>Actors:</strong> System Timer, ChocAn Manager <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>The software product gathers the information from the provider’s form already given</li>
+					<li>The software product generates a new blank report</li>
+					<li>The report is populated with information about the provider at the top</li>
+					<li>For every service, the report is populated with the information from the above form, sorted by the date and time the form was submitted to the computer</li>
+					<li>The software product adds a three digit number to the report representing the total number of consultations</li>
+					<li>The software product adds the total fee for the past week</li>
+					<li>The software product sends the newly generated report to the provider via email</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>6a. The total fee for the past week exceeds $99,999.99</br>
+				<span>&emsp; 6a.1. An error is thrown</span> </br>
+				<span>&emsp; 6a.2. The provider is made known of the error</span> </br>
+				<span>&emsp; 6a.3. The report is populated with the maximum value (99,999.99)</span> </br>
+				<span>7a. The software product has a communication failure</br>
+				<span>&emsp; 7a.1. The member is notified of the failure through other contact</span> </br>
+				<span>&emsp; 7a.2. When the issue is resolved, the use case starts back at step 1</span> </br>
+			</div>
+			
+			<div id="write-eft-data-to-disk" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Write EFT Data To Disk <br />
+				<strong>Context:</strong>  A record consisting of electronic funds transfer data is written to a disk. <br />
+				<strong>Actors:</strong> System Timer <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>Each provider who has billed ChocAn during that week receives a report.</li>
+					<li>A record consisting of EFT data is then written to a disk.</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>1a. The provider did not receive a report.</br>
+				<span>&emsp; 1a.1. The Provider contacts support or manager.</span> </br>
+				<span>&emsp; 1a.2. The issue was resolved, continuing to step 2.</span> </br>
+			</div>
+			
+			<div id="send-summary-report" class="case-description">
+			<br />
+				<strong>Use Case:</strong>  Send Summary Report <br />
+				<strong>Context:</strong>  A summary report is given to the manager for accounts payable.<br />
+				<strong>Actors:</strong> System Timer <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>A record consisting of EFT data is written to a disk.</li>
+					<li>Banking computers ensure that each provider’s bank account is credited with the appropriate amount.</li>
+					<li>Manager receives summary report for accounts payable.</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>2a. An error is caused by an incorrect credited amount to the provider’s bank account.</br>
+				<span>&emsp; 2a.1. The Provider notifies the manager or bank provider.</span> </br>
+				<span>&emsp; 2a.2. The correct amount is credited to the provider’s bank account.</span> </br>
+				<span>&emsp; 2a.3. The banking computers then verify the correct amounts.</span> </br>
+			</div>
+			
+			<div id="manually-generate-report" class="case-description">
+			<br />
+				<strong>Use Case:</strong>  Manually Generate Report <br />
+				<strong>Context:</strong>  A ChocAn Manager wants to manually send a report<br />
+				<strong>Actors:</strong> ChocAn Manager <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>The manager selects an option to send a report</li>
+					<li>The software product prompts the manager for which report to send</li>
+					<li>The manager selects which report to send</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>3a. The manager selects to send a member report</br>
+				<span>&emsp; 3a.1. The software product prompts the manager for the member(s) to send the report to</span> </br>
+				<span>&emsp; 3a.2. The manager selects the member(s) to generate and send a report to</span> </br>
+				<span>&emsp; 3a.3. The software product sends the member report to the appropriate member(s)</span> </br>
+				<span>3b. The manager selects to send a provider report</br>
+				<span>&emsp; 3b.1. The software product prompts the manager for the provider(s) to send the report to</span> </br>
+				<span>&emsp; 3b.2. The manager selects the provider(s) to generate and send a report to</span> </br>
+				<span>&emsp; 3b.3. The software product sends the provider report to the appropriate provider(s)</span> </br>
+				<span>3c. The manager selects to send a summary report</br>
+				<span>&emsp; 3c.1. The software product sends a summary report to the manager</span> </br>
+				<span>3d. The manager cancels the operation</br>
+				<span>&emsp; 3d.1. The software product reverts to previous state</span> </br>
+				<span>&emsp; 3d.2. The use case is complete</span> </br>
+			</div>
+			
+			<div id="manage-records" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Manage Records <br />
+				<strong>Context:</strong>  A change in records is necessary<br />
+				<strong>Actors:</strong> Data Center Operator <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>The software product prompts the operator which records to change</li>
+					<li>The operator selects which type of records to edit</li>
+				</ol>
+				<strong>Extensions:</strong><br />
+				<span>2a. The operator selects to edit members or providers.</br>
+				<span>&emsp; 2a.1. The software product then <a href="#edit-members">edits one or more members.</a></span> </br>
+				<span>&emsp; 2a.2. The software product then <a href="#edit-providers">edits one or more providers.</a></span> </br>
+			</div>
+			
+			<div id="edit-members" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Edit Members <br />
+				<strong>Context:</strong>   ChocAn Data Center allows operators to edit member information.<br />
+				<strong>Actors:</strong> Data Center Operator <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>During the day, the software at the ChocAn Data Center is run in interactive mode.</li>
+					<li>Operators may add new members to ChocAn, delete resigned members, or update member records.</li>
+				</ol>
+				<strong>Extensions:</strong>N/A<br />
+			</div>
+			
+			<div id="edit-providers" class="case-description">
+			<br />
+				<strong>Use Case:</strong> Edit Providers <br />
+				<strong>Context:</strong> ChocAn data Center allows operators to remove, add or update the Providers<br />
+				<strong>Actors:</strong> Data Center Operator <br />
+				<strong>Main Success Scenario:</strong> 
+				<ol>
+					<li>During the day, the software at the ChocAn Data Center runs in interactive mode.</li>
+					<li>Operators have the ability to add, remove or update any provider’s records. </li>
+				</ol>
+				<strong>Extensions:</strong> N/A<br />
+			</div>
+			
+		</div>
+		
+		<h2>Bitbucket Statistics</h2>
+		<img src="Bitbucket_Statistics.png" />
+	</body>
+</html>
