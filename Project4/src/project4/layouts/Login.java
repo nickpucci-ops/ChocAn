@@ -51,8 +51,8 @@ public class Login extends JPanel implements ActionListener {
 		this.add(passwordText, c);
 		
 		submitBtn = new JButton("Log in");
-		submitBtn.addActionListener(terminal);
 		submitBtn.addActionListener(this);
+		submitBtn.addActionListener(terminal);		
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 2;
@@ -68,7 +68,10 @@ public class Login extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
-	}
+		if(e.getSource() == submitBtn) {
+			submitBtn.putClientProperty("id", userNameText.getText());
+			submitBtn.putClientProperty("password", passwordText.getPassword());
+		}
+	}	
 	
 }
