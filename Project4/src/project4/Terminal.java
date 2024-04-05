@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import project4.layouts.Login;
+import project4.layouts.MainAccountingProcedure;
 import project4.layouts.OperatorMenu;
 
 public class Terminal implements ActionListener {
@@ -18,11 +19,13 @@ public class Terminal implements ActionListener {
 	
 	Login loginPanel;
 	OperatorMenu operatorMenuPanel;
+	MainAccountingProcedure mainAccountingPanel;
 	
 	Terminal() {
 		mainWindow = new JFrame();
 		
 		operatorMenuPanel = new OperatorMenu(this);
+		mainAccountingPanel = new MainAccountingProcedure(this);
 		
 		loginPanel = new Login(this);
 		mainWindow.add(loginPanel);
@@ -74,7 +77,10 @@ public class Terminal implements ActionListener {
 			mainWindow.revalidate();
 			mainWindow.repaint();
 		} else if(s.equals("Run Main Accounting Procedure")) {
-			//run main accounting procedure
+			mainWindow.remove(loginPanel);
+			mainWindow.add(mainAccountingPanel);
+			mainWindow.revalidate();
+			mainWindow.repaint();
 		}
 		
 	}
