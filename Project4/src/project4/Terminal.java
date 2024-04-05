@@ -78,6 +78,7 @@ public class Terminal implements ActionListener {
 			mainWindow.repaint();
 		} else if(s.equals("Run Main Accounting Procedure")) {
 			mainWindow.remove(loginPanel);
+			mainAccountingPanel.MainAccountingStart();
 			mainWindow.add(mainAccountingPanel);
 			mainWindow.revalidate();
 			mainWindow.repaint();
