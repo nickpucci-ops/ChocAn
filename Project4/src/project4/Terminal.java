@@ -12,6 +12,7 @@ import project4.layouts.OperatorMenu;
 public class Terminal implements ActionListener {
 	
 	ArrayList<Employee> employees;
+	ArrayList<Member> members;
 	
 	Employee loggedInEmployee;
 	
@@ -38,7 +39,7 @@ public class Terminal implements ActionListener {
 		mainWindow.setVisible(true);
 		
 		employees = new ArrayList<Employee>();
-		
+		members = new ArrayList<Member>();
 	}
 	
 	public static void main(String[] args) {
@@ -103,5 +104,13 @@ public class Terminal implements ActionListener {
 	
 	public void resizeWindow() {
 		mainWindow.validate();
+	}
+	
+	public ArrayList<Employee> getEmployees() {
+		return employees;
+	}
+	
+	public ArrayList<Member> getMembers() {
+		return members;
 	}
 }
