@@ -4,8 +4,10 @@ import javax.swing.*;
 import project4.Terminal;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Login extends JPanel {
+public class Login extends JPanel implements ActionListener {
 	/**
 	 * 
 	 */
@@ -17,6 +19,8 @@ public class Login extends JPanel {
 	JTextField userNameText;
 	JPasswordField passwordText;
 	JButton submitBtn;
+	
+	JButton mainAccountingProcedureBtn;
 	
 	public Login(Terminal terminal) {
 		super();
@@ -48,10 +52,23 @@ public class Login extends JPanel {
 		
 		submitBtn = new JButton("Log in");
 		submitBtn.addActionListener(terminal);
+		submitBtn.addActionListener(this);
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 2;
 		this.add(submitBtn, c);
+		
+		mainAccountingProcedureBtn = new JButton("Run Main Accounting Procedure");
+		mainAccountingProcedureBtn.addActionListener(terminal);
+		c.gridx = 0;
+		c.gridy = 3;
+		this.add(mainAccountingProcedureBtn, c);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

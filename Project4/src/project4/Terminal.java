@@ -40,8 +40,7 @@ public class Terminal implements ActionListener {
 		// TODO Auto-generated method stub
 		String s = e.getActionCommand();
 		if(s.equals("Log in")) {
-			int result = verifyEmployee();
-			//userNameText.setText("submitted");
+			int result = verifyEmployee();		
 			mainWindow.remove(loginPanel);
 			mainWindow.add(operatorMenuPanel);
 			mainWindow.revalidate();
@@ -51,6 +50,8 @@ public class Terminal implements ActionListener {
 			mainWindow.add(loginPanel);
 			mainWindow.revalidate();
 			mainWindow.repaint();
+		} else if(s.equals("Run Main Accounting Procedure")) {
+			//run main accounting procedure
 		}
 		
 	}
