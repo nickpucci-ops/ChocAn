@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 import project4.layouts.Login;
+import project4.layouts.MainAccountingProcedure;
 import project4.layouts.OperatorMenu;
 
 public class Terminal implements ActionListener {
 	
 	ArrayList<Employee> employees;
+	ArrayList<Member> members;
 	
 	Employee loggedInEmployee;
 	
@@ -18,11 +20,13 @@ public class Terminal implements ActionListener {
 	
 	Login loginPanel;
 	OperatorMenu operatorMenuPanel;
+	MainAccountingProcedure mainAccountingPanel;
 	
 	Terminal() {
 		mainWindow = new JFrame();
 		
 		operatorMenuPanel = new OperatorMenu(this);
+		mainAccountingPanel = new MainAccountingProcedure(this);
 		
 		loginPanel = new Login(this);
 		mainWindow.add(loginPanel);
@@ -35,7 +39,7 @@ public class Terminal implements ActionListener {
 		mainWindow.setVisible(true);
 		
 		employees = new ArrayList<Employee>();
-		
+		members = new ArrayList<Member>();
 	}
 	
 	public static void main(String[] args) {
@@ -74,7 +78,10 @@ public class Terminal implements ActionListener {
 			mainWindow.revalidate();
 			mainWindow.repaint();
 		} else if(s.equals("Run Main Accounting Procedure")) {
-			//run main accounting procedure
+			mainWindow.remove(loginPanel);
+			mainWindow.add(mainAccountingPanel);
+			mainWindow.revalidate();
+			mainWindow.repaint();
 		}
 		
 	}
@@ -96,5 +103,13 @@ public class Terminal implements ActionListener {
 	
 	public void resizeWindow() {
 		mainWindow.validate();
+	}
+	
+	public ArrayList<Employee> getEmployees() {
+		return employees;
+	}
+	
+	public ArrayList<Member> getMembers() {
+		return members;
 	}
 }

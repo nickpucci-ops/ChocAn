@@ -18,6 +18,7 @@ public abstract class Menu extends JPanel implements ActionListener {
 	
 	Menu(Terminal terminal) {
 		super();
+		this.terminal = terminal;
 		this.setLayout(new BorderLayout());
 		
 		topPanel = new JPanel();
