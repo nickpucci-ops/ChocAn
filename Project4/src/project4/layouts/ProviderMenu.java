@@ -1,7 +1,11 @@
 package project4.layouts;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
+import project4.Member;
 //import project4.Employee;
 import project4.Terminal;
 //import project4.Member;
@@ -14,6 +18,10 @@ public class ProviderMenu extends Menu implements ActionListener {
 //	private static String user;
 //	private static String password;
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2673515052420890046L;
 	JPanel mainMenuPanel;
 	JButton requestProviderDirectoryBtn;
 	JButton billChocAnBtn;
@@ -22,7 +30,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	JButton providerDirectoryBackBtn;
 	
 	JPanel billChocAnPanel;
-	JLabel 
+	//JLabel 
 	JButton submitDataBtn;
 	JButton billChocAnBackBtn;
 	
@@ -90,15 +98,22 @@ public class ProviderMenu extends Menu implements ActionListener {
 //		addMemberSubmitBtn = new JButton("Submit");
 //		addMemberSubmitBtn.addActionListener(this);
 		
-		public int validateMemberID(String memberID) {
-			for(Member member : members) {
-				if (member.getID() == Integer.parseInt(memberID)) {
-					return 1;
-				} else {
-					return 0; //member not verified
-				}
+		
+	}
+	
+	public int validateMemberID(String memberID) {
+		for(Member member : terminal.getMembers()) {
+			if (member.getId() == Integer.parseInt(memberID)) {
+				return 1;
+			} else {
+				return 0; //member not verified
 			}
-			return 0;
 		}
+		return 0;
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
