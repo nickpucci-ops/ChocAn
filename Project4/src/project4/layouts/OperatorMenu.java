@@ -52,6 +52,12 @@ public class OperatorMenu extends Menu implements ActionListener {
 	JTextField updateMemberZipText;
 	JButton updateMemberCancelBtn;
 	JButton updateMemberSubmitBtn;
+	
+	JPanel deleteMemberPanel;
+	JLabel deleteMemberChoiceLabel;
+	JComboBox<String> deleteMemberChoiceBox;
+	JButton deleteMemberSubmitBtn;
+	JButton deleteMemberCancelBtn;
 
 	public OperatorMenu(Terminal terminal) {
 		super(terminal);		
@@ -112,7 +118,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 		addMemberSubmitBtn.addActionListener(this);
 		
 		updateMemberChoicePanel = new JPanel();
-		updateMemberChoiceLabel = new JLabel("Choose Member to update: ");
+		updateMemberChoiceLabel = new JLabel("Choose member to update: ");
 		updateMemberChoicePanel.add(updateMemberChoiceLabel);
 		updateMemberChoiceBox = new JComboBox<String>();
 		updateMemberChoicePanel.add(updateMemberChoiceBox);
@@ -140,6 +146,16 @@ public class OperatorMenu extends Menu implements ActionListener {
 		updateMemberCancelBtn.addActionListener(this);
 		updateMemberSubmitBtn = new JButton("Submit");
 		updateMemberSubmitBtn.addActionListener(this);
+		
+		deleteMemberPanel = new JPanel();
+		deleteMemberChoiceLabel = new JLabel("Choose member to delete: ");
+		deleteMemberPanel.add(deleteMemberChoiceLabel);
+		deleteMemberChoiceBox = new JComboBox<String>();
+		deleteMemberPanel.add(deleteMemberChoiceBox);
+		deleteMemberSubmitBtn = new JButton("Delete");
+		deleteMemberSubmitBtn.addActionListener(this);
+		deleteMemberCancelBtn = new JButton("Cancel");
+		deleteMemberCancelBtn.addActionListener(this);
 	}
 
 	@Override
@@ -168,7 +184,12 @@ public class OperatorMenu extends Menu implements ActionListener {
 			addFooterButton(updateMemberChoiceSubmitBtn);
 			setTitle("Select Member");
 		} else if(e.getSource() == deleteMemberBtn) { 
-			
+			clear();
+			main.add(deleteMemberPanel);
+			populateMemberComboBox(deleteMemberChoiceBox);
+			addFooterButton(deleteMemberSubmitBtn);
+			addFooterButton(deleteMemberCancelBtn);
+			setTitle("Delete Member");
 		} else if(e.getSource() == addMemberCancelBtn) {
 			clear();
 			main.add(editMembersPanel);
@@ -200,12 +221,23 @@ public class OperatorMenu extends Menu implements ActionListener {
 				main.add(editMembersPanel);
 				setTitle("Edit Members");
 			}
+		} else if(e.getSource() == deleteMemberSubmitBtn) {
+			int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteMemberChoiceBox.getSelectedItem() + "? This action cannot be undone!", "Delete Member", JOptionPane.YES_NO_OPTION);
+			if(confirm == JOptionPane.OK_OPTION) {
+				((Operator)terminal.getLoggedInEmployee()).removeMember(terminal, terminal.getMemberByName((String)deleteMemberChoiceBox.getSelectedItem()));
+				clear();
+				main.add(editMembersPanel);
+				setTitle("Edit Members");
+			} 
+		} else if(e.getSource() == deleteMemberCancelBtn) {
+			clear();
+			main.add(editMembersPanel);
+			setTitle("Edit Members");
 		} else if(e.getSource() == getLogoutBtn()) {
 			clear();
 			main.add(mainMenuPanel);
 			setTitle("Operator");
-		}
-		else {
+		} else {
 			clear();
 			main.add(mainMenuPanel);
 			setTitle("Operator");
