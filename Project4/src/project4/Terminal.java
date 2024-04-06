@@ -2,6 +2,7 @@ package project4;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -117,8 +118,10 @@ public class Terminal implements ActionListener {
 	private void readData() {
 		try(JsonReader reader = new JsonReader(new FileReader("members.json"))) {
 			Gson gson = new GsonBuilder().create();
-			members = new ArrayList<Member>();
-			members = gson.fromJson(reader, members.getClass());
+			
+			members = new ArrayList<Member>(Arrays.asList(gson.fromJson(reader, Member[].class)));
+			//List memberObject = (List) Arrays.asList(gson.fromJson(reader, Member[].class));
+			//members.add(memberObject.);
 		} catch (FileNotFoundException e) {
 			members.add(new Member("Joe Schmoe", 1, "123 Main Street", "Tuscaloosa", "AL", 12345));
 			members.add(new Member("Bob", 2, "456 Main Street", "Seattle", "WA", 56482));	

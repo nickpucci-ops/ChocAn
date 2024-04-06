@@ -175,7 +175,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			setTitle("Edit Members");
 		} else if(e.getSource() == addMemberSubmitBtn) {			
 			if(!validateAddMemberFields()) {
-				JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);;;;;;;;;;;;;
+				JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
 			} else {
 				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
 				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
@@ -205,6 +205,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 	}
 	
 	private void populateMemberComboBox(JComboBox<String> comboBox) {
+		comboBox.removeAllItems();
 		for(Member member : terminal.getMembers()) {
 			comboBox.addItem(member.getName());
 		}
