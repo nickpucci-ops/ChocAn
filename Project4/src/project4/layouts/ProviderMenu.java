@@ -103,7 +103,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	
 	public int validateMemberID(String memberID) {
 		for(Member member : terminal.getMembers()) {
-			if (member.getId() == Integer.parseInt(memberID)) {
+			if (member.getMemberNumber() == Integer.parseInt(memberID)) {
 				return 1;
 			} else {
 				return 0; //member not verified

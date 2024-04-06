@@ -51,8 +51,7 @@ public class Login extends JPanel implements ActionListener {
 		this.add(passwordText, c);
 		
 		submitBtn = new JButton("Log in");
-		submitBtn.addActionListener(this);
-		submitBtn.addActionListener(terminal);		
+		submitBtn.addActionListener(this);		
 		c.gridx = 0;
 		c.gridy = 2;
 		c.gridwidth = 2;
@@ -69,8 +68,15 @@ public class Login extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == submitBtn) {
-			submitBtn.putClientProperty("id", userNameText.getText());
-			submitBtn.putClientProperty("password", passwordText.getPassword());
+			String username = userNameText.getText();
+			String password = String.valueOf(passwordText.getPassword());
+			if(username.isEmpty() || password.isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Please enter BOTH a username AND a password", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			if(!terminal.verifyEmployee(username, password)) {
+				JOptionPane.showMessageDialog(this, "Incorrect username or password", "Error", JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}	
 	

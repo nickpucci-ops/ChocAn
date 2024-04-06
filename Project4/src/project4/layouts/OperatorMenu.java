@@ -170,9 +170,16 @@ public class OperatorMenu extends Menu implements ActionListener {
 		} else if(e.getSource() == deleteMemberBtn) { 
 			
 		} else if(e.getSource() == addMemberCancelBtn) {
-		
-		} else if(e.getSource() == addMemberSubmitBtn) {
-			
+			clear();
+			main.add(editMembersPanel);
+			setTitle("Edit Members");
+		} else if(e.getSource() == addMemberSubmitBtn) {			
+			if(!validateAddMemberFields()) {
+				JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);;;;;;;;;;;;;
+			} else {
+				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
+				((Operator)terminal.getLoggedInEmployee()).addMember(newMember);
+			}
 		} else if(e.getSource() == updateMemberChoiceSubmitBtn) {
 			clear();
 			main.add(updateMemberPanel);
@@ -195,16 +202,38 @@ public class OperatorMenu extends Menu implements ActionListener {
 	}
 	
 	private void populateMemberComboBox(JComboBox<String> comboBox) {
-		comboBox.addItem("John Doe");
-		comboBox.addItem("Joe Schmoe");
-		comboBox.addItem("Arnold Schwarzenegger");
+		for(Member member : terminal.getMembers()) {
+			comboBox.addItem(member.getName());
+		}
 	}
 	
 	private void populateUpdateMemberFields() {
-		updateMemberNameText.setText((String)updateMemberChoiceBox.getSelectedItem());
-		updateMemberAddressText.setText("123 Main St.");
-		updateMemberCityText.setText("Tuscaloosa, AL");
-		updateMemberZipText.setText("12345");
+		Member memberToEdit = terminal.getMemberByName((String)updateMemberChoiceBox.getSelectedItem());
+		updateMemberNameText.setText(memberToEdit.getName());
+		updateMemberAddressText.setText(memberToEdit.getStreetAddress());
+		updateMemberCityText.setText(memberToEdit.getCity());
+		updateMemberZipText.setText(String.valueOf(memberToEdit.getZipCode()));
+	}
+	
+	private Boolean validateAddMemberFields() {
+		if(addMemberNameText.getText().isEmpty()) {
+			return false;
+		}
+		if(addMemberAddressText.getText().isEmpty()) {
+			return false;
+		}
+		if(addMemberCityText.getText().isEmpty()) {
+			return false;
+		}
+		if(addMemberZipText.getText().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	private Member createMemberFromAddMemberFields(int id) {
+		return new Member(addMemberNameText.getText(), id, addMemberAddressText.getText(), 
+				addMemberCityText.getText(), addMemberCityText.getText(), Integer.parseInt(addMemberZipText.getText()));
 	}
 
 }

@@ -25,6 +25,12 @@ public class Terminal implements ActionListener {
 	Terminal() {
 		mainWindow = new JFrame();
 		
+		employees = new ArrayList<Employee>();
+		employees.add(new Operator(this, 1));
+		members = new ArrayList<Member>();
+		members.add(new Member("Joe Schmoe", 1, "123 Main Street", "Tuscaloosa", "AL", 12345));
+		members.add(new Member("Bob", 2, "456 Main Street", "Seattle", "WA", 56482));
+		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
 		
@@ -38,8 +44,7 @@ public class Terminal implements ActionListener {
 		//mainWindow.pack();
 		mainWindow.setVisible(true);
 		
-		employees = new ArrayList<Employee>();
-		members = new ArrayList<Member>();
+		
 	}
 	
 	public static void main(String[] args) {
@@ -51,28 +56,7 @@ public class Terminal implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String s = e.getActionCommand();
-		if(s.equals("Log in")) {
-			JButton logInBtn = (JButton)e.getSource();
-			int result = verifyEmployee((String)logInBtn.getClientProperty("id"), (String)logInBtn.getClientProperty("password"));	
-			if(result == 0) {
-				//TODO: handle invalid log in
-				//for now, just go to operator menu
-				mainWindow.remove(loginPanel);
-				mainWindow.add(operatorMenuPanel);
-				mainWindow.revalidate();
-				mainWindow.repaint();
-			} else if(result == Employee.OPERATOR) {
-				mainWindow.remove(loginPanel);
-				mainWindow.add(operatorMenuPanel);
-				mainWindow.revalidate();
-				mainWindow.repaint();
-			} else if(result == Employee.MANAGER) {
-				//TODO: show manager menu
-			} else if(result == Employee.PROVIDER) {
-				//TODO: show provider menu
-			}
-			
-		} else if(s.equals("Log out")) {			
+		if(s.equals("Log out")) {			
 			mainWindow.getContentPane().removeAll();
 			mainWindow.add(loginPanel);
 			mainWindow.revalidate();
@@ -87,19 +71,34 @@ public class Terminal implements ActionListener {
 		
 	}
 	
-	public int verifyEmployee(String id, String pwd) {
+	public Boolean verifyEmployee(String id, String pwd) {
+		short employeeType = -1;
 		for(Employee employee : employees) {
 			if(employee.getId() == Integer.parseInt(id)) {
 				if(employee.getPassword().equals(pwd)) {
 					loggedInEmployee = employee;
-					return employee.getEmployeeType();
+					employeeType = employee.getEmployeeType();
 				} else {
-					//invalid log in -- wrong username and password
-					return 0;
+					//invalid log in -- wrong password
+					return false;
 				}
 			}
 		}
-		return 0;
+		//invalid log in -- no user matches id
+		if(employeeType == -1) {
+			return false;
+		}
+		if(employeeType == Employee.OPERATOR) {
+			mainWindow.remove(loginPanel);
+			mainWindow.add(operatorMenuPanel);
+			mainWindow.revalidate();
+			mainWindow.repaint();
+		} else if(employeeType == Employee.MANAGER) {
+			//TODO: show manager menu
+		} else if(employeeType == Employee.PROVIDER) {
+			//TODO: show provider menu
+		}
+		return true;
 	}
 	
 	public void resizeWindow() {
@@ -112,5 +111,18 @@ public class Terminal implements ActionListener {
 	
 	public ArrayList<Member> getMembers() {
 		return members;
+	}
+	
+	public Employee getLoggedInEmployee() {
+		return loggedInEmployee;
+	}
+	
+	public Member getMemberByName(String name) {
+		for(Member member : members) {
+			if(member.getName().equals(name)) {
+				return member;
+			}
+		}
+		return members.getFirst();
 	}
 }

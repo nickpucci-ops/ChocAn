@@ -1,6 +1,6 @@
 package project4;
 
-public class Member extends Employee {
+public class Member {
     private String name;
     private int memberNumber; 
     private String streetAddress;
