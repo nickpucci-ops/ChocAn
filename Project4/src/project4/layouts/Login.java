@@ -41,11 +41,13 @@ public class Login extends JPanel implements ActionListener {
 		this.add(passwordLabel, c);
 		
 		userNameText = new JTextField(16);
+		userNameText.setText("1");
 		c.gridx = 1;
 		c.gridy = 0;
 		this.add(userNameText, c);
 		
 		passwordText = new JPasswordField(16);
+		passwordText.setText("password");
 		c.gridx = 1;
 		c.gridy = 1;
 		this.add(passwordText, c);
@@ -69,14 +71,22 @@ public class Login extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 		if(e.getSource() == submitBtn) {
 			String username = userNameText.getText();
-			String password = String.valueOf(passwordText.getPassword());
+			String password = String.valueOf(passwordText.getPassword());			
 			if(username.isEmpty() || password.isEmpty()) {
 				JOptionPane.showMessageDialog(this, "Please enter BOTH a username AND a password", "Error", JOptionPane.ERROR_MESSAGE);
+				userNameText.setText("");
+				passwordText.setText("");
 				return;
 			}
-			if(!terminal.verifyEmployee(username, password)) {
-				JOptionPane.showMessageDialog(this, "Incorrect username or password", "Error", JOptionPane.ERROR_MESSAGE);
+			try {
+				if(!terminal.verifyEmployee(username, password)) {
+					JOptionPane.showMessageDialog(this, "Incorrect username or password", "Error", JOptionPane.ERROR_MESSAGE);										
+				}
+			} catch (NumberFormatException exception) {
+				JOptionPane.showMessageDialog(this, "Username must be a number", "Invalid Format", JOptionPane.ERROR_MESSAGE);
 			}
+			userNameText.setText("");
+			passwordText.setText("");
 		}
 	}	
 	

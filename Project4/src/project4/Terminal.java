@@ -9,6 +9,17 @@ import project4.layouts.Login;
 import project4.layouts.MainAccountingProcedure;
 import project4.layouts.OperatorMenu;
 
+import project4.json.EmployeeAdapter;
+
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Writer;
+import java.io.IOException;
+
 public class Terminal implements ActionListener {
 	
 	ArrayList<Employee> employees;
@@ -25,11 +36,7 @@ public class Terminal implements ActionListener {
 	Terminal() {
 		mainWindow = new JFrame();
 		
-		employees = new ArrayList<Employee>();
-		employees.add(new Operator(this, 1));
-		members = new ArrayList<Member>();
-		members.add(new Member("Joe Schmoe", 1, "123 Main Street", "Tuscaloosa", "AL", 12345));
-		members.add(new Member("Bob", 2, "456 Main Street", "Seattle", "WA", 56482));
+		readData();
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
@@ -38,7 +45,13 @@ public class Terminal implements ActionListener {
 		mainWindow.add(loginPanel);
 		
 		//set mainWindow properties
-		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		mainWindow.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				writeData();
+				mainWindow.dispose();
+			}
+		});		
 		mainWindow.setSize(new Dimension(500, 300));
 		mainWindow.setTitle("ChocAn");
 		//mainWindow.pack();
@@ -71,7 +84,7 @@ public class Terminal implements ActionListener {
 		
 	}
 	
-	public Boolean verifyEmployee(String id, String pwd) {
+	public Boolean verifyEmployee(String id, String pwd) throws NumberFormatException {
 		short employeeType = -1;
 		for(Employee employee : employees) {
 			if(employee.getId() == Integer.parseInt(id)) {
@@ -99,6 +112,53 @@ public class Terminal implements ActionListener {
 			//TODO: show provider menu
 		}
 		return true;
+	}
+	
+	private void readData() {
+		try(JsonReader reader = new JsonReader(new FileReader("members.json"))) {
+			Gson gson = new GsonBuilder().create();
+			members = new ArrayList<Member>();
+			members = gson.fromJson(reader, members.getClass());
+		} catch (FileNotFoundException e) {
+			members.add(new Member("Joe Schmoe", 1, "123 Main Street", "Tuscaloosa", "AL", 12345));
+			members.add(new Member("Bob", 2, "456 Main Street", "Seattle", "WA", 56482));	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try(JsonReader reader = new JsonReader(new FileReader("employees.json"))) {
+			employees = new ArrayList<Employee>();
+			Gson gson = (new GsonBuilder()).registerTypeAdapter(employees.getClass(), new EmployeeAdapter()).create();	
+			employees = gson.fromJson(reader, employees.getClass());
+		} catch (FileNotFoundException e) {
+			employees = new ArrayList<Employee>();
+			employees.add(new Operator(1));	
+		} catch(JsonSyntaxException e) {
+			employees = new ArrayList<Employee>();
+			employees.add(new Operator(1));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void writeData() {
+		try(Writer writer = new FileWriter("members.json")) {
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(members, writer);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try(Writer writer = new FileWriter("employees.json")) {
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(employees, writer);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	public void resizeWindow() {

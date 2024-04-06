@@ -2,16 +2,16 @@ package project4;
 
 public class Operator extends Employee {
 	
-	Operator(Terminal terminal, int id) {
-		super(terminal, Employee.OPERATOR, id);
+	Operator(int id) {
+		super(Employee.OPERATOR, id);
 		
 	}
 	
-	public void addMember(Member member) {
+	public void addMember(Terminal terminal, Member member) {
 		terminal.getMembers().add(member);
 	}
 	
-	public void editMember(Member member) {
+	public void editMember(Terminal terminal, Member member) {
 		for(Member memberItem : terminal.getMembers()) {
 			if(memberItem.getMemberNumber() == member.getMemberNumber()) {
 				memberItem = member;
@@ -20,15 +20,15 @@ public class Operator extends Employee {
 		}
 	}
 	
-	public void removeMember(Member member) {
+	public void removeMember(Terminal terminal, Member member) {
 		terminal.getMembers().remove(member);
 	}
 	
-	public void addProvider(Provider provider) {
+	public void addProvider(Terminal terminal, Provider provider) {
 		terminal.getEmployees().add(provider);
 	}
 	
-	public void editProvider(Provider provider) {
+	public void editProvider(Terminal terminal, Provider provider) {
 		for(Employee employee : terminal.getEmployees()) {
 			if(employee.getId() == provider.getId()) {
 				employee = provider;
@@ -37,7 +37,7 @@ public class Operator extends Employee {
 		}
 	}
 	
-	public void removeProvider(Provider provider) {
+	public void removeProvider(Terminal terminal, Provider provider) {
 		terminal.getEmployees().remove(provider);
 	}
 	

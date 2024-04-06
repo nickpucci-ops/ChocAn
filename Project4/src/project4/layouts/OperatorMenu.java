@@ -115,7 +115,6 @@ public class OperatorMenu extends Menu implements ActionListener {
 		updateMemberChoiceLabel = new JLabel("Choose Member to update: ");
 		updateMemberChoicePanel.add(updateMemberChoiceLabel);
 		updateMemberChoiceBox = new JComboBox<String>();
-		populateMemberComboBox(updateMemberChoiceBox);
 		updateMemberChoicePanel.add(updateMemberChoiceBox);
 		updateMemberChoiceSubmitBtn = new JButton("Update");
 		updateMemberChoiceSubmitBtn.addActionListener(this);
@@ -165,6 +164,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 		} else if(e.getSource() == updateMemberBtn) {
 			clear();
 			main.add(updateMemberChoicePanel);
+			populateMemberComboBox(updateMemberChoiceBox);
 			addFooterButton(updateMemberChoiceSubmitBtn);
 			setTitle("Select Member");
 		} else if(e.getSource() == deleteMemberBtn) { 
@@ -178,7 +178,10 @@ public class OperatorMenu extends Menu implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);;;;;;;;;;;;;
 			} else {
 				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
-				((Operator)terminal.getLoggedInEmployee()).addMember(newMember);
+				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
+				clear();
+				main.add(editMembersPanel);
+				setTitle("Edit Members");
 			}
 		} else if(e.getSource() == updateMemberChoiceSubmitBtn) {
 			clear();
