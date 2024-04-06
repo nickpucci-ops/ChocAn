@@ -14,7 +14,7 @@ public class Operator extends Employee {
 	public void editMember(Terminal terminal, Member member) {
 		for(Member memberItem : terminal.getMembers()) {
 			if(memberItem.getMemberNumber() == member.getMemberNumber()) {
-				memberItem = member;
+				terminal.getMembers().set(terminal.getMembers().indexOf(memberItem), member);
 				return;
 			}
 		}

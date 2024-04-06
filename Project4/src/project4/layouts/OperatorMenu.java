@@ -190,6 +190,16 @@ public class OperatorMenu extends Menu implements ActionListener {
 			addFooterButton(updateMemberSubmitBtn);
 			addFooterButton(updateMemberCancelBtn);
 			setTitle("Update Member");
+		} else if(e.getSource() == updateMemberSubmitBtn) {
+			if(!validateUpdateMemberFields()) {
+				JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			} else {
+				Member updatedMember = createMemberFromUpdateMemberFields();
+				((Operator)terminal.getLoggedInEmployee()).editMember(terminal, updatedMember);
+				clear();
+				main.add(editMembersPanel);
+				setTitle("Edit Members");
+			}
 		} else if(e.getSource() == getLogoutBtn()) {
 			clear();
 			main.add(mainMenuPanel);
@@ -238,6 +248,27 @@ public class OperatorMenu extends Menu implements ActionListener {
 	private Member createMemberFromAddMemberFields(int id) {
 		return new Member(addMemberNameText.getText(), id, addMemberAddressText.getText(), 
 				addMemberCityText.getText(), addMemberCityText.getText(), Integer.parseInt(addMemberZipText.getText()));
+	}
+	
+	private Boolean validateUpdateMemberFields() {
+		if(updateMemberNameText.getText().isEmpty()) {
+			return false;
+		}
+		if(updateMemberAddressText.getText().isEmpty()) {
+			return false;
+		}
+		if(updateMemberCityText.getText().isEmpty()) {
+			return false;
+		}
+		if(updateMemberZipText.getText().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+	
+	private Member createMemberFromUpdateMemberFields() {
+		return new Member(updateMemberNameText.getText(), terminal.getMemberByName((String)updateMemberChoiceBox.getSelectedItem()).getMemberNumber(), updateMemberAddressText.getText(), 
+				updateMemberCityText.getText(), updateMemberCityText.getText(), Integer.parseInt(updateMemberZipText.getText()));
 	}
 
 }
