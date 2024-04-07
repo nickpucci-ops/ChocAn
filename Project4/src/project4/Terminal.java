@@ -9,7 +9,7 @@ import javax.swing.*;
 import project4.layouts.Login;
 import project4.layouts.MainAccountingProcedure;
 import project4.layouts.OperatorMenu;
-
+import project4.report.*;
 import project4.json.EmployeeAdapter;
 
 import com.google.gson.*;
@@ -38,6 +38,9 @@ public class Terminal implements ActionListener {
 		mainWindow = new JFrame();
 		
 		readData();
+		
+		MemberReport testReport = new MemberReport(members.getFirst(), "memReport.pdf");
+		testReport.open();
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
