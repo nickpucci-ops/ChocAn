@@ -1,5 +1,6 @@
 package project4;
 
+import project4.report.ProviderReport;
 import project4.report.Report;
 
 public class Manager extends Employee {
@@ -7,8 +8,8 @@ public class Manager extends Employee {
 		super(Employee.MANAGER, id, username);
 	}
 	
-	public void getReport() {
-		
+	public void getProviderReport() {
+		ProviderReport preport = new ProviderReport( provider ,"Provider Report" )
 	}
 	public void sendReport(Report report) {
 		
