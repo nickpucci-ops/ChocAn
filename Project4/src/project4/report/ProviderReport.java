@@ -25,7 +25,7 @@ public class ProviderReport extends Report{
         addLineWithTitle("Total Fee for Week: ", String.format("$%.2f", 99999.0));
  	
 		closeAndSave();
-
+ 
 	}
 }
 
