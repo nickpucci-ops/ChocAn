@@ -8,9 +8,11 @@ public abstract class Employee {
 	protected short employeeType;
 	private int id;
 	private String password;
+	private String username;
 	
-	Employee(short employeeType, int id) {
+	Employee(short employeeType, int id, String Username) {
 		this.employeeType = employeeType;
+		this.username = Username;
 		this.id = id;
 		this.password = "password";
 	}
@@ -26,4 +28,8 @@ public abstract class Employee {
 	public String getPassword() {
 		return this.password;
 	}
-}
+	
+	public String getUsername() {
+		return this.username;
+	}
+ }

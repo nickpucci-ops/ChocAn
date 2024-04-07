@@ -1,5 +1,7 @@
 package project4.layouts;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -33,6 +35,12 @@ public class ManagerMenu extends Menu implements ActionListener {
 		runEFTBtn.addActionListener(this);
 		mainMenuPanel.add(runEFTBtn);
 		main.add(mainMenuPanel);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

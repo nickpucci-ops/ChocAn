@@ -2,8 +2,8 @@ package project4;
 
 public class Operator extends Employee {
 	
-	Operator(int id) {
-		super(Employee.OPERATOR, id);
+	Operator(int id, String username) {
+		super(Employee.OPERATOR, id, username);
 		
 	}
 	
