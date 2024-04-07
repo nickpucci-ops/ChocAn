@@ -94,11 +94,11 @@ public class ManagerMenu extends Menu implements ActionListener {
 		else if(e.getSource() == getLogoutBtn()) {
 			clear();
 			main.add(mainMenuPanel);
-			setTitle("Provider");
+			setTitle("Manager");
 		}  else {
 			clear();
 			main.add(mainMenuPanel);
-			setTitle("Provider");
+			setTitle("Manager");
 		}
 		main.revalidate();
 		main.repaint();
