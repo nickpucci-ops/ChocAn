@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import project4.layouts.Login;
 import project4.layouts.MainAccountingProcedure;
+import project4.layouts.ManagerMenu;
 import project4.layouts.OperatorMenu;
 import project4.report.*;
 import project4.json.EmployeeAdapter;
@@ -33,6 +34,7 @@ public class Terminal implements ActionListener {
 	Login loginPanel;
 	OperatorMenu operatorMenuPanel;
 	MainAccountingProcedure mainAccountingPanel;
+	ManagerMenu managerMenuPanel;
 	
 	Terminal() {
 		mainWindow = new JFrame();
@@ -44,6 +46,7 @@ public class Terminal implements ActionListener {
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
+		managerMenuPanel = new ManagerMenu(this);
 		
 		loginPanel = new Login(this);
 		mainWindow.add(loginPanel);
@@ -111,7 +114,10 @@ public class Terminal implements ActionListener {
 			mainWindow.revalidate();
 			mainWindow.repaint();
 		} else if(employeeType == Employee.MANAGER) {
-			//TODO: show manager menu
+			mainWindow.remove(loginPanel);
+			mainWindow.add(managerMenuPanel);
+			mainWindow.revalidate();
+			mainWindow.repaint();
 		} else if(employeeType == Employee.PROVIDER) {
 			//TODO: show provider menu
 		}
