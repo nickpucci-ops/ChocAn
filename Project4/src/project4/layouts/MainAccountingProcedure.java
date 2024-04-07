@@ -6,19 +6,25 @@ import java.util.ArrayList;
 
 import project4.*;
 import project4.report.MemberReport;
+import project4.report.SummaryReport;
 
 public class MainAccountingProcedure extends Panel implements ActionListener {
 
 	private static final long serialVersionUID = -3934833398410949394L;
 	
+	private static final short MEMBER_REPORTS = 0;
+	private static final short PROVIDER_REPORTS = 1;
+	private static final short SUMMARY_REPORT = 2;
+	
 	Terminal terminal;
 	JButton continueBtn;
 	
-	int memberPanelPos;
+	short panelPos;
 	String[] memberNames = {"John", "Joe", "Mary"};
 	
 	JPanel memberReportPanel;
 	ArrayList<MemberReport> memberReports;
+	SummaryReport summaryReport;
 	
 	JPanel providerReportPanel;
 	JLabel providerReportLabel1;
@@ -76,8 +82,29 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 				int index = (int)((JButton)e.getSource()).getClientProperty("index");
 				memberReports.get(index).open();
 			}
-		} else if(e.getSource() == continueBtn) {
-			
+		} else if(s.equals("Open Summary Report")) {
+			summaryReport.open();
+		}
+		else if(e.getSource() == continueBtn) {
+			panelPos++;
+			switch(panelPos) {
+			case(MEMBER_REPORTS):
+				createMemberReports();
+				switchToMemberPanel();
+				break;
+			case(PROVIDER_REPORTS):
+				createProviderReports();
+				switchToProviderPanel();
+				break;
+			case(SUMMARY_REPORT):
+				createSummaryReport();
+				switchToSummaryPanel();
+				break;
+			default:
+				createMemberReports();
+				switchToMemberPanel();
+				break;
+			}
 		}
 		
 		main.revalidate();
@@ -86,6 +113,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	}
 	
 	public void MainAccountingStart() {
+		panelPos = MEMBER_REPORTS;
 		createMemberReports();
 		switchToMemberPanel();
 	}
@@ -119,7 +147,24 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	private void switchToProviderPanel() {
 		main.removeAll();
 		title.setText("Provider Reports");
+		main.revalidate();
+		main.repaint();
 	}
 
-
+	private void createSummaryReport() {
+		summaryReport = new SummaryReport(terminal, "summary.pdf");
+	}
+	private void switchToSummaryPanel() {
+		main.removeAll();
+		title.setText("Summary Report");
+		JButton openReport = new JButton("Open Summary Report");
+		openReport.addActionListener(this);
+		main.add(openReport);
+		bottomPanel.remove(continueBtn);
+		main.revalidate();
+		main.repaint();
+		bottomPanel.revalidate();
+		bottomPanel.repaint();
+	}
 }
+ 

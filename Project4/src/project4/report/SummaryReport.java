@@ -3,7 +3,7 @@ package project4.report;
 import project4.*;
 
 public class SummaryReport extends Report {
-	SummaryReport(Terminal terminal, String filename) {
+	public SummaryReport(Terminal terminal, String filename) {
 		super(filename, "Summary Report");
 		int totalFee = 0;
 		int totalConsultations = 0;
@@ -25,5 +25,7 @@ public class SummaryReport extends Report {
 		addLine("-------------------------");
 		addLineWithTitle("Total Consultations:", String.valueOf(totalConsultations));
 		addLineWithTitle("Total Fee", String.valueOf(totalFee));
+		
+		closeAndSave();
 	}
 }
