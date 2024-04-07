@@ -192,6 +192,10 @@ public class Terminal implements ActionListener {
 		return members;
 	}
 	
+	public ArrayList<Service> getServices() {
+		return services;
+	}
+	
 	public Employee getLoggedInEmployee() {
 		return loggedInEmployee;
 	}
