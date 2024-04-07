@@ -31,6 +31,8 @@ public class OperatorMenu extends Menu implements ActionListener {
 	JTextField addMemberAddressText;
 	JLabel addMemberCityLabel;
 	JTextField addMemberCityText;
+	JLabel addMemberStateLabel;
+	JTextField addMemberStateText;
 	JLabel addMemberZipLabel;
 	JTextField addMemberZipText;
 	JButton addMemberCancelBtn;
@@ -48,6 +50,8 @@ public class OperatorMenu extends Menu implements ActionListener {
 	JTextField updateMemberAddressText;
 	JLabel updateMemberCityLabel;
 	JTextField updateMemberCityText;
+	JLabel updateMemberStateLabel;
+	JTextField updateMemberStateText;
 	JLabel updateMemberZipLabel;
 	JTextField updateMemberZipText;
 	JButton updateMemberCancelBtn;
@@ -108,6 +112,10 @@ public class OperatorMenu extends Menu implements ActionListener {
 		addMemberPanel.add(addMemberCityLabel);
 		addMemberCityText = new JTextField(16);
 		addMemberPanel.add(addMemberCityText);
+		addMemberStateLabel = new JLabel("State: ");
+		addMemberPanel.add(addMemberStateLabel);
+		addMemberStateText = new JTextField(16);
+		addMemberPanel.add(addMemberStateText);
 		addMemberZipLabel = new JLabel("Zip Code: ");
 		addMemberPanel.add(addMemberZipLabel);
 		addMemberZipText = new JTextField(16);
@@ -138,6 +146,10 @@ public class OperatorMenu extends Menu implements ActionListener {
 		updateMemberPanel.add(updateMemberCityLabel);
 		updateMemberCityText = new JTextField(16);
 		updateMemberPanel.add(updateMemberCityText);
+		updateMemberStateLabel = new JLabel("State: ");
+		updateMemberPanel.add(updateMemberStateLabel);
+		updateMemberStateText = new JTextField(16);
+		updateMemberPanel.add(updateMemberStateText);
 		updateMemberZipLabel = new JLabel("Zip Code: ");
 		updateMemberPanel.add(updateMemberZipLabel);
 		updateMemberZipText = new JTextField(16);
@@ -195,15 +207,13 @@ public class OperatorMenu extends Menu implements ActionListener {
 			main.add(editMembersPanel);
 			setTitle("Edit Members");
 		} else if(e.getSource() == addMemberSubmitBtn) {			
-			if(!validateAddMemberFields()) {
-				JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
-			} else {
+			if(validateAddMemberFields()) {
 				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
 				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
 				clear();
 				main.add(editMembersPanel);
 				setTitle("Edit Members");
-			}
+			} 
 		} else if(e.getSource() == updateMemberChoiceSubmitBtn) {
 			clear();
 			main.add(updateMemberPanel);
@@ -212,15 +222,13 @@ public class OperatorMenu extends Menu implements ActionListener {
 			addFooterButton(updateMemberCancelBtn);
 			setTitle("Update Member");
 		} else if(e.getSource() == updateMemberSubmitBtn) {
-			if(!validateUpdateMemberFields()) {
-				JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
-			} else {
+			if(validateUpdateMemberFields()) {
 				Member updatedMember = createMemberFromUpdateMemberFields();
 				((Operator)terminal.getLoggedInEmployee()).editMember(terminal, updatedMember);
 				clear();
 				main.add(editMembersPanel);
 				setTitle("Edit Members");
-			}
+			} 
 		} else if(e.getSource() == deleteMemberSubmitBtn) {
 			int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteMemberChoiceBox.getSelectedItem() + "? This action cannot be undone!", "Delete Member", JOptionPane.YES_NO_OPTION);
 			if(confirm == JOptionPane.OK_OPTION) {
@@ -258,20 +266,55 @@ public class OperatorMenu extends Menu implements ActionListener {
 		updateMemberNameText.setText(memberToEdit.getName());
 		updateMemberAddressText.setText(memberToEdit.getStreetAddress());
 		updateMemberCityText.setText(memberToEdit.getCity());
+		updateMemberStateText.setText(memberToEdit.getState());
 		updateMemberZipText.setText(String.valueOf(memberToEdit.getZipCode()));
 	}
 	
 	private Boolean validateAddMemberFields() {
 		if(addMemberNameText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
-		}
+		}		
 		if(addMemberAddressText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		if(addMemberCityText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addMemberStateText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		if(addMemberZipText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addMemberNameText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Name field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addMemberAddressText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Address field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addMemberCityText.getText().length() > 14) {
+			JOptionPane.showMessageDialog(this, "City field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addMemberStateText.getText().length() > 2) {
+			JOptionPane.showMessageDialog(this, "State field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addMemberZipText.getText().length() != 5) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			Integer.parseInt(addMemberZipText.getText());
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
@@ -279,20 +322,54 @@ public class OperatorMenu extends Menu implements ActionListener {
 	
 	private Member createMemberFromAddMemberFields(int id) {
 		return new Member(addMemberNameText.getText(), id, addMemberAddressText.getText(), 
-				addMemberCityText.getText(), addMemberCityText.getText(), Integer.parseInt(addMemberZipText.getText()));
+				addMemberCityText.getText(), addMemberStateText.getText(), Integer.parseInt(addMemberZipText.getText()));
 	}
 	
 	private Boolean validateUpdateMemberFields() {
 		if(updateMemberNameText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		if(updateMemberAddressText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		if(updateMemberCityText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateMemberStateText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		if(updateMemberZipText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateMemberNameText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Name field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateMemberAddressText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Address field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateMemberCityText.getText().length() > 14) {
+			JOptionPane.showMessageDialog(this, "City field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateMemberStateText.getText().length() > 2) {
+			JOptionPane.showMessageDialog(this, "State field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateMemberZipText.getText().length() != 5) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			Integer.parseInt(updateMemberZipText.getText());
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
@@ -300,7 +377,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 	
 	private Member createMemberFromUpdateMemberFields() {
 		return new Member(updateMemberNameText.getText(), terminal.getMemberByName((String)updateMemberChoiceBox.getSelectedItem()).getMemberNumber(), updateMemberAddressText.getText(), 
-				updateMemberCityText.getText(), updateMemberCityText.getText(), Integer.parseInt(updateMemberZipText.getText()));
+				updateMemberCityText.getText(), updateMemberStateText.getText(), Integer.parseInt(updateMemberZipText.getText()));
 	}
 
 }

@@ -7,11 +7,11 @@ public class MemberReport extends Report {
 	public MemberReport(Member member, String filename) {
 		super(filename, "Member Report");
 		addLineWithTitle("Member Name:", member.getName());
-		addLineWithTitle("Member Number:", String.valueOf(member.getMemberNumber()));
+		addLineWithTitle("Member Number:", String.format("%09d", member.getMemberNumber()));
 		addLineWithTitle("Street Address:", member.getStreetAddress());
 		addLineWithTitle("City:", member.getCity());
 		addLineWithTitle("State:", member.getState());
-		addLineWithTitle("Zip Code:", String.valueOf(member.getZipCode()));
+		addLineWithTitle("Zip Code:", String.format("%05d",member.getZipCode()));
 		
 		closeAndSave();
 	}
