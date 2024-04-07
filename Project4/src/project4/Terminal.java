@@ -39,7 +39,7 @@ public class Terminal implements ActionListener {
 		
 		readData();
 		
-		MemberReport testReport = new MemberReport(members.getFirst(), "memReport.pdf");
+		MemberReport testReport = new MemberReport(members.get(0), "memReport.pdf");
 		testReport.open();
 		
 		operatorMenuPanel = new OperatorMenu(this);
@@ -189,6 +189,6 @@ public class Terminal implements ActionListener {
 				return member;
 			}
 		}
-		return members.getFirst();
+		return members.get(0);
 	}
 }
