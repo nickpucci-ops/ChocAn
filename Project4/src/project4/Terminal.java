@@ -190,6 +190,6 @@ public class Terminal implements ActionListener {
 				return member;
 			}
 		}
-		return members.getFirst();
+		return members.get(0);
 	}
 }
