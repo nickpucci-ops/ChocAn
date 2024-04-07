@@ -50,4 +50,8 @@ public class Service  {
             throw new IllegalArgumentException("Date must be in the format MM/DD/YYYY");
         }
     }
+    
+    public int getFee() {
+    	return this.fee;
+    }
 }
