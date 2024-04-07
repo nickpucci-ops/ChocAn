@@ -4,10 +4,11 @@ import javax.swing.*;
 import java.awt.event.*;
 import project4.*;
 
-public class MainAccountingProcedure extends Menu implements ActionListener {
+public class MainAccountingProcedure extends Panel implements ActionListener {
 
 	private static final long serialVersionUID = -3934833398410949394L;
 	
+	Terminal terminal;
 	JButton continueBtn;
 	
 	int memberPanelPos;
@@ -22,20 +23,48 @@ public class MainAccountingProcedure extends Menu implements ActionListener {
 	JLabel providerReportLabel2;
 	JLabel providerReportLabel3;
 	
+	private JPanel topPanel;
+	private JPanel bottomPanel;
+	protected JPanel main;
+	private JLabel title;
+	
+	private JButton loginBtn;
+	
 	public MainAccountingProcedure(Terminal terminal) {
-		super(terminal);
-		this.setTitle("Main Accounting Procedure");
+		super();
+		this.terminal = terminal;
+		this.setLayout(new BorderLayout());
+		
+		topPanel = new JPanel();
+		main = new JPanel();
+		bottomPanel = new JPanel();
+		bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		bottomPanel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		
+		loginBtn = new JButton("Log out");
+		loginBtn.addActionListener(terminal);
+		loginBtn.addActionListener(this);
+		bottomPanel.add(loginBtn);
 		
 		continueBtn = new JButton("Continue");
 		continueBtn.addActionListener(this);
-		addFooterButton(continueBtn);
+		bottomPanel.add(continueBtn);
+		
+		title = new JLabel("Main Accounting Procedure");
+		topPanel.add(title);
+		
+		this.add(topPanel, BorderLayout.NORTH);
+		this.add(main, BorderLayout.CENTER);
+		this.add(bottomPanel, BorderLayout.SOUTH);
+		
+		
 		
 		memberReportPanel = new JPanel(new GridLayout(0, 1));
 		memberReportLabel1 = new JLabel("" + memberPanelPos);
 		memberReportPanel.add(memberReportLabel1);
 		memberReportLabel2 = new JLabel(memberNames[memberPanelPos]);
 		memberReportPanel.add(memberReportLabel2);
-		setTitle("Member Report");
+		//setTitle("Member Report");
 		main.add(memberReportPanel);
 		
 		providerReportPanel = new JPanel(new GridLayout(0, 1));
@@ -50,7 +79,7 @@ public class MainAccountingProcedure extends Menu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
-		if(e.getSource() == continueBtn && memberPanelPos < 2) {
+		/*if(e.getSource() == continueBtn && memberPanelPos < 2) {
 			memberPanelPos++;
 			memberReportLabel1.setText("" + memberPanelPos);
 			memberReportLabel2.setText(memberNames[memberPanelPos]);
@@ -63,7 +92,7 @@ public class MainAccountingProcedure extends Menu implements ActionListener {
 			//addFooterButton(continueBtn);
 			main.add(providerReportPanel);
 			setTitle("Provider Report");
-		}
+		}*/
 		main.revalidate();
 		main.repaint();
 		

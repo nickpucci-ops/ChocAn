@@ -13,7 +13,7 @@ public class Service  {
     private Provider provider;
     private String comments;
 
-    public Service(String name, int code, int fee, Date dateProvided, Date dateEntered, Member member, Provider provider, String comments)
+    public Service(String name, int code, int fee, Date dateProvided, Date dateEntered, Member member, Provider provider, String comments) {
         this.name = name;
         this.code = code;
         this.fee = fee;

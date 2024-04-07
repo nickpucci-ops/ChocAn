@@ -88,10 +88,10 @@ public class Terminal implements ActionListener {
 		
 	}
 	
-	public Boolean verifyEmployee(String id, String pwd) throws NumberFormatException {
+	public Boolean verifyEmployee(String username, String pwd) throws NumberFormatException {
 		short employeeType = -1;
 		for(Employee employee : employees) {
-			if(employee.getId() == Integer.parseInt(id)) {
+			if(employee.getUsername().equals(username)) {
 				if(employee.getPassword().equals(pwd)) {
 					loggedInEmployee = employee;
 					employeeType = employee.getEmployeeType();
@@ -126,6 +126,7 @@ public class Terminal implements ActionListener {
 			//List memberObject = (List) Arrays.asList(gson.fromJson(reader, Member[].class));
 			//members.add(memberObject.);
 		} catch (FileNotFoundException e) {
+			members = new ArrayList<Member>();
 			members.add(new Member("Joe Schmoe", 1, "123 Main Street", "Tuscaloosa", "AL", 12345));
 			members.add(new Member("Bob", 2, "456 Main Street", "Seattle", "WA", 56482));	
 		} catch (IOException e) {
@@ -139,10 +140,10 @@ public class Terminal implements ActionListener {
 			employees = gson.fromJson(reader, employees.getClass());
 		} catch (FileNotFoundException e) {
 			employees = new ArrayList<Employee>();
-			employees.add(new Operator(1));	
+			employees.add(new Operator(1, "operator1"));	
 		} catch(JsonSyntaxException e) {
 			employees = new ArrayList<Employee>();
-			employees.add(new Operator(1));
+			employees.add(new Operator(1, "operator1"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
