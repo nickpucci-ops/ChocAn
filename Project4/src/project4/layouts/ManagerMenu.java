@@ -1,5 +1,5 @@
 package project4.layouts;
-import java.awt.*;
+//import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -15,6 +15,15 @@ public class ManagerMenu extends Menu implements ActionListener {
 	JButton runProviderReportBtn;
 	JButton runManagerReportBtn;
 	JButton runEFTBtn;
+	
+	JPanel memberReportPanel;
+	JButton memberReportBackBtn;
+	JPanel providerReportPanel;
+	JButton providerReportBackBtn;
+	JPanel managerReportPanel;
+	JButton managerReportBackBtn;
+	JPanel EFTPanel;
+	JButton EFTBackBtn;
 	
 	public ManagerMenu(Terminal terminal) {
 		super(terminal);		
@@ -34,12 +43,53 @@ public class ManagerMenu extends Menu implements ActionListener {
 		runEFTBtn.addActionListener(this);
 		mainMenuPanel.add(runEFTBtn);
 		main.add(mainMenuPanel);
+		
+		memberReportPanel = new JPanel();
+		memberReportBackBtn = new JButton("Back");
+		memberReportBackBtn.addActionListener(this);
+		
+		providerReportPanel = new JPanel();
+		providerReportBackBtn = new JButton("Back");
+		providerReportBackBtn.addActionListener(this);
+		
+		managerReportPanel = new JPanel();
+		managerReportBackBtn = new JButton("Back");
+		managerReportBackBtn.addActionListener(this);
+		
+		EFTPanel = new JPanel();
+		EFTBackBtn = new JButton("Back");
+		EFTBackBtn.addActionListener(this);
+		
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource()== runMemberReportBtn) {
+			clear();
+			main.add(memberReportPanel);
+			addFooterButton(memberReportBackBtn);
+			setTitle("Member Report");
+		}
+		else if(e.getSource() == runProviderReportBtn) {
+			clear();
+			main.add(providerReportPanel);
+			addFooterButton(providerReportBackBtn);
+			setTitle("Provider Report");
+		}
+		else if(e.getSource() == runManagerReportBtn) {
+			clear();
+			main.add(managerReportPanel);
+			addFooterButton(managerReportBackBtn);
+			setTitle("Manager Report");
+		}
+		else if(e.getSource() == runEFTBtn) {
+			clear();
+			main.add(EFTPanel);
+			addFooterButton(EFTBackBtn);
+			setTitle("EFT");
+		}
 	}
 	
 	
