@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import project4.Member;
+import project4.Operator;
 //import project4.Employee;
 import project4.Terminal;
 //import project4.Member;
@@ -30,21 +31,24 @@ public class ProviderMenu extends Menu implements ActionListener {
 	JButton providerDirectoryBackBtn;
 	
 	JPanel billChocAnPanel;
-	//JLabel 
+	JPanel addDateOfServicePanel;
+	JLabel addDateOfServiceLabel;
+	JTextField addDateOfServiceText;
+	JPanel addProviderNumberPanel;
+	JLabel addProviderNumberLabel;
+	JTextField addProviderNumberText;
+	JPanel addMemeberNumberPanel;
+	JLabel addMemeberNumberLabel;
+	JTextField addMemeberNumberText;
+	JPanel addServiceCodePanel;
+	JLabel addServiceCodeLabel;
+	JTextField addServiceCodeText;
+	JPanel addDateOfServicePanel;
+	JLabel addDateOfServiceLabel;
+	JTextField addDateOfServiceText;
 	JButton submitDataBtn;
-	JButton billChocAnBackBtn;
+	JButton billChocAnCancelBtn;
 	
-//	JPanel addMemberPanel;
-//	JLabel addMemberNameLabel;
-//	JTextField addMemberNameText;
-//	JLabel addMemberAddressLabel;
-//	JTextField addMemberAddressText;
-//	JLabel addMemberCityLabel;
-//	JTextField addMemberCityText;
-//	JLabel addMemberZipLabel;
-//	JTextField addMemberZipText;
-//	JButton addMemberCancelBtn;
-//	JButton addMemberSubmitBtn;
 	
 	
 	public ProviderMenu(Terminal terminal) {
@@ -61,42 +65,46 @@ public class ProviderMenu extends Menu implements ActionListener {
 		main.add(mainMenuPanel);
 		
 		providerDirectoryPanel = new JPanel();
-		//look up 6 digit service id number
+		//display
 		providerDirectoryBackBtn = new JButton("Back");
 		providerDirectoryBackBtn.addActionListener(this);
 		providerDirectoryPanel.add(providerDirectoryBackBtn);
 		
 		billChocAnPanel = new JPanel();
-		//enter member id
-		//enter service data
+		//current date and time
+		//
+		//date service was provided
+		addDateOfServicePanel = new JPanel(new GridLayout(0, 2));
+		addDateOfServiceLabel = new JLabel("Date of service(MM–DD–YYYY): ");
+		addDateOfServicePanel.add(addDateOfServiceLabel);
+		addDateOfServiceText = new JTextField(16);
+		addDateOfServicePanel.add(addDateOfServiceText);
+		//provider number
+		addProviderNumberPanel = new JPanel(new GridLayout(0, 2));
+		addProviderNumberNameLabel = new JLabel("Provider #: ");
+		addProviderNumberPanel.add(addProviderNumberNameLabel);
+		addProviderNumberNameText = new JTextField(16);
+		addProviderNumberPanel.add(addProviderNumberNameText);
+		//member number
+		addMemeberNumberPanel = new JPanel(new GridLayout(0, 2));
+		addMemeberNumberNameLabel = new JLabel("Member #: ");
+		addMemeberNumberPanel.add(addMemeberNumberNameLabel);
+		addMemeberNumberNameText = new JTextField(16);
+		addMemeberNumberPanel.add(addMemeberNumberNameText);
+		//service code
+		addServiceCodePanel = new JPanel(new GridLayout(0, 2));
+		addServiceCodeAddressLabel = new JLabel("Service Code: ");
+		addServiceCodePanel.add(addServiceCodeAddressLabel);
+		addServiceCodeAddressText = new JTextField(6);
+		addServiceCodePanel.add(addServiceCodeAddressText);
+		//submit
 		submitDataBtn = new JButton("Submit");
 		submitDataBtn.addActionListener(this);
 		billChocAnPanel.add(submitDataBtn);
-		billChocAnBackBtn = new JButton("Back");
-		billChocAnBackBtn.addActionListener(this);
-		billChocAnPanel.add(billChocAnBackBtn);
-		
-//		addMemberPanel = new JPanel(new GridLayout(0, 2));
-//		addMemberNameLabel = new JLabel("Name: ");
-//		addMemberPanel.add(addMemberNameLabel);
-//		addMemberNameText = new JTextField(16);
-//		addMemberPanel.add(addMemberNameText);
-//		addMemberAddressLabel = new JLabel("Address: ");
-//		addMemberPanel.add(addMemberAddressLabel);
-//		addMemberAddressText = new JTextField(16);
-//		addMemberPanel.add(addMemberAddressText);
-//		addMemberCityLabel = new JLabel("City: ");
-//		addMemberPanel.add(addMemberCityLabel);
-//		addMemberCityText = new JTextField(16);
-//		addMemberPanel.add(addMemberCityText);
-//		addMemberZipLabel = new JLabel("Zip Code: ");
-//		addMemberPanel.add(addMemberZipLabel);
-//		addMemberZipText = new JTextField(16);
-//		addMemberPanel.add(addMemberZipText);
-//		addMemberCancelBtn = new JButton("Cancel");
-//		addMemberCancelBtn.addActionListener(this);
-//		addMemberSubmitBtn = new JButton("Submit");
-//		addMemberSubmitBtn.addActionListener(this);
+		//back
+		billChocAnCancelBtn = new JButton("Cancel");
+		billChocAnCancelBtn.addActionListener(this);
+		billChocAnPanel.add(billChocAnCancelBtn);
 		
 		
 	}
@@ -114,6 +122,46 @@ public class ProviderMenu extends Menu implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getSource() == requestProviderDirectoryBtn) {
+			clear();
+			main.add(providerDirectoryPanel);
+			addFooterButton(providerDirectoryBackBtn);
+			setTitle("Provider Directory");
+		} else if(e.getSource() == providerDirectoryBackBtn) {
+			clear();
+			main.add(mainMenuPanel);
+			setTitle("Provider");
+		} else if(e.getSource() == billChocAnBtn) {
+			clear();
+			main.add(billChocAnPanel);
+			addFooterButton(billChocAnCancelBtn);
+			addFooterButton(submitDataBtn);
+			setTitle("Add Service Record");
+		} else if(e.getSource() == billChocAnCancelBtn) {
+			clear();
+			main.add(mainMenuPanel);
+			setTitle("Provider");
+		} else if(e.getSource() == submitDataBtn) {
+//			if(validateAddMemberFields()) {
+//				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
+//				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
+//				clear();
+//				main.add(editMembersPanel);
+//				setTitle("Edit Members");
+//			}
+//			clear();
+//			main.add(mainMenuPanel);
+//			setTitle("Provider");
+		} else if(e.getSource() == getLogoutBtn()) {
+			clear();
+			main.add(mainMenuPanel);
+			setTitle("Provider");
+		}  else {
+			clear();
+			main.add(mainMenuPanel);
+			setTitle("Provider");
+		}
+		main.revalidate();
+		main.repaint();
 	}
 }
