@@ -62,6 +62,45 @@ public class OperatorMenu extends Menu implements ActionListener {
 	JComboBox<String> deleteMemberChoiceBox;
 	JButton deleteMemberSubmitBtn;
 	JButton deleteMemberCancelBtn;
+	
+	JPanel addProviderPanel;
+	JLabel addProviderNameLabel;
+	JTextField addProviderNameText;
+	JLabel addProviderAddressLabel;
+	JTextField addProviderAddressText;
+	JLabel addProviderCityLabel;
+	JTextField addProviderCityText;
+	JLabel addProviderStateLabel;
+	JTextField addProviderStateText;
+	JLabel addProviderZipLabel;
+	JTextField addProviderZipText;
+	JButton addProviderCancelBtn;
+	JButton addProviderSubmitBtn;
+	
+	JPanel updateProviderChoicePanel;
+	JLabel updateProviderChoiceLabel;
+	JComboBox<String> updateProviderChoiceBox;
+	JButton updateProviderChoiceSubmitBtn;
+	
+	JPanel updateProviderPanel;
+	JLabel updateProviderNameLabel;
+	JTextField updateProviderNameText;
+	JLabel updateProviderAddressLabel;
+	JTextField updateProviderAddressText;
+	JLabel updateProviderCityLabel;
+	JTextField updateProviderCityText;
+	JLabel updateProviderStateLabel;
+	JTextField updateProviderStateText;
+	JLabel updateProviderZipLabel;
+	JTextField updateProviderZipText;
+	JButton updateProviderCancelBtn;
+	JButton updateProviderSubmitBtn;
+	
+	JPanel deleteProviderPanel;
+	JLabel deleteProviderChoiceLabel;
+	JComboBox<String> deleteProviderChoiceBox;
+	JButton deleteProviderSubmitBtn;
+	JButton deleteProviderCancelBtn;
 
 	public OperatorMenu(Terminal terminal) {
 		super(terminal);		
@@ -91,10 +130,13 @@ public class OperatorMenu extends Menu implements ActionListener {
 		
 		editProvidersPanel = new JPanel();
 		addProviderBtn = new JButton("Add Provider");
+		addProviderBtn.addActionListener(this);
 		editProvidersPanel.add(addProviderBtn);
 		updateProviderBtn = new JButton("Update Provider");
+		updateProviderBtn.addActionListener(this);
 		editProvidersPanel.add(updateProviderBtn);
 		deleteProviderBtn = new JButton("Delete Provider");
+		deleteProviderBtn.addActionListener(this);
 		editProvidersPanel.add(deleteProviderBtn);
 		editProvidersBackBtn = new JButton("Back");
 		editProvidersBackBtn.addActionListener(this);
@@ -168,11 +210,80 @@ public class OperatorMenu extends Menu implements ActionListener {
 		deleteMemberSubmitBtn.addActionListener(this);
 		deleteMemberCancelBtn = new JButton("Cancel");
 		deleteMemberCancelBtn.addActionListener(this);
+		
+		addProviderPanel = new JPanel(new GridLayout(0, 2));
+		addProviderNameLabel = new JLabel("Name: ");
+		addProviderPanel.add(addProviderNameLabel);
+		addProviderNameText = new JTextField(16);
+		addProviderPanel.add(addProviderNameText);
+		addProviderAddressLabel = new JLabel("Address: ");
+		addProviderPanel.add(addProviderAddressLabel);
+		addProviderAddressText = new JTextField(16);
+		addProviderPanel.add(addProviderAddressText);
+		addProviderCityLabel = new JLabel("City: ");
+		addProviderPanel.add(addProviderCityLabel);
+		addProviderCityText = new JTextField(16);
+		addProviderPanel.add(addProviderCityText);
+		addProviderStateLabel = new JLabel("State: ");
+		addProviderPanel.add(addProviderStateLabel);
+		addProviderStateText = new JTextField(16);
+		addProviderPanel.add(addProviderStateText);
+		addProviderZipLabel = new JLabel("Zip Code: ");
+		addProviderPanel.add(addProviderZipLabel);
+		addProviderZipText = new JTextField(16);
+		addProviderPanel.add(addProviderZipText);
+		addProviderSubmitBtn = new JButton("Submit");
+		addProviderSubmitBtn.addActionListener(this);
+		addProviderCancelBtn = new JButton("Cancel");
+		addProviderCancelBtn.addActionListener(this);
+		
+		updateProviderChoicePanel = new JPanel();
+		updateProviderChoiceLabel = new JLabel("Choose provider to update: ");
+		updateProviderChoicePanel.add(updateProviderChoiceLabel);
+		updateProviderChoiceBox = new JComboBox<String>();
+		updateProviderChoicePanel.add(updateProviderChoiceBox);
+		updateProviderChoiceSubmitBtn = new JButton("Update");
+		updateProviderChoiceSubmitBtn.addActionListener(this);
+		
+		updateProviderPanel = new JPanel(new GridLayout(0, 2));
+		updateProviderNameLabel = new JLabel("Name: ");
+		updateProviderPanel.add(updateProviderNameLabel);
+		updateProviderNameText = new JTextField(16);
+		updateProviderPanel.add(updateProviderNameText);
+		updateProviderAddressLabel = new JLabel("Address: ");
+		updateProviderPanel.add(updateProviderAddressLabel);
+		updateProviderAddressText = new JTextField(16);
+		updateProviderPanel.add(updateProviderAddressText);
+		updateProviderCityLabel = new JLabel("City: ");
+		updateProviderPanel.add(updateProviderCityLabel);
+		updateProviderCityText = new JTextField(16);
+		updateProviderPanel.add(updateProviderCityText);
+		updateProviderStateLabel = new JLabel("State: ");
+		updateProviderPanel.add(updateProviderStateLabel);
+		updateProviderStateText = new JTextField(16);
+		updateProviderPanel.add(updateProviderStateText);
+		updateProviderZipLabel = new JLabel("Zip Code: ");
+		updateProviderPanel.add(updateProviderZipLabel);
+		updateProviderZipText = new JTextField(16);
+		updateProviderPanel.add(updateProviderZipText);
+		updateProviderCancelBtn = new JButton("Cancel");
+		updateProviderCancelBtn.addActionListener(this);
+		updateProviderSubmitBtn = new JButton("Submit");
+		updateProviderSubmitBtn.addActionListener(this);
+		
+		deleteProviderPanel = new JPanel();
+		deleteProviderChoiceLabel = new JLabel("Choose provider to delete: ");
+		deleteProviderPanel.add(deleteProviderChoiceLabel);
+		deleteProviderChoiceBox = new JComboBox<String>();
+		deleteProviderPanel.add(deleteProviderChoiceBox);
+		deleteProviderSubmitBtn = new JButton("Delete");
+		deleteProviderSubmitBtn.addActionListener(this);
+		deleteProviderCancelBtn = new JButton("Cancel");
+		deleteProviderCancelBtn.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		if(e.getSource() == editMembersBtn) {
 			clear();
 			main.add(editMembersPanel);
@@ -241,11 +352,70 @@ public class OperatorMenu extends Menu implements ActionListener {
 			clear();
 			main.add(editMembersPanel);
 			setTitle("Edit Members");
-		} else if(e.getSource() == getLogoutBtn()) {
+		} else if(e.getSource() == addProviderBtn) {
+			clear();
+			main.add(addProviderPanel);
+			addFooterButton(addProviderSubmitBtn);
+			addFooterButton(addProviderCancelBtn);
+			setTitle("Add Provider");			
+		} else if(e.getSource() == addProviderSubmitBtn) {
+			if(validateAddProviderFields()) {
+				Provider newProvider = createProviderFromAddProviderFields(terminal.getEmployees().getLast().getId() + 1);
+				((Operator)terminal.getLoggedInEmployee()).addProvider(terminal, newProvider);
+				clear();
+				main.add(editProvidersPanel);
+				setTitle("Edit Members");				
+			}
+		} else if(e.getSource() == addProviderCancelBtn) {
+			clear();
+			main.add(editProvidersPanel);
+			setTitle("Edit Providers");
+		} else if(e.getSource() == updateProviderBtn) {
+			clear();
+			main.add(updateProviderChoicePanel);
+			populateProviderComboBox(updateProviderChoiceBox);
+			addFooterButton(updateProviderChoiceSubmitBtn);
+			setTitle("Select Provider");
+		} else if(e.getSource() == updateProviderChoiceSubmitBtn) {
+			clear();
+			main.add(updateProviderPanel);
+			populateUpdateProviderFields();
+			addFooterButton(updateProviderSubmitBtn);
+			addFooterButton(updateProviderCancelBtn);
+			setTitle("Update Provider");
+		} else if(e.getSource() == updateProviderSubmitBtn) {
+			if(validateUpdateProviderFields()) {
+				Provider updatedProvider = createProviderFromUpdateProviderFields();
+				((Operator)terminal.getLoggedInEmployee()).editProvider(terminal, updatedProvider);
+				clear();
+				main.add(editProvidersPanel);
+				setTitle("Edit Providers");
+			}			
+		} else if(e.getSource() == updateProviderCancelBtn) {
+			clear();
+			main.add(editProvidersPanel);
+			setTitle("Edit Providers");
+		} else if(e.getSource() == deleteProviderBtn) {
+			clear();
+			main.add(deleteProviderPanel);
+			populateProviderComboBox(deleteProviderChoiceBox);
+			addFooterButton(deleteProviderSubmitBtn);
+			addFooterButton(deleteProviderCancelBtn);
+			setTitle("Delete Provider");
+		} else if(e.getSource() == deleteMemberSubmitBtn) {
+			int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteProviderChoiceBox.getSelectedItem() + "? This action cannot be undone!", "Delete Provider", JOptionPane.YES_NO_OPTION);
+			if(confirm == JOptionPane.OK_OPTION) {
+				((Operator)terminal.getLoggedInEmployee()).removeProvider(terminal, (Provider)terminal.getEmployees().get(1));
+				clear();
+				main.add(editProvidersPanel);
+				setTitle("Edit Providers");
+			} 
+		}
+		else if(e.getSource() == getLogoutBtn()) {
 			clear();
 			main.add(mainMenuPanel);
 			setTitle("Operator");
-		} else {
+		}  else {
 			clear();
 			main.add(mainMenuPanel);
 			setTitle("Operator");
@@ -379,5 +549,100 @@ public class OperatorMenu extends Menu implements ActionListener {
 		return new Member(updateMemberNameText.getText(), terminal.getMemberByName((String)updateMemberChoiceBox.getSelectedItem()).getMemberNumber(), updateMemberAddressText.getText(), 
 				updateMemberCityText.getText(), updateMemberStateText.getText(), Integer.parseInt(updateMemberZipText.getText()));
 	}
-
+	
+	private Boolean validateAddProviderFields() {
+		if(addProviderNameText.getText().isEmpty() || addProviderAddressText.getText().isEmpty() ||
+				addProviderCityText.getText().isEmpty() || addProviderStateText.getText().isEmpty() ||
+				addProviderZipText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addProviderNameText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Name field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addProviderAddressText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Address field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addProviderCityText.getText().length() > 14) {
+			JOptionPane.showMessageDialog(this, "City field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addProviderStateText.getText().length() > 2) {
+			JOptionPane.showMessageDialog(this, "State field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addProviderZipText.getText().length() != 5) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			Integer.parseInt(addProviderZipText.getText());
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+	
+	private Provider createProviderFromAddProviderFields(int id) {
+		//TODO: create new provider with given fields
+		return new Provider(id);
+	}
+	
+	private void populateProviderComboBox(JComboBox<String> comboBox) {
+		comboBox.removeAllItems();
+		for(Employee employee : terminal.getEmployees()) {
+			if(employee.getEmployeeType() == Employee.PROVIDER) {
+				//TODO change this to getName()
+				comboBox.addItem(String.valueOf(((Provider)employee).getId()));
+			}
+		}
+	}
+	
+	private void populateUpdateProviderFields() {
+		//TODO update provider fields
+	}
+	
+	private Boolean validateUpdateProviderFields() {
+		if(updateProviderNameText.getText().isEmpty() || updateProviderAddressText.getText().isEmpty() ||
+				updateProviderCityText.getText().isEmpty() || updateProviderStateText.getText().isEmpty() ||
+				updateProviderZipText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateProviderNameText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Name field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateProviderAddressText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Address field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateProviderCityText.getText().length() > 14) {
+			JOptionPane.showMessageDialog(this, "City field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateProviderStateText.getText().length() > 2) {
+			JOptionPane.showMessageDialog(this, "State field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(updateProviderZipText.getText().length() != 5) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			Integer.parseInt(updateProviderZipText.getText());
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "The zip code field must be 5 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
+	
+	private Provider createProviderFromUpdateProviderFields() {
+		//TODO create provider
+		return new Provider(1);
+	}
 }
