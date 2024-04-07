@@ -48,18 +48,22 @@ public class ManagerMenu extends Menu implements ActionListener {
 		memberReportPanel = new JPanel();
 		memberReportBackBtn = new JButton("Back");
 		memberReportBackBtn.addActionListener(this);
+		memberReportPanel.add(memberReportBackBtn);
 		
 		providerReportPanel = new JPanel();
 		providerReportBackBtn = new JButton("Back");
 		providerReportBackBtn.addActionListener(this);
+		providerReportPanel.add(providerReportBackBtn);
 		
 		managerReportPanel = new JPanel();
 		managerReportBackBtn = new JButton("Back");
 		managerReportBackBtn.addActionListener(this);
+		managerReportPanel.add(managerReportBackBtn);
 		
 		EFTPanel = new JPanel();
 		EFTBackBtn = new JButton("Back");
 		EFTBackBtn.addActionListener(this);
+		EFTPanel.add(EFTBackBtn);
 		
 
 	}
