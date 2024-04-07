@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import project4.Terminal;
 
@@ -20,7 +21,7 @@ public class ManagerMenu extends Menu implements ActionListener {
 		super(terminal);		
 		this.setTitle("Manager");
 		
-		mainMenuPanel = new JPanel();
+		mainMenuPanel = new JPanel(new GridLayout(0, 1));
 		runMemberReportBtn = new JButton("Run Member Report");
 		runMemberReportBtn.addActionListener(this);
 		mainMenuPanel.add(runMemberReportBtn);

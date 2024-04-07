@@ -76,6 +76,8 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 				int index = (int)((JButton)e.getSource()).getClientProperty("index");
 				memberReports.get(index).open();
 			}
+		} else if(e.getSource() == continueBtn) {
+			
 		}
 		
 		main.revalidate();
@@ -84,6 +86,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	}
 	
 	public void MainAccountingStart() {
+		createMemberReports();
 		switchToMemberPanel();
 	}
 	
@@ -96,7 +99,6 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	}
 	
 	private void switchToMemberPanel() {
-		createMemberReports();
 		main.removeAll();
 		title.setText("Member Reports");
 		for(Member member : terminal.getMembers()) {
@@ -108,6 +110,15 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 			newBtn.addActionListener(this);
 			main.add(newBtn);
 		}
+	}
+	
+	private void createProviderReports() {
+		
+	}
+	
+	private void switchToProviderPanel() {
+		main.removeAll();
+		title.setText("Provider Reports");
 	}
 
 
