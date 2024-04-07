@@ -26,6 +26,7 @@ public class Terminal implements ActionListener {
 	
 	ArrayList<Employee> employees;
 	ArrayList<Member> members;
+	ArrayList<Service> services;
 	
 	Employee loggedInEmployee;
 	
@@ -41,12 +42,14 @@ public class Terminal implements ActionListener {
 		
 		readData();
 		
-		MemberReport testReport = new MemberReport(members.get(0), "memReport.pdf");
-		testReport.open();
+		//MemberReport testReport = new MemberReport(members.get(0), "memReport.pdf");
+		//testReport.open();
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
 		managerMenuPanel = new ManagerMenu(this);
+		
+		services = new ArrayList<Service>();
 		
 		loginPanel = new Login(this);
 		mainWindow.add(loginPanel);
@@ -147,9 +150,11 @@ public class Terminal implements ActionListener {
 		} catch (FileNotFoundException e) {
 			employees = new ArrayList<Employee>();
 			employees.add(new Operator(1, "operator1"));	
+			employees.add(new Manager(2, "manager1"));
 		} catch(JsonSyntaxException e) {
 			employees = new ArrayList<Employee>();
 			employees.add(new Operator(1, "operator1"));
+			employees.add(new Manager(2, "manager1"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

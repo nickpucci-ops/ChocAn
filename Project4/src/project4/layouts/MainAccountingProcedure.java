@@ -2,7 +2,10 @@ package project4.layouts;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import project4.*;
+import project4.report.MemberReport;
 
 public class MainAccountingProcedure extends Panel implements ActionListener {
 
@@ -15,8 +18,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	String[] memberNames = {"John", "Joe", "Mary"};
 	
 	JPanel memberReportPanel;
-	JLabel memberReportLabel1;
-	JLabel memberReportLabel2;
+	ArrayList<MemberReport> memberReports;
 	
 	JPanel providerReportPanel;
 	JLabel providerReportLabel1;
@@ -35,8 +37,10 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		this.terminal = terminal;
 		this.setLayout(new BorderLayout());
 		
+		memberReports = new ArrayList<MemberReport>();
+		
 		topPanel = new JPanel();
-		main = new JPanel();
+		main = new JPanel(new GridLayout(0, 2));
 		bottomPanel = new JPanel();
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
@@ -50,6 +54,8 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		continueBtn.addActionListener(this);
 		bottomPanel.add(continueBtn);
 		
+		
+		
 		title = new JLabel("Main Accounting Procedure");
 		topPanel.add(title);
 		
@@ -57,56 +63,63 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		this.add(main, BorderLayout.CENTER);
 		this.add(bottomPanel, BorderLayout.SOUTH);
 		
+		MainAccountingStart();
 		
-		
-		memberReportPanel = new JPanel(new GridLayout(0, 1));
-		memberReportLabel1 = new JLabel("" + memberPanelPos);
-		memberReportPanel.add(memberReportLabel1);
-		memberReportLabel2 = new JLabel(memberNames[memberPanelPos]);
-		memberReportPanel.add(memberReportLabel2);
-		//setTitle("Member Report");
-		main.add(memberReportPanel);
-		
-		providerReportPanel = new JPanel(new GridLayout(0, 1));
-		providerReportLabel1 = new JLabel("Testing");
-		providerReportLabel2 = new JLabel("More Testing");
-		providerReportLabel3 = new JLabel("Most Testing");
-		providerReportPanel.add(providerReportLabel1);
-		providerReportPanel.add(providerReportLabel2);
-		providerReportPanel.add(providerReportLabel3);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
-		/*if(e.getSource() == continueBtn && memberPanelPos < 2) {
-			memberPanelPos++;
-			memberReportLabel1.setText("" + memberPanelPos);
-			memberReportLabel2.setText(memberNames[memberPanelPos]);
-			clear();
-			addFooterButton(continueBtn);
-			main.add(memberReportPanel);
-			setTitle("Member Report");
-		} else if (e.getSource() == continueBtn) {
-			clear();
-			//addFooterButton(continueBtn);
-			main.add(providerReportPanel);
-			setTitle("Provider Report");
-		}*/
+		if(s.equals("Open")) {
+			String type = (String)((JButton)e.getSource()).getClientProperty("type");
+			if(type.equals("member")) {
+				int index = (int)((JButton)e.getSource()).getClientProperty("index");
+				memberReports.get(index).open();
+			}
+		} else if(e.getSource() == continueBtn) {
+			
+		}
+		
 		main.revalidate();
 		main.repaint();
 		
 	}
 	
 	public void MainAccountingStart() {
-		memberPanelPos = 0;
+		createMemberReports();
+		switchToMemberPanel();
 	}
 	
-	/*
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	private void createMemberReports() {
+		memberReports.clear();
+		for(Member member : terminal.getMembers()) {
+			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf");
+			memberReports.add(newReport);
+		}
 	}
-	*/
+	
+	private void switchToMemberPanel() {
+		main.removeAll();
+		title.setText("Member Reports");
+		for(Member member : terminal.getMembers()) {
+			main.add(new JLabel(member.getName()));
+			JButton newBtn = new JButton("Open");
+			newBtn.setSize(300, 100);
+			newBtn.putClientProperty("type", "member");
+			newBtn.putClientProperty("index", terminal.getMembers().indexOf(member));
+			newBtn.addActionListener(this);
+			main.add(newBtn);
+		}
+	}
+	
+	private void createProviderReports() {
+		
+	}
+	
+	private void switchToProviderPanel() {
+		main.removeAll();
+		title.setText("Provider Reports");
+	}
+
 
 }
