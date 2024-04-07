@@ -5,12 +5,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import project4.Member;
-import project4.Operator;
-//import project4.Employee;
 import project4.Terminal;
-//import project4.Member;
-//import project4.Provider;
+import project4.Member;
+import project4.Provider;
 
 public class ProviderMenu extends Menu implements ActionListener {
 	/*
@@ -120,10 +117,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == requestProviderDirectoryBtn) {
-			clear();
-			main.add(providerDirectoryPanel);
-			addFooterButton(providerDirectoryBackBtn);
-			setTitle("Provider Directory");
+			((Provider)terminal.getLoggedInEmployee()).getProviderDirectory();
 		} else if(e.getSource() == providerDirectoryBackBtn) {
 			clear();
 			main.add(mainMenuPanel);

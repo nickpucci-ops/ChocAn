@@ -10,6 +10,7 @@ import project4.layouts.Login;
 import project4.layouts.MainAccountingProcedure;
 import project4.layouts.ManagerMenu;
 import project4.layouts.OperatorMenu;
+import project4.layouts.ProviderMenu;
 import project4.report.*;
 import project4.json.EmployeeAdapter;
 
@@ -26,6 +27,7 @@ public class Terminal implements ActionListener {
 	
 	ArrayList<Employee> employees;
 	ArrayList<Member> members;
+	ArrayList<Service> services;
 	
 	Employee loggedInEmployee;
 	
@@ -35,6 +37,7 @@ public class Terminal implements ActionListener {
 	OperatorMenu operatorMenuPanel;
 	MainAccountingProcedure mainAccountingPanel;
 	ManagerMenu managerMenuPanel;
+	ProviderMenu providerMenuPanel;
 	
 	
 	Terminal() {
@@ -44,13 +47,14 @@ public class Terminal implements ActionListener {
 		
 		//MemberReport testReport = new MemberReport(members.get(0), "memReport.pdf");
 		//testReport.open();				
-
+		services = new ArrayList<Service>();
 		ProviderReport TestProvider = new ProviderReport(new Provider(1, "provider1"), "test3.pdf"); 
 		TestProvider.open(); 
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
 		managerMenuPanel = new ManagerMenu(this);
+		providerMenuPanel = new ProviderMenu(this);
 		
 		loginPanel = new Login(this);
 		mainWindow.add(loginPanel);
@@ -123,7 +127,10 @@ public class Terminal implements ActionListener {
 			mainWindow.revalidate();
 			mainWindow.repaint();
 		} else if(employeeType == Employee.PROVIDER) {
-			//TODO: show provider menu
+			mainWindow.remove(loginPanel);
+			mainWindow.add(providerMenuPanel);
+			mainWindow.revalidate();
+			mainWindow.repaint();
 		}
 		return true;
 	}
@@ -152,10 +159,12 @@ public class Terminal implements ActionListener {
 			employees = new ArrayList<Employee>();
 			employees.add(new Operator(1, "operator1"));	
 			employees.add(new Manager(2, "manager1"));
+			employees.add(new Provider(3, "provider1"));
 		} catch(JsonSyntaxException e) {
 			employees = new ArrayList<Employee>();
 			employees.add(new Operator(1, "operator1"));
 			employees.add(new Manager(2, "manager1"));
+			employees.add(new Provider(3, "provider1"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
