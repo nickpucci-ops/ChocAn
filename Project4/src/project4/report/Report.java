@@ -20,12 +20,12 @@ public abstract class Report {
 	float currOffsetY;
 	public Report(String filename, String title) {
 		try {
-			Files.deleteIfExists(Paths.get(filename));
+			Files.deleteIfExists(Paths.get("reports/" + filename));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.file = new File(filename);
+		this.file = new File("reports/" + filename);
 		this.filename = filename;
 		
 		document = new PDDocument();
@@ -69,7 +69,11 @@ public abstract class Report {
 		try {
 			contentStream.endText();
 			contentStream.close();
-			document.save(filename);
+			
+			if(!new File("reports/").exists()) {
+				new File("reports/").mkdir();
+			}
+			document.save("reports/" + filename);
 			document.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
