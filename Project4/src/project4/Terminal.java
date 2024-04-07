@@ -26,7 +26,6 @@ public class Terminal implements ActionListener {
 	
 	ArrayList<Employee> employees;
 	ArrayList<Member> members;
-	ArrayList<Service> services;
 	
 	Employee loggedInEmployee;
 	
@@ -37,19 +36,21 @@ public class Terminal implements ActionListener {
 	MainAccountingProcedure mainAccountingPanel;
 	ManagerMenu managerMenuPanel;
 	
+	
 	Terminal() {
 		mainWindow = new JFrame();
 		
 		readData();
 		
 		//MemberReport testReport = new MemberReport(members.get(0), "memReport.pdf");
-		//testReport.open();
+		//testReport.open();				
+
+		ProviderReport TestProvider = new ProviderReport(new Provider(1, "provider1"), "test3.pdf"); 
+		TestProvider.open(); 
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
 		managerMenuPanel = new ManagerMenu(this);
-		
-		services = new ArrayList<Service>();
 		
 		loginPanel = new Login(this);
 		mainWindow.add(loginPanel);
