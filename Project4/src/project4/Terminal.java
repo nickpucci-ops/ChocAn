@@ -39,7 +39,7 @@ public class Terminal implements ActionListener {
 		
 		readData();
 		
-		MemberReport testReport = new MemberReport(members.getFirst(), "memReport.pdf");
+		MemberReport testReport = new MemberReport(members.getFirst(), "reports/memReport.pdf");
 		testReport.open();
 		
 		operatorMenuPanel = new OperatorMenu(this);
