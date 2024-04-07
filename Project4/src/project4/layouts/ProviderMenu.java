@@ -43,9 +43,6 @@ public class ProviderMenu extends Menu implements ActionListener {
 	JPanel addServiceCodePanel;
 	JLabel addServiceCodeLabel;
 	JTextField addServiceCodeText;
-	JPanel addDateOfServicePanel;
-	JLabel addDateOfServiceLabel;
-	JTextField addDateOfServiceText;
 	JButton submitDataBtn;
 	JButton billChocAnCancelBtn;
 	
@@ -75,28 +72,28 @@ public class ProviderMenu extends Menu implements ActionListener {
 		//
 		//date service was provided
 		addDateOfServicePanel = new JPanel(new GridLayout(0, 2));
-		addDateOfServiceLabel = new JLabel("Date of service(MM–DD–YYYY): ");
+		addDateOfServiceLabel = new JLabel("Date of service(MMï¿½DDï¿½YYYY): ");
 		addDateOfServicePanel.add(addDateOfServiceLabel);
 		addDateOfServiceText = new JTextField(16);
 		addDateOfServicePanel.add(addDateOfServiceText);
 		//provider number
 		addProviderNumberPanel = new JPanel(new GridLayout(0, 2));
-		addProviderNumberNameLabel = new JLabel("Provider #: ");
-		addProviderNumberPanel.add(addProviderNumberNameLabel);
-		addProviderNumberNameText = new JTextField(16);
-		addProviderNumberPanel.add(addProviderNumberNameText);
+		addProviderNumberLabel = new JLabel("Provider #: ");
+		addProviderNumberPanel.add(addProviderNumberLabel);
+		addProviderNumberText = new JTextField(16);
+		addProviderNumberPanel.add(addProviderNumberText);
 		//member number
 		addMemeberNumberPanel = new JPanel(new GridLayout(0, 2));
-		addMemeberNumberNameLabel = new JLabel("Member #: ");
-		addMemeberNumberPanel.add(addMemeberNumberNameLabel);
-		addMemeberNumberNameText = new JTextField(16);
-		addMemeberNumberPanel.add(addMemeberNumberNameText);
+		addMemeberNumberLabel = new JLabel("Member #: ");
+		addMemeberNumberPanel.add(addMemeberNumberLabel);
+		addMemeberNumberText = new JTextField(16);
+		addMemeberNumberPanel.add(addMemeberNumberText);
 		//service code
 		addServiceCodePanel = new JPanel(new GridLayout(0, 2));
-		addServiceCodeAddressLabel = new JLabel("Service Code: ");
-		addServiceCodePanel.add(addServiceCodeAddressLabel);
-		addServiceCodeAddressText = new JTextField(6);
-		addServiceCodePanel.add(addServiceCodeAddressText);
+		addServiceCodeLabel = new JLabel("Service Code: ");
+		addServiceCodePanel.add(addServiceCodeLabel);
+		addServiceCodeText = new JTextField(6);
+		addServiceCodePanel.add(addServiceCodeText);
 		//submit
 		submitDataBtn = new JButton("Submit");
 		submitDataBtn.addActionListener(this);
