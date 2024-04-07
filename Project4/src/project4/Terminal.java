@@ -49,8 +49,6 @@ public class Terminal implements ActionListener {
 		mainAccountingPanel = new MainAccountingProcedure(this);
 		managerMenuPanel = new ManagerMenu(this);
 		
-		services = new ArrayList<Service>();
-		
 		loginPanel = new Login(this);
 		mainWindow.add(loginPanel);
 		
@@ -189,6 +187,10 @@ public class Terminal implements ActionListener {
 	
 	public ArrayList<Member> getMembers() {
 		return members;
+	}
+	
+	public ArrayList<Service> getServices() {
+		return services;
 	}
 	
 	public Employee getLoggedInEmployee() {
