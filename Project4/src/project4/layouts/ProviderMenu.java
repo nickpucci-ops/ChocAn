@@ -121,6 +121,11 @@ public class ProviderMenu extends Menu implements ActionListener {
 			main.add(mainMenuPanel);
 			setTitle("Provider");
 		} else if(e.getSource() == submitDataBtn) {
+			//if provider does not exist -> error
+			//if member does not exist -> error
+			//if service code does not exist -> error
+			//else -> write to service records -> reset to provider menu
+
 //			if(validateAddMemberFields()) {
 //				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
 //				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
@@ -143,4 +148,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 		main.revalidate();
 		main.repaint();
 	}
+	
+	
+	
 }
