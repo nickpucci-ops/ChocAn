@@ -319,7 +319,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			setTitle("Edit Members");
 		} else if(e.getSource() == addMemberSubmitBtn) {			
 			if(validateAddMemberFields()) {
-				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
+				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().get(terminal.getMembers().size()-1).getMemberNumber() + 1);
 				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
 				clear();
 				main.add(editMembersPanel);
@@ -360,7 +360,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			setTitle("Add Provider");			
 		} else if(e.getSource() == addProviderSubmitBtn) {
 			if(validateAddProviderFields()) {
-				Provider newProvider = createProviderFromAddProviderFields(terminal.getEmployees().getLast().getId() + 1);
+				Provider newProvider = createProviderFromAddProviderFields(terminal.getEmployees().get(terminal.getEmployees().size()-1).getId() + 1);
 				((Operator)terminal.getLoggedInEmployee()).addProvider(terminal, newProvider);
 				clear();
 				main.add(editProvidersPanel);
