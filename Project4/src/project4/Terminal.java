@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import project4.layouts.Login;
 import project4.layouts.MainAccountingProcedure;
+import project4.layouts.ManagerMenu;
 import project4.layouts.OperatorMenu;
 import project4.report.*;
 import project4.json.EmployeeAdapter;
@@ -33,6 +34,7 @@ public class Terminal implements ActionListener {
 	Login loginPanel;
 	OperatorMenu operatorMenuPanel;
 	MainAccountingProcedure mainAccountingPanel;
+	ManagerMenu managerMenuPanel;
 	
 	Terminal() {
 		mainWindow = new JFrame();
