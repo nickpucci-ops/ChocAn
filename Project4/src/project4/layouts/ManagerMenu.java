@@ -3,16 +3,22 @@ import javax.swing.*;
 
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import project4.Employee;
-//import project4.Manager;
 import project4.Member;
 import project4.Provider;
 import project4.Terminal;
+import project4.report.MemberReport;
 
 
 public class ManagerMenu extends Menu implements ActionListener {
 	private static final long serialVersionUID = 7059180387276164616L;
+	
+	//Terminal terminal;
+	
+	ArrayList<MemberReport> memberReports;
+	ArrayList<Member> members;
 	
 	JPanel mainMenuPanel;
 	JButton runMemberReportBtn;
@@ -143,7 +149,16 @@ public class ManagerMenu extends Menu implements ActionListener {
 			clear();
 			main.add(mainMenuPanel);
 			setTitle("Manager");
-		}  else {
+		}  
+		else if(e.getSource() == runMemberReportChoiceBtn) {
+			Member memberNeeded = getMemberByName((String)memberChoiceBox.getSelectedItem());
+			int index = memberNeeded.getMemberNumber();
+			memberReports.get(index).open();
+			clear();
+			main.add(memberReportPanel);
+			setTitle("Member Report");
+		}
+		else {
 			clear();
 			main.add(mainMenuPanel);
 			setTitle("Manager");
@@ -167,6 +182,14 @@ public class ManagerMenu extends Menu implements ActionListener {
 				comboBox.addItem(String.valueOf(((Provider)employee).getId()));
 			}
 		}
+	}
+	public Member getMemberByName(String name) {
+		for(Member member : members) {
+			if(member.getName().equals(name)) {
+				return member;
+			}
+		}
+		return members.get(0);
 	}
 	
 	
