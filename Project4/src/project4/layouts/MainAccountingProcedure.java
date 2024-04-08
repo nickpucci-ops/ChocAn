@@ -149,7 +149,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		Provider provider;
 		for(Employee employee : terminal.getEmployees()) {
 			if(employee.getEmployeeType() == Employee.OPERATOR) {
-				provider = new Provider(employee.getId(), employee.getUsername());
+				provider = new Provider(employee.getId(), employee.getUsername(), "name", 8 , "street", "city", "st", 12345);
 				ProviderReport newReport = new ProviderReport(provider, "Provider_Report-" + provider.getId() + ".pdf");
 				providerReports.add(newReport);
 			}

@@ -588,7 +588,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 	
 	private Provider createProviderFromAddProviderFields(int id) {
 		//TODO: create new provider with given fields
-		return new Provider(id, "provider1");
+		return new Provider(id, "provider1", "name", 8 , "street", "city", "st", 12345);
 	}
 	
 	private void populateProviderComboBox(JComboBox<String> comboBox) {
@@ -643,6 +643,6 @@ public class OperatorMenu extends Menu implements ActionListener {
 	
 	private Provider createProviderFromUpdateProviderFields() {
 		//TODO create provider
-		return new Provider(1, "provider1");
+		return new Provider(1, "provider1", "name", 8 , "street", "city", "st", 12345);
 	}
 }

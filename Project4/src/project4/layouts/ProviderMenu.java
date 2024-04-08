@@ -121,6 +121,9 @@ public class ProviderMenu extends Menu implements ActionListener {
 			main.add(mainMenuPanel);
 			setTitle("Provider");
 		} else if(e.getSource() == submitDataBtn) {
+			if(validateBillChocAnFields()) {
+				
+			}
 			//if provider does not exist -> error
 			//if member does not exist -> error
 			//if service code does not exist -> error
@@ -147,7 +150,42 @@ public class ProviderMenu extends Menu implements ActionListener {
 		main.revalidate();
 		main.repaint();
 	}
+	private Boolean validateBillChocAnFields() {
+		if(addDateOfServiceText.getText().isEmpty() || addProviderNumberText.getText().isEmpty() ||
+				addMemeberNumberText.getText().isEmpty() || addServiceCodeText.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(this, "Please fill out all fields", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		if(addServiceCodeText.getText().length() != 6) {
+			JOptionPane.showMessageDialog(this, "The service code field must be 6 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		try {
+			Integer.parseInt(addServiceCodeText.getText());
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "The service code field must be 6 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		return true;
+	}
 	
+	private Boolean validateMemberNumber(String memberID) {
+		for(Member member : terminal.getMembers()) {
+			if (member.getMemberNumber() == Integer.parseInt(memberID)) {
+				return true;
+			} else {
+				return false; //member not verified
+			}
+		}
+		return false;
+	}
+	private Boolean validateProviderNumber(){
+		
+		return false;
+	}
 	
+	private Boolean validateServiceCode() {
+		return false;
+	}
 	
 }
