@@ -48,8 +48,8 @@ public class Terminal implements ActionListener {
 		//MemberReport testReport = new MemberReport(members.get(0), "memReport.pdf");
 		//testReport.open();				
 		services = new ArrayList<Service>();
-		ProviderReport TestProvider = new ProviderReport(new Provider(1, "provider1"), "test3.pdf"); 
-		TestProvider.open(); 
+		//ProviderReport TestProvider = new ProviderReport(new Provider(1, "provider1"), "test3.pdf"); 
+		//TestProvider.open(); 
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
@@ -84,7 +84,7 @@ public class Terminal implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		String s = e.getActionCommand();
-		if(s.equals("Log out")) {			
+		if(s.equals("Log out") || s.equals("Return to Log In")) {			
 			mainWindow.getContentPane().removeAll();
 			mainWindow.add(loginPanel);
 			mainWindow.revalidate();

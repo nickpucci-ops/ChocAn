@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import project4.*;
 import project4.report.MemberReport;
+import project4.report.ProviderReport;
 import project4.report.SummaryReport;
 
 public class MainAccountingProcedure extends Panel implements ActionListener {
@@ -20,10 +21,10 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	JButton continueBtn;
 	
 	short panelPos;
-	String[] memberNames = {"John", "Joe", "Mary"};
 	
 	JPanel memberReportPanel;
 	ArrayList<MemberReport> memberReports;
+	ArrayList<ProviderReport> providerReports;
 	SummaryReport summaryReport;
 	
 	JPanel providerReportPanel;
@@ -44,6 +45,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		this.setLayout(new BorderLayout());
 		
 		memberReports = new ArrayList<MemberReport>();
+		providerReports = new ArrayList<ProviderReport>();
 		
 		topPanel = new JPanel();
 		main = new JPanel(new GridLayout(0, 2));
@@ -51,7 +53,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
-		loginBtn = new JButton("Log in");
+		loginBtn = new JButton("Return to Log In");
 		loginBtn.addActionListener(terminal);
 		loginBtn.addActionListener(this);
 		bottomPanel.add(loginBtn);
@@ -81,6 +83,9 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 			if(type.equals("member")) {
 				int index = (int)((JButton)e.getSource()).getClientProperty("index");
 				memberReports.get(index).open();
+			} else if(type.equals("provider")) {
+				int index = (int)((JButton)e.getSource()).getClientProperty("index");
+				providerReports.get(index).open();
 			}
 		} else if(s.equals("Open Summary Report")) {
 			summaryReport.open();
@@ -105,8 +110,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 				switchToMemberPanel();
 				break;
 			}
-		}
-		
+		}			
 		main.revalidate();
 		main.repaint();
 		
@@ -141,14 +145,32 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	}
 	
 	private void createProviderReports() {
-		
+		providerReports.clear();
+		Provider provider;
+		for(Employee employee : terminal.getEmployees()) {
+			if(employee.getEmployeeType() == Employee.OPERATOR) {
+				provider = new Provider(employee.getId(), employee.getUsername());
+				ProviderReport newReport = new ProviderReport(provider, "Provider_Report-" + provider.getId() + ".pdf");
+				providerReports.add(newReport);
+			}
+		}
 	}
 	
 	private void switchToProviderPanel() {
 		main.removeAll();
 		title.setText("Provider Reports");
-		main.revalidate();
-		main.repaint();
+		this.createProviderReports();
+		for(Employee employee : terminal.getEmployees()) {
+			if(employee.getEmployeeType() == Employee.PROVIDER) {
+				main.add(new JLabel(employee.getUsername()));
+				JButton newBtn = new JButton("Open");
+				newBtn.setSize(300, 100);
+				newBtn.putClientProperty("type", "provider");
+				newBtn.putClientProperty("index", terminal.getEmployees().indexOf(employee));
+				newBtn.addActionListener(this);
+				main.add(newBtn);
+			}
+		}
 	}
 
 	private void createSummaryReport() {
