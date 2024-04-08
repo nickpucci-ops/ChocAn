@@ -1,11 +1,14 @@
 package project4.layouts;
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
+
+import project4.Manager;
+import project4.Provider;
 import project4.Terminal;
 
 public class ManagerMenu extends Menu implements ActionListener {
@@ -74,10 +77,7 @@ public class ManagerMenu extends Menu implements ActionListener {
 			setTitle("Member Report");
 		}
 		else if(e.getSource() == runProviderReportBtn) {
-			clear();
-			main.add(providerReportPanel);
-			addFooterButton(providerReportBackBtn);
-			setTitle("Provider Report");
+			((Manager)terminal.getLoggedInEmployee()).getProviderReport((Provider)terminal.getLoggedInEmployee());
 		}
 		else if(e.getSource() == runManagerReportBtn) {
 			clear();

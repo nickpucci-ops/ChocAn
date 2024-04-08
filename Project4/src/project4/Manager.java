@@ -8,8 +8,9 @@ public class Manager extends Employee {
 		super(Employee.MANAGER, id, username);
 	}
 	
-	public void getProviderReport() {
-		ProviderReport preport = new ProviderReport( provider ,"Provider Report" )
+	public void getProviderReport(Provider provider) {
+		ProviderReport pReport = new ProviderReport(provider,"Provider Report");
+		pReport.open();
 	}
 	public void sendReport(Report report) {
 		
