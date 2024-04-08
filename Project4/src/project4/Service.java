@@ -23,6 +23,22 @@ public class Service  {
         this.provider = provider;
         this.comments = comments;
     }
+    
+    public String getName() {
+    	return this.name;
+    }
+    
+    public Date getDate() {
+    	return this.dateProvided;
+    }
+    
+    public Provider getProvider() {
+    	return this.provider;
+    }
+    
+    public int getCode() {
+    	return this.code;
+    }
 
     public static Date setDate() {
         return new Date();

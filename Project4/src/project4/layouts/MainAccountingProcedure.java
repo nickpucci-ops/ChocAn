@@ -3,11 +3,15 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import project4.*;
 import project4.report.MemberReport;
 import project4.report.ProviderReport;
 import project4.report.SummaryReport;
+
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class MainAccountingProcedure extends Panel implements ActionListener {
 
@@ -124,8 +128,19 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	
 	private void createMemberReports() {
 		memberReports.clear();
+		
+		//Test service bank, replace with terminal.getServices(); later
+		ArrayList<Service> testServices = new ArrayList<Service>();
+		Date today = new Date();
+		Provider pro = new Provider(1, "JSmith", "Jeremy Smith", 1, "Street Lane", "Tuscaloosa", "AL", 54321);
+		Service test1 = new Service(terminal.getMembers().get(1).getName(), 123456, 555, today, today, terminal.getMembers().get(1), pro, "Test");
+		testServices.add(test1);
+		Service test2 = new Service(terminal.getMembers().get(1).getName(), 123456, 555, today, today, terminal.getMembers().get(1), pro, "Test");
+		testServices.add(test2);
+		//
+		
 		for(Member member : terminal.getMembers()) {
-			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf");
+			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", testServices);
 			memberReports.add(newReport);
 		}
 	}
