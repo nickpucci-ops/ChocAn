@@ -9,8 +9,12 @@ public class Manager extends Employee {
 	}
 	
 	public void getProviderReport(Provider provider) {
+<<<<<<< HEAD
 		ProviderReport pReport = new ProviderReport(provider,"Provider Report");
 		pReport.open();
+=======
+		ProviderReport preport = new ProviderReport( provider ,"Provider Report" );
+>>>>>>> branch 'main' of https://bitbucket.org/azaman2/spring24team6/src/main/
 	}
 	public void sendReport(Report report) {
 		
