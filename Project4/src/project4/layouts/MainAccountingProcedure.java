@@ -51,7 +51,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		
-		loginBtn = new JButton("Log out");
+		loginBtn = new JButton("Log in");
 		loginBtn.addActionListener(terminal);
 		loginBtn.addActionListener(this);
 		bottomPanel.add(loginBtn);
