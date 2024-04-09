@@ -3,7 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
- 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.swing.*;
 
 import project4.layouts.Login;
@@ -29,7 +31,7 @@ public class Terminal implements ActionListener {
 	ArrayList<Member> members;
 	ArrayList<Service> services;
 	ArrayList<Provider> providers;
-	
+	Map<Integer, String> serviceCodes;
 	
 	
 	Employee loggedInEmployee;
@@ -53,6 +55,12 @@ public class Terminal implements ActionListener {
 		services = new ArrayList<Service>();
 		//ProviderReport TestProvider = new ProviderReport(new Provider(1, "provider1"), "test3.pdf"); 
 		//TestProvider.open(); 
+		
+		serviceCodes = new HashMap<Integer, String>();
+		serviceCodes.put(598470, "Dietitian");
+		serviceCodes.put(883948, "Aerobi Exercise");
+		serviceCodes.put(123456, "Chocoholic Counseling");
+		serviceCodes.put(456789, "Consultation");
 		
 		operatorMenuPanel = new OperatorMenu(this);
 		mainAccountingPanel = new MainAccountingProcedure(this);
