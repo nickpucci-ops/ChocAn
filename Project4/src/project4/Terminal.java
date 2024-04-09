@@ -43,7 +43,7 @@ public class Terminal implements ActionListener {
 	ProviderMenu providerMenuPanel;
 	
 	
-	Terminal() {
+	public Terminal() {
 		mainWindow = new JFrame();
 		
 		readData();
