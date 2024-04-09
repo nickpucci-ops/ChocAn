@@ -1,6 +1,8 @@
 package project4;
 
 import java.util.ArrayList;
+import java.time.format.*;
+import java.time.LocalDateTime;
 
 import project4.report.MemberReport;
 import project4.report.ProviderReport;
@@ -12,14 +14,16 @@ public class Manager extends Employee {
 		super(Employee.MANAGER, id, username);
 	}
 	public void getProviderReport(Terminal terminal, Provider provider) {
-		ProviderReport providerReport = new ProviderReport(provider, "ProviderReport.pdf", terminal.getServicesForProvider(provider));
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-DD-YYYY");
+		ProviderReport providerReport = new ProviderReport(provider, provider.getName() + " - " + formatter.format(LocalDateTime.now()) + ".pdf", terminal.getServicesForProvider(provider));
 		providerReport.open();
 	}
 	
 	public void getMemberReport(Terminal terminal, Member member) {
-	ArrayList<Service> memberServices = terminal.getServicesForMember(member);
-	MemberReport memberReport = new MemberReport(member, "MemberReport.pdf", memberServices);
-	memberReport.open();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-DD-YYYY");
+		ArrayList<Service> memberServices = terminal.getServicesForMember(member);
+		MemberReport memberReport = new MemberReport(member, member.getName() + " - " + formatter.format(LocalDateTime.now()) + ".pdf", memberServices);
+		memberReport.open();
 	}
 	
 	public void getSummaryReport(Terminal terminal) {
