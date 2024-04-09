@@ -11,6 +11,13 @@ import project4.report.MemberReport;
 import project4.report.ProviderReport;
 import project4.report.SummaryReport;
 
+/**
+ * The MainAccountingProcedure class is used to navigate the UI for the
+ * main accounting procedure and creating and displaying pdf files for
+ * each report
+ * @author Davis Moman
+ */
+
 public class MainAccountingProcedure extends Panel implements ActionListener {
 
 	private static final long serialVersionUID = -3934833398410949394L;
@@ -41,6 +48,11 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	
 	private JButton loginBtn;
 	
+	/**
+	 * Constructor for the MainAccountingProcedure class
+	 * 
+	 * @param terminal is the base terminal used to enter this class
+	 */
 	public MainAccountingProcedure(Terminal terminal) {
 		super();
 		this.terminal = terminal;
@@ -74,6 +86,14 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		
 	}
 	
+	/**
+	 * Checks if an action was performed on any buttons in the UI
+	 * Open button opens corresponding report file
+	 * Continue button changes to next page (member reports -> provider reports -> summary report)
+	 * Return to log in button returns UI to the log in page
+	 * 
+	 * @param e the action that triggered this void
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String s = e.getActionCommand();
@@ -115,20 +135,36 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		
 	}
 	
+	/**
+	 * Called when the terminal actionListener changes the UI to the MainAccountingProcedure UI
+	 */
 	public void MainAccountingStart() {
 		panelPos = MEMBER_REPORTS;
 		createMemberReports();
 		switchToMemberPanel();
 	}
 	
+	/**
+	 * Creates an ArrayList of memberReports to use for the UI and file opening
+	 */
 	private void createMemberReports() {
 		memberReports.clear();
+		ArrayList<Service> sampleServices = new ArrayList<Service>();
+		Provider sampleProvider = new Provider(1, "Username", "Jeremy Smith", 2, "Street St", "Tuscaloosa", "AL", 12345);
+		Date today = new Date();
+		Service sampleService = new Service("Service Name", 123456, (float)12.34, today, today, terminal.getMembers().get(0), sampleProvider, "Comments");
+		sampleServices.add(sampleService);
+		sampleServices.add(sampleService);
 		for(Member member : terminal.getMembers()) {
-			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", terminal.getServicesForMember(member));
-			memberReports.add(newReport);
+			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", sampleServices);
+			memberReports.add(newReport);//terminal.getServicesForMember(member)
 		}
 	}
 	
+	
+	/**
+	 * Changes the UI to display all memberReports and buttons to open their corresponding PDF files
+	 */
 	private void switchToMemberPanel() {
 		main.removeAll();
 		title.setText("Member Reports");
@@ -144,6 +180,10 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		bottomPanel.add(continueBtn);
 	}
 	
+	
+	/**
+	 * Creates an ArrayList of providerReports to use for the UI and file opening
+	 */
 	private void createProviderReports() {
 		Provider provider;
 		for(Employee employee : terminal.getEmployees()) {
@@ -155,6 +195,9 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Changes the UI to display all providerReports and buttons to open their corresponding PDF files
+	 */
 	private void switchToProviderPanel() {
 		main.removeAll();
 		title.setText("Provider Reports");
@@ -174,9 +217,16 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		}
 	}
 
+	/**
+	 * Creates a pdf file for the summaryReport
+	 */
 	private void createSummaryReport() {
 		summaryReport = new SummaryReport(terminal, "summary.pdf");
 	}
+	
+	/**
+	 * Changes the UI to display the summaryReport and a button to open the corresponding PDF file
+	 */
 	private void switchToSummaryPanel() {
 		main.removeAll();
 		title.setText("Summary Report");
