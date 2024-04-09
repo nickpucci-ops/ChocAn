@@ -27,7 +27,7 @@ class NehemiahCamaraTests {
         String streetAddress = newMember.getStreetAddress();
         assertEquals("164 Elm Street", streetAddress, "Street address should match the expected value.");
     }
-
+ 
     @Test 
     void testGetZipCode() {
         Member newMember = new Member("David Beck", 180, "119 Parkway Street", "Denver", "CO", 18465);
