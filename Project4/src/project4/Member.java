@@ -21,11 +21,11 @@ public class Member {
     /**
      *  Constructor for the class
      * @param name used to set name variable for this class
-     * @param number used to assign number to this variable
-     * @param address used to assign to this variable
-     * @param City used to assign to this variable
-     * @param State used to assign to this variable 
-     * @param ZipCode used to assign to this variable
+     * @param memberNumber used to assign number to this variable
+     * @param streetAddress used to assign to this variable
+     * @param city used to assign to this variable
+     * @param state used to assign to this variable 
+     * @param zipCode used to assign to this variable
      */
     public Member(String name, int memberNumber, String streetAddress, String city, String state, int zipCode) {
         this.name = name;

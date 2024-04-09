@@ -18,6 +18,7 @@ import project4.report.SummaryReport;
 /**
  * The Manager class represents a manager within the system.
  * Managers have the ability to generate reports for providers, members, and summary of services.
+ * @author Kasandra Valles
  */
 public class Manager extends Employee {
     
