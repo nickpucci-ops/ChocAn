@@ -4,14 +4,12 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import project4.*;
 import project4.report.MemberReport;
 import project4.report.ProviderReport;
 import project4.report.SummaryReport;
-
-import java.util.Date;
-import java.text.SimpleDateFormat;
 
 public class MainAccountingProcedure extends Panel implements ActionListener {
 
