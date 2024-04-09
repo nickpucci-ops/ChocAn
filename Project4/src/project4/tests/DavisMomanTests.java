@@ -92,7 +92,9 @@ class DavisMomanTests {
 	@Test
 	void testTerminalFunctions() {
 		Assertions.assertEquals(terminal.getMemberByName("Joe Schmoe"), terminal.getMembers().get(0));
-		Assertions.assertEquals(terminal.getProviderByNumber("3"), terminal.getProviders().get(0));
+		String num = String.format("%d",terminal.getProviders().get(0).getProviderNumber());
+		Assertions.assertEquals(terminal.getProviderByNumber(num), terminal.getProviders().get(0));
+		Assertions.assertNotNull(terminal.getProviderByName("name"));
 		Assertions.assertNull(terminal.getProviderByName("Nonexistant Person"));
 	}
 }
