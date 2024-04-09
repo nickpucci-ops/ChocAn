@@ -13,6 +13,9 @@ import project4.Service;
 
 /*
  * Provider Menu class extending from the Menu class
+ * 
+ * @author Nick
+ * @version 1.0
  */
 public class ProviderMenu extends Menu implements ActionListener {
 
@@ -43,6 +46,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	
 	/*
 	 * Create new provider menu from terminal
+	 * @param terminal the current terminal
 	 */
 	public ProviderMenu(Terminal terminal) {
 		super(terminal);
@@ -107,6 +111,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 
 	/*
 	 * Method to read if any button has been activated and then produce the desired output
+	 * @param e the action event received
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -176,6 +181,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	
 	/*
 	 * Confirm that the member number entered exists
+	 * @param memberID the member number entered by the user
 	 */
 	private Boolean validateMemberNumber(String memberID) {
 		for(Member member : terminal.getMembers()) {
@@ -191,6 +197,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	
 	/*
 	 * Confirm that the provider number entered exists
+	 * @param providerID the provider number entered by the user
 	 */
 	private Boolean validateProviderNumber(String providerID){
 		for(Provider provider : terminal.getProviders()) {
@@ -206,6 +213,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	
 	/*
 	 * Confirm that the service code entered exists
+	 * @param serviceCode the service code entered by the user
 	 */
 	private Boolean validateServiceCode(String serviceCode) {
 		for(Service service : terminal.getServices()) {
