@@ -19,10 +19,15 @@ public class ProviderReport extends Report{
 		addLineWithTitle("State:", provider.getState());
 		addLineWithTitle("Zip Code:", String.format("%05d", 5));
 		
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy"); 
+	    DateFormat dateTimeFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss"); 
+	    Calendar calobj = Calendar.getInstance(); 
+	       
 		addLine(""); // Add a blank line for spacing
+		
 		for(Service service : services){
-			addLineWithTitle("Date of Service:", "");
-	        addLineWithTitle("Received on:", "01-10-2024, 10:29:38");
+	        addLineWithTitle("Date of service:", df.format(calobj.getTime()));
+	        addLineWithTitle("Date recorded:", dateTimeFormat.format(calobj.getTime()));
 	        addLineWithTitle("Member Name:", "Bob");
 	        addLineWithTitle("Member Number:", String.format("%09d", 9));
 	        addLineWithTitle("Service Code:", String.format("%06d", 6));
