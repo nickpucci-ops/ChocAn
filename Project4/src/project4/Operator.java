@@ -31,7 +31,7 @@ public class Operator extends Employee {
 	public void editProvider(Terminal terminal, Provider provider) {
 		for(Employee employee : terminal.getEmployees()) {
 			if(employee.getId() == provider.getId()) {
-				employee = provider;
+				terminal.getEmployees().set(terminal.getEmployees().indexOf(employee), provider);
 				return;
 			}
 		}

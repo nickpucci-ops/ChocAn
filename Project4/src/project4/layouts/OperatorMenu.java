@@ -66,6 +66,8 @@ public class OperatorMenu extends Menu implements ActionListener {
 	JPanel addProviderPanel;
 	JLabel addProviderNameLabel;
 	JTextField addProviderNameText;
+	JLabel addProviderUsernameLabel;
+	JTextField addProviderUsernameText;
 	JLabel addProviderAddressLabel;
 	JTextField addProviderAddressText;
 	JLabel addProviderCityLabel;
@@ -216,6 +218,8 @@ public class OperatorMenu extends Menu implements ActionListener {
 		addProviderPanel.add(addProviderNameLabel);
 		addProviderNameText = new JTextField(16);
 		addProviderPanel.add(addProviderNameText);
+		addProviderUsernameLabel = new JLabel("Username: ");
+		addProviderUsernameText = new JTextField(16);
 		addProviderAddressLabel = new JLabel("Address: ");
 		addProviderPanel.add(addProviderAddressLabel);
 		addProviderAddressText = new JTextField(16);
@@ -402,10 +406,10 @@ public class OperatorMenu extends Menu implements ActionListener {
 			addFooterButton(deleteProviderSubmitBtn);
 			addFooterButton(deleteProviderCancelBtn);
 			setTitle("Delete Provider");
-		} else if(e.getSource() == deleteMemberSubmitBtn) {
+		} else if(e.getSource() == deleteProviderSubmitBtn) {
 			int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteProviderChoiceBox.getSelectedItem() + "? This action cannot be undone!", "Delete Provider", JOptionPane.YES_NO_OPTION);
 			if(confirm == JOptionPane.OK_OPTION) {
-				((Operator)terminal.getLoggedInEmployee()).removeProvider(terminal, (Provider)terminal.getEmployees().get(1));
+				((Operator)terminal.getLoggedInEmployee()).removeProvider(terminal, terminal.getProviderByName((String)deleteProviderChoiceBox.getSelectedItem()));
 				clear();
 				main.add(editProvidersPanel);
 				setTitle("Edit Providers");
@@ -561,6 +565,10 @@ public class OperatorMenu extends Menu implements ActionListener {
 			JOptionPane.showMessageDialog(this, "Name field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
+		if(addProviderUsernameText.getText().length() > 25) {
+			JOptionPane.showMessageDialog(this, "Username field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
 		if(addProviderAddressText.getText().length() > 25) {
 			JOptionPane.showMessageDialog(this, "Address field is too long!", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
@@ -587,22 +595,28 @@ public class OperatorMenu extends Menu implements ActionListener {
 	}
 	
 	private Provider createProviderFromAddProviderFields(int id) {
-		//TODO: create new provider with given fields
-		return new Provider(id, "provider1", "name", 8 , "street", "city", "st", 12345);
+		return new Provider(id, addProviderUsernameText.getText(), addProviderNameText.getText(),
+				id , addProviderAddressText.getText(), addProviderCityText.getText(), 
+				addProviderStateText.getText(), Integer.parseInt(addProviderZipText.getText()));
 	}
 	
 	private void populateProviderComboBox(JComboBox<String> comboBox) {
 		comboBox.removeAllItems();
 		for(Employee employee : terminal.getEmployees()) {
 			if(employee.getEmployeeType() == Employee.PROVIDER) {
-				//TODO change this to getName()
-				comboBox.addItem(String.valueOf(((Provider)employee).getId()));
+				comboBox.addItem(String.valueOf(((Provider)employee).getName()));
 			}
 		}
 	}
 	
 	private void populateUpdateProviderFields() {
-		//TODO update provider fields
+		Provider provider = terminal.getProviderByName((String)updateProviderChoiceBox.getSelectedItem());
+		updateProviderNameText.setText(provider.getName());
+		updateProviderCityText.setText(provider.getCity());
+		updateProviderStateText.setText(provider.getState());
+		updateProviderAddressText.setText(provider.getStreetAddress());
+		updateProviderZipText.setText(String.valueOf(provider.getZipCode()));
+		
 	}
 	
 	private Boolean validateUpdateProviderFields() {
@@ -642,7 +656,10 @@ public class OperatorMenu extends Menu implements ActionListener {
 	}
 	
 	private Provider createProviderFromUpdateProviderFields() {
-		//TODO create provider
-		return new Provider(1, "provider1", "name", 8 , "street", "city", "st", 12345);
+		return new Provider(terminal.getProviderByName((String)updateProviderChoiceBox.getSelectedItem()).getId(),
+				terminal.getProviderByName((String)updateProviderChoiceBox.getSelectedItem()).getUsername(), 
+				updateProviderNameText.getText(), terminal.getProviderByName((String)updateProviderChoiceBox.getSelectedItem()).getProviderNumber(),
+				updateProviderAddressText.getText(), updateProviderCityText.getText(), updateProviderStateText.getText(),
+				Integer.parseInt(updateProviderZipText.getText()));
 	}
 }
