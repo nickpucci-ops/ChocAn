@@ -6,6 +6,9 @@
 package project4;
 
 import java.util.Date;
+/*
+ * This constructor method for the Service class. It defines how a service object should be made.
+ */
 import java.text.SimpleDateFormat;
 
 public class Service  {
@@ -17,9 +20,19 @@ public class Service  {
     private Member member;
     private Provider provider;
     private String comments;
-/*
- * This constructor method for the Service class. It defines how a service object should be made.
- */
+
+    /*
+     * This constructor method for the Service class. It defines how a service object should be made.
+     * @param name is the name of the service
+     * @param code is the code of the service
+     * @param fee is the fee of the service
+     * @param dateProvided is the date of when the service was provided
+     * @param dateEntered is the date of when the information was entered
+     * @param member is the member receiving the services
+     * @param provider is the provider giving the services
+     * @param comments are any comments from the provider
+     */
+    
     public Service(String name, int code, float fee, Date dateProvided, Date dateEntered, Member member, Provider provider, String comments) {
         this.name = name;
         this.code = code;
@@ -31,37 +44,37 @@ public class Service  {
         this.comments = comments;
     }
     /*
-     * Gets the name of the service
+     * Gets the name of the service for the instance
      */
     public String getName() {
     	return this.name;
     }
     /*
-     *  Gets the date of when the service was provided
+     *  Gets the date of when the service was provided for the instance
      */
     public Date getDateProvided() {
     	return this.dateProvided;
     }
     /*
-     *  Gets the date of when the information was entered
+     *  Gets the date of when the information was entered for the instance
      */
     public Date getDateEntered() {
     	return this.dateEntered;
     }
     /*
-     * Gets the name of the provider
+     * Gets the name of the provider for the instance
      */
     public Provider getProvider() {
     	return this.provider;
     }
     /*
-     * Gets the name of the member
+     * Gets the name of the member for the instance
      */
     public Member getMember() {
     	return this.member;
     }
     /*
-     * Gets the service code
+     * Gets the service code for the instance
      */
     public int getCode() {
     	return this.code;
