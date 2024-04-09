@@ -20,7 +20,7 @@ public class SummaryReport extends Report {
 						numConsultations++;
 						totalProviderFee += service.getFee();
 					}
-					addLineWithTitle("Number of Consultations:", String.valueOf(numConsultations));
+					addLineWithTitle("Consultations:", String.valueOf(numConsultations));
 					addLineWithTitle("Fee: ", String.valueOf(totalProviderFee));
 					totalFee += totalProviderFee;
 					totalConsultations += numConsultations;

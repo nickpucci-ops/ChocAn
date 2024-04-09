@@ -1,30 +1,46 @@
 package project4.report;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import project4.Provider;
 import project4.Service;
 
 public class ProviderReport extends Report{
 	Provider provider;
-	public ProviderReport(Provider provider, String filename, ArrayList<Service> serivces) {
+	public ProviderReport(Provider provider, String filename, ArrayList<Service> services) {
 		super(filename, "Provider Report");
-		addLineWithTitle("Provider Name:", "James Bald");
-		addLineWithTitle("Provider Number:", String.format("%09d", 9));
-		addLineWithTitle("Street Address:", "somewhere");
-		addLineWithTitle("City:", "Boston");
-		addLineWithTitle("State:", "MA");
+		int totalConsultations = 0;
+		float totalFee = 0;
+		
+		addLineWithTitle("Provider Name:", provider.getName());
+		addLineWithTitle("Provider Number:", String.format("%09d", provider.getProviderNumber()));
+		addLineWithTitle("Street Address:", provider.getStreetAddress());
+		addLineWithTitle("City:", provider.getCity());
+		addLineWithTitle("State:", provider.getState());
 		addLineWithTitle("Zip Code:", String.format("%05d", 5));
 		
+		DateFormat df = new SimpleDateFormat("MM-dd-yyyy"); 
+	    DateFormat dateTimeFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss"); 
+	    Calendar calobj = Calendar.getInstance(); 
+	       
 		addLine(""); // Add a blank line for spacing
-        addLineWithTitle("Date of Service:", "01-10-2024");
-        addLineWithTitle("Received on:", "01-10-2024, 10:29:38");
-        addLineWithTitle("Member Name:", "Bob");
-        addLineWithTitle("Member Number:", String.format("%09d", 9));
-        addLineWithTitle("Service Code:", String.format("%06d", 6));
-        addLineWithTitle("Fee to be Paid:", String.format("$%.2f", 3.0));
-        addLineWithTitle("Total Consultations:", "3");
-        addLineWithTitle("Total Fee for Week: ", String.format("$%.2f", 99999.0));
+		addLineWithTitle("Serivces:", "");
+		for(Service service : services){
+	        addLineWithTitle("Date of service:", df.format(calobj.getTime()));
+	        addLineWithTitle("Date recorded:", dateTimeFormat.format(calobj.getTime()));
+	        addLineWithTitle("Member Name:", "Bob");
+	        addLineWithTitle("Member Number:", String.format("%09d", 9));
+	        addLineWithTitle("Service Code:", String.format("%06d", 6));
+	        addLineWithTitle("Fee to be Paid:", String.format("$%.2f", service.getFee()));
+			totalConsultations++;
+			totalFee += service.getFee();
+			addLine("");
+		}
+        addLineWithTitle("Total Consultations:", String.format("%d", totalConsultations));
+        addLineWithTitle("Total Fee for Week: ", String.format("$%.2f", totalFee));
  	
 		closeAndSave();
  

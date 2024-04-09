@@ -192,3 +192,13 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		bottomPanel.repaint();
 	}
 }
+
+/*	List of sample services for testing purposes
+	--------------------------------------------
+		ArrayList<Service> sampleServices = new ArrayList<Service>();
+		Provider sampleProvider = new Provider(1, "Username", "Jeremy Smith", 2, "Street St", "Tuscaloosa", "AL", 12345);
+		Date today = new Date();
+		Service sampleService = new Service("Service Name", 123456, (float)12.34, today, today, terminal.getMembers().get(0), sampleProvider, "Comments");
+		sampleServices.add(sampleService);
+		sampleServices.add(sampleService);
+*/
