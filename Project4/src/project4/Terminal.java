@@ -217,4 +217,14 @@ public class Terminal implements ActionListener {
 		}
 		return members.get(0);
 	}
+	
+	public ArrayList<Service> getServicesForMember(Member member){
+		ArrayList<Service> memberServices = new ArrayList<>();
+		for (Service service : services) {
+			if (service.getMember().equals(member)) {
+				memberServices.add(service);
+			}
+		}
+		return memberServices;
+	}
 }

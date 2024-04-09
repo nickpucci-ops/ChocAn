@@ -6,8 +6,10 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import project4.Employee;
+import project4.Manager;
 import project4.Member;
 import project4.Provider;
+import project4.Service;
 import project4.Terminal;
 import project4.report.MemberReport;
 
@@ -54,6 +56,8 @@ public class ManagerMenu extends Menu implements ActionListener {
 	public ManagerMenu(Terminal terminal) {
 		super(terminal);		
 		this.setTitle("Manager");
+		
+		memberReports = new ArrayList<MemberReport>();
 		
 		mainMenuPanel = new JPanel(new GridLayout(0, 1));
 		runMemberReportBtn = new JButton("Run Member Report");
@@ -151,12 +155,9 @@ public class ManagerMenu extends Menu implements ActionListener {
 			setTitle("Manager");
 		}  
 		else if(e.getSource() == runMemberReportChoiceBtn) {
-			Member memberNeeded = getMemberByName((String)memberChoiceBox.getSelectedItem());
-			int index = memberNeeded.getMemberNumber();
-			memberReports.get(index).open();
-			clear();
-			main.add(memberReportPanel);
-			setTitle("Member Report");
+			Member selectedMember = getSelectedMember();
+			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
+			loggedInManager.getMemberReport(terminal, selectedMember);
 		}
 		else {
 			clear();
@@ -183,15 +184,20 @@ public class ManagerMenu extends Menu implements ActionListener {
 			}
 		}
 	}
-	public Member getMemberByName(String name) {
-		for(Member member : members) {
-			if(member.getName().equals(name)) {
-				return member;
-			}
-		}
-		return members.get(0);
+	private Member getSelectedMember() {
+		String selectedMemberName = (String) memberChoiceBox.getSelectedItem();
+		return terminal.getMemberByName(selectedMemberName);
 	}
 	
+	/*private ArrayList<Service> getMemberServices(Member member) {
+	    ArrayList<Service> memberServices = new ArrayList<>();
+	    for (Member member : terminal.getServices()) {
+	        if (member.getName().equals(name)) {
+	            memberServices.add(service);
+	        }
+	    }
+	    return memberServices;
+	}*/
 	
 	
 }

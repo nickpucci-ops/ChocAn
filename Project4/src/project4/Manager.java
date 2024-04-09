@@ -1,5 +1,7 @@
 package project4;
 
+import java.util.ArrayList;
+
 import project4.report.MemberReport;
 import project4.report.ProviderReport;
 import project4.report.Report;
@@ -15,7 +17,9 @@ public class Manager extends Employee {
 	}
 	
 	public void getMemberReport(Terminal terminal, Member member) {
-	//TODO
+	ArrayList<Service> memberServices = terminal.getServicesForMember(member);
+	MemberReport memberReport = new MemberReport(member, "MemberReport.pdf", memberServices);
+	memberReport.open();
 	}
 	
 	public void getSummaryReport() {

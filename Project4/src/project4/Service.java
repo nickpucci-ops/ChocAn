@@ -36,6 +36,10 @@ public class Service  {
     	return this.provider;
     }
     
+    public Member getMember() {
+    	return this.member;
+    }
+    
     public int getCode() {
     	return this.code;
     }
