@@ -2,10 +2,16 @@ package project4.tests;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+
+import project4.*;
+
 class DominiqueCastroTests {
 	Terminal terminal;
 	@BeforeEach
-	void setUp() throws exception {
+	void setUp() throws Exception {
 		terminal = new Terminal();
 	}
 	
