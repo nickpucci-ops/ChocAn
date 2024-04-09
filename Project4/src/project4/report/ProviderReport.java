@@ -1,11 +1,13 @@
 package project4.report;
 
-import project4.Provider;
+import java.util.ArrayList;
 
+import project4.Provider;
+import project4.Service;
 
 public class ProviderReport extends Report{
 	Provider provider;
-	public ProviderReport(Provider provider, String filename) {
+	public ProviderReport(Provider provider, String filename, ArrayList<Service> serivces) {
 		super(filename, "Provider Report");
 		addLineWithTitle("Provider Name:", "James Bald");
 		addLineWithTitle("Provider Number:", String.format("%09d", 9));

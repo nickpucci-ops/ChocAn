@@ -64,9 +64,6 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		
 		continueBtn = new JButton("Continue");
 		continueBtn.addActionListener(this);
-		bottomPanel.add(continueBtn);
-		
-		
 		
 		title = new JLabel("Main Accounting Procedure");
 		topPanel.add(title);
@@ -128,19 +125,8 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	
 	private void createMemberReports() {
 		memberReports.clear();
-		
-		//Test service bank, replace with terminal.getServices(); later
-		ArrayList<Service> testServices = new ArrayList<Service>();
-		Date today = new Date();
-		Provider pro = new Provider(1, "JSmith", "Jeremy Smith", 1, "Street Lane", "Tuscaloosa", "AL", 54321);
-		Service test1 = new Service(terminal.getMembers().get(1).getName(), 123456, 555, today, today, terminal.getMembers().get(1), pro, "Test");
-		testServices.add(test1);
-		Service test2 = new Service(terminal.getMembers().get(1).getName(), 123456, 555, today, today, terminal.getMembers().get(1), pro, "Test");
-		testServices.add(test2);
-		//
-		
 		for(Member member : terminal.getMembers()) {
-			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", testServices);
+			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", terminal.getServicesForMember(member));
 			memberReports.add(newReport);
 		}
 	}
@@ -157,15 +143,15 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 			newBtn.addActionListener(this);
 			main.add(newBtn);
 		}
+		bottomPanel.add(continueBtn);
 	}
 	
 	private void createProviderReports() {
-		providerReports.clear();
 		Provider provider;
 		for(Employee employee : terminal.getEmployees()) {
-			if(employee.getEmployeeType() == Employee.OPERATOR) {
-				provider = new Provider(employee.getId(), employee.getUsername(), "name", 8 , "street", "city", "st", 12345);
-				ProviderReport newReport = new ProviderReport(provider, "Provider_Report-" + provider.getId() + ".pdf");
+			if(employee.getEmployeeType() == Employee.PROVIDER) {
+				provider = (Provider)employee;
+				ProviderReport newReport = new ProviderReport(provider, "Provider_Report-" + provider.getId() + ".pdf", terminal.getServicesForProvider(provider));
 				providerReports.add(newReport);
 			}
 		}
@@ -174,6 +160,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 	private void switchToProviderPanel() {
 		main.removeAll();
 		title.setText("Provider Reports");
+		int provCount = 0;
 		this.createProviderReports();
 		for(Employee employee : terminal.getEmployees()) {
 			if(employee.getEmployeeType() == Employee.PROVIDER) {
@@ -181,9 +168,10 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 				JButton newBtn = new JButton("Open");
 				newBtn.setSize(300, 100);
 				newBtn.putClientProperty("type", "provider");
-				newBtn.putClientProperty("index", terminal.getEmployees().indexOf(employee));
+				newBtn.putClientProperty("index", provCount);
 				newBtn.addActionListener(this);
 				main.add(newBtn);
+				provCount++;
 			}
 		}
 	}
@@ -204,4 +192,3 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		bottomPanel.repaint();
 	}
 }
- 

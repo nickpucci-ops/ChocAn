@@ -18,12 +18,10 @@ public class MemberReport extends Report {
 		addLine("");
 		addLineWithTitle("Services:", "");
 		for(Service service : services){
-			if(service.getName() == member.getName()) {
-				addLineWithTitle("Service Code: ", String.format("%06d", service.getCode()));
-				addLineWithTitle("Provider: ", service.getProvider().getName());
-				addLineWithTitle("Date: ", service.getDate().toString());
-				addLine("");
-			}
+			addLineWithTitle("Service Code: ", String.format("%06d", service.getCode()));
+			addLineWithTitle("Provider: ", service.getProvider().getName());
+			addLineWithTitle("Date: ", service.getDate().toString());
+			addLine("");
 		}
 		
 		closeAndSave();
