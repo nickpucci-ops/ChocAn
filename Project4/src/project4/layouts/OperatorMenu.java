@@ -325,6 +325,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			if(validateAddMemberFields()) {
 				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().get(terminal.getMembers().size()-1).getMemberNumber() + 1);
 				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
+				JOptionPane.showMessageDialog(this, "Successfully created member!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clear();
 				main.add(editMembersPanel);
 				setTitle("Edit Members");
@@ -340,6 +341,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			if(validateUpdateMemberFields()) {
 				Member updatedMember = createMemberFromUpdateMemberFields();
 				((Operator)terminal.getLoggedInEmployee()).editMember(terminal, updatedMember);
+				JOptionPane.showMessageDialog(this, "Successfully updated member!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clear();
 				main.add(editMembersPanel);
 				setTitle("Edit Members");
@@ -348,6 +350,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteMemberChoiceBox.getSelectedItem() + "? This action cannot be undone!", "Delete Member", JOptionPane.YES_NO_OPTION);
 			if(confirm == JOptionPane.OK_OPTION) {
 				((Operator)terminal.getLoggedInEmployee()).removeMember(terminal, terminal.getMemberByName((String)deleteMemberChoiceBox.getSelectedItem()));
+				JOptionPane.showMessageDialog(this, "Successfully deleted member!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clear();
 				main.add(editMembersPanel);
 				setTitle("Edit Members");
@@ -366,6 +369,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			if(validateAddProviderFields()) {
 				Provider newProvider = createProviderFromAddProviderFields(terminal.getEmployees().get(terminal.getEmployees().size()-1).getId() + 1);
 				((Operator)terminal.getLoggedInEmployee()).addProvider(terminal, newProvider);
+				JOptionPane.showMessageDialog(this, "Successfully created provider!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clear();
 				main.add(editProvidersPanel);
 				setTitle("Edit Members");				
@@ -391,6 +395,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			if(validateUpdateProviderFields()) {
 				Provider updatedProvider = createProviderFromUpdateProviderFields();
 				((Operator)terminal.getLoggedInEmployee()).editProvider(terminal, updatedProvider);
+				JOptionPane.showMessageDialog(this, "Successfully updated provider!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clear();
 				main.add(editProvidersPanel);
 				setTitle("Edit Providers");
@@ -410,6 +415,7 @@ public class OperatorMenu extends Menu implements ActionListener {
 			int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete " + deleteProviderChoiceBox.getSelectedItem() + "? This action cannot be undone!", "Delete Provider", JOptionPane.YES_NO_OPTION);
 			if(confirm == JOptionPane.OK_OPTION) {
 				((Operator)terminal.getLoggedInEmployee()).removeProvider(terminal, terminal.getProviderByName((String)deleteProviderChoiceBox.getSelectedItem()));
+				JOptionPane.showMessageDialog(this, "Successfully deleted provider!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clear();
 				main.add(editProvidersPanel);
 				setTitle("Edit Providers");
