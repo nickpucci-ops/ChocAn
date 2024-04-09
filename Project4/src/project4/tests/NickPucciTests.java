@@ -19,7 +19,6 @@ class NickPucciTests {
 
 	@Test
 	void testGetMemberNumber() {
-		
 		Member newMember = new Member("test member", 509, "123 Main Street", "Tuscaloosa", "AL", 45567);
 		int num = newMember.getMemberNumber();
 		
