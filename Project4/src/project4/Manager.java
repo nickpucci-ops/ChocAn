@@ -11,9 +11,9 @@ public class Manager extends Employee {
 	Manager(int id, String username) {
 		super(Employee.MANAGER, id, username);
 	}
-	public void getProviderReport(Provider provider) {
-		ProviderReport pReport = new ProviderReport( provider ,"Provider Report" );
-		pReport.open();
+	public void getProviderReport(Terminal terminal, Provider provider) {
+		ProviderReport providerReport = new ProviderReport(provider, "ProviderReport.pdf");
+		providerReport.open();
 	}
 	
 	public void getMemberReport(Terminal terminal, Member member) {
@@ -22,10 +22,8 @@ public class Manager extends Employee {
 	memberReport.open();
 	}
 	
-	public void getSummaryReport() {
-		//ask
-	}
-	public void sendReport(Report report) {
-		//TODO 
+	public void getSummaryReport(Terminal terminal) {
+		SummaryReport summaryReport = new SummaryReport(terminal, "summary.pdf");
+		summaryReport.open();
 	}
 }

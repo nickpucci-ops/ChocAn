@@ -44,9 +44,6 @@ public class ManagerMenu extends Menu implements ActionListener {
 	JComboBox<String> providerChoiceBox;
 	JButton runProviderReportChoiceBtn;
 	
-	JPanel managerReportPanel;
-	JButton managerReportBackBtn;
-	
 	JPanel EFTPanel;
 	JButton EFTBackBtn;
 	JLabel EFTChoiceLabel;
@@ -66,9 +63,6 @@ public class ManagerMenu extends Menu implements ActionListener {
 		runProviderReportBtn = new JButton("Run Provider Report");
 		runProviderReportBtn.addActionListener(this);
 		mainMenuPanel.add(runProviderReportBtn);
-		runManagerReportBtn = new JButton("Run Manager Report");
-		runManagerReportBtn.addActionListener(this);
-		mainMenuPanel.add(runManagerReportBtn);
 		runEFTBtn = new JButton("Run EFT");
 		runEFTBtn.addActionListener(this);
 		mainMenuPanel.add(runEFTBtn);
@@ -94,10 +88,6 @@ public class ManagerMenu extends Menu implements ActionListener {
 		runProviderReportChoiceBtn = new JButton("Enter");
 		runProviderReportChoiceBtn.addActionListener(this);
 		
-		managerReportPanel = new JPanel();
-		managerReportBackBtn = new JButton("Back");
-		managerReportBackBtn.addActionListener(this);
-		
 		EFTPanel = new JPanel();
 		EFTChoiceLabel = new JLabel("Choose provider to run report: ");
 		EFTPanel.add(EFTChoiceLabel);
@@ -110,6 +100,13 @@ public class ManagerMenu extends Menu implements ActionListener {
 		summaryReportBackBtn = new JButton("Back");
 		summaryReportBackBtn.addActionListener(this);
 		
+		memberReportBackBtn = new JButton("Back");
+		memberReportBackBtn.addActionListener(this);
+		providerReportBackBtn = new JButton("Back");
+		EFTBackBtn = new JButton("Back");
+		providerReportBackBtn.addActionListener(this);
+		EFTBackBtn.addActionListener(this);
+		
 
 	}
 
@@ -121,6 +118,7 @@ public class ManagerMenu extends Menu implements ActionListener {
 			main.add(memberReportPanel);
 			populateMemberComboBox(memberChoiceBox);
 			addFooterButton(runMemberReportChoiceBtn);
+			addFooterButton(memberReportBackBtn);
 			setTitle("Member Report");
 		}
 		else if(e.getSource() == runProviderReportBtn) {
@@ -128,26 +126,20 @@ public class ManagerMenu extends Menu implements ActionListener {
 			main.add(providerReportPanel);
 			populateProviderComboBox(providerChoiceBox);
 			addFooterButton(runProviderReportChoiceBtn);
+			addFooterButton(providerReportBackBtn);
 			setTitle("Provider Report");
-		}
-		else if(e.getSource() == runManagerReportBtn) {
-			clear();
-			main.add(managerReportPanel);
-			addFooterButton(managerReportBackBtn);
-			setTitle("Manager Report");
 		}
 		else if(e.getSource() == runEFTBtn) {
 			clear();
 			main.add(EFTPanel);
 			populateProviderComboBox(EFTChoiceBox);
 			addFooterButton(runEFTReportChoiceBtn);
+			addFooterButton(EFTBackBtn);
 			setTitle("EFT");
 		}
 		else if(e.getSource() == runSummaryReportBtn) {
-			clear();
-			main.add(summaryReportPanel);
-			addFooterButton(summaryReportBackBtn);
-			setTitle("Summary Report");
+			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
+			loggedInManager.getSummaryReport(terminal);
 		}
 		else if(e.getSource() == getLogoutBtn()) {
 			clear();
@@ -158,6 +150,24 @@ public class ManagerMenu extends Menu implements ActionListener {
 			Member selectedMember = getSelectedMember();
 			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
 			loggedInManager.getMemberReport(terminal, selectedMember);
+		}
+		else if(e.getSource() == runProviderReportChoiceBtn) {
+			Provider selectedProvider = getSelectedProvider();
+			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
+			loggedInManager.getProviderReport(terminal, selectedProvider);
+		}
+		else if(e.getSource() == runEFTReportChoiceBtn) {
+			Provider selectedProvider = getSelectedProvider();
+			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
+			loggedInManager.getProviderReport(terminal, selectedProvider);
+		}
+		else if(e.getSource() == memberReportBackBtn ||
+	            e.getSource() == providerReportBackBtn ||
+	            e.getSource() == EFTBackBtn ||
+	            e.getSource() == summaryReportBackBtn) {
+			clear();
+			main.add(mainMenuPanel);
+			setTitle("Manager");
 		}
 		else {
 			clear();
@@ -188,6 +198,15 @@ public class ManagerMenu extends Menu implements ActionListener {
 		String selectedMemberName = (String) memberChoiceBox.getSelectedItem();
 		return terminal.getMemberByName(selectedMemberName);
 	}
+	private Provider getSelectedProvider() {
+		String selectedProviderNumber = (String) providerChoiceBox.getSelectedItem();
+		return terminal.getProviderByNumber(selectedProviderNumber);
+	}
+	/*not needed
+	 * private Provider getSelectedProvider() {
+		String selectedProviderNumer = (String) providerChoiceBox.getSelectedItem();
+		return terminal.getProviderByNumber(selectedProviderNumber);
+	}*/ 
 	
 	/*private ArrayList<Service> getMemberServices(Member member) {
 	    ArrayList<Service> memberServices = new ArrayList<>();
