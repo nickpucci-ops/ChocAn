@@ -31,7 +31,7 @@ public class Terminal implements ActionListener {
 	ArrayList<Member> members;
 	ArrayList<Service> services;
 	ArrayList<Provider> providers;
-	Map<Integer, String> serviceCodes;
+	HashMap<Integer, String> serviceCodes;
 	
 	
 	Employee loggedInEmployee;
@@ -276,6 +276,10 @@ public class Terminal implements ActionListener {
 			}
 		}
 		return memberServices;
+	}
+	
+	public HashMap<Integer, String> getServiceCodes() {
+		return serviceCodes;
 	}
 	
 	public ArrayList<Service> getServicesForProvider(Provider provider){
