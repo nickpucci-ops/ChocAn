@@ -16,7 +16,7 @@ public class Member {
     private String state;
     private int zipCode;
     private String status; 
-
+ 
     
     /**
      *  Constructor for the class
