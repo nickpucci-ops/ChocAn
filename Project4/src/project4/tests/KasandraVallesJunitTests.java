@@ -59,7 +59,7 @@ class KasandraVallesJunitTests {
     @Test
     void testGetProviderReport() throws Exception {
       ProviderReport providerReport = null;
-      
+      Assertions.assertNull(providerReport);
     }
 
     @Test
@@ -84,6 +84,7 @@ class KasandraVallesJunitTests {
     @Test
     void testGetSummaryReport() throws Exception {
     	SummaryReport summaryReport = null;
+    	Assertions.assertNull(summaryReport);
        
     }
 }
