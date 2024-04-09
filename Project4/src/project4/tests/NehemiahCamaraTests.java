@@ -35,7 +35,9 @@ class NehemiahCamaraTests {
         assertEquals(18465, zipCode, "Zip code should match the expected value.");
     }
     
+    @Test
     void testUpdateAddress(){
+    	Provider provider = new Provider(1, "providerUsername", "Provider One", 101, "123 Old Street", "Old City", "Old State", 12345);
         provider.updateAddress("456 New Street", "New City", "New State", 67890);
         
         
