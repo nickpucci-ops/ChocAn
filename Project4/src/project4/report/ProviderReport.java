@@ -1,6 +1,9 @@
 package project4.report;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import project4.Provider;
 import project4.Service;
@@ -24,7 +27,7 @@ public class ProviderReport extends Report{
 	    Calendar calobj = Calendar.getInstance(); 
 	       
 		addLine(""); // Add a blank line for spacing
-		
+		addLineWithTitle("Serivces:", "");
 		for(Service service : services){
 	        addLineWithTitle("Date of service:", df.format(calobj.getTime()));
 	        addLineWithTitle("Date recorded:", dateTimeFormat.format(calobj.getTime()));
