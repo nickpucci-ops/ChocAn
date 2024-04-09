@@ -211,7 +211,6 @@ public class ProviderMenu extends Menu implements ActionListener {
 		return false;
 	}
 	
-	
 	/*
 	 * Confirm that the service code entered exists
 	 * @param serviceCode the service code entered by the user
