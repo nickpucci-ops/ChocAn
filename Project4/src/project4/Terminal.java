@@ -241,13 +241,22 @@ public class Terminal implements ActionListener {
 		return members.get(0);
 	}
 	
-	public Provider getProviderByNumber(String number) {
-		for(Provider provider : providers) {
-			if(String.valueOf(provider.getProviderNumber()).equals(number)) {
-				return provider;
+	public Member getMemberByNumber(String number) {
+		for(Member member : members) {
+			if(String.valueOf(member.getMemberNumber()).equals(number)) {
+				return member;
 			}
 		}
-		return providers.get(0);
+		return null;
+	}
+	
+	public Provider getProviderByNumber(String number) {
+		for(Employee employee : employees) {
+			if(employee.getEmployeeType() == Employee.PROVIDER && String.valueOf(((Provider)employee).getProviderNumber()).equals(number)) {
+				return (Provider)employee;
+			}
+		}
+		return null;
 	}
 	
 	public Provider getProviderByName(String name) {
@@ -257,6 +266,10 @@ public class Terminal implements ActionListener {
 			}
 		}
 		return null;
+	}
+	
+	public void addService(Service service) {
+		services.add(service);
 	}
 	/*private void populateProviderComboBox(JComboBox<String> comboBox) {
 		comboBox.removeAllItems();

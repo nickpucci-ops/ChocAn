@@ -2,12 +2,14 @@ package project4.layouts;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
 import javax.swing.*;
 
 import project4.Terminal;
 import project4.Member;
 import project4.Provider;
+import project4.Service;
 
 public class ProviderMenu extends Menu implements ActionListener {
 
@@ -20,18 +22,19 @@ public class ProviderMenu extends Menu implements ActionListener {
 	JButton providerDirectoryBackBtn;
 	
 	JPanel billChocAnPanel;
-	JPanel addDateOfServicePanel;
 	JLabel addDateOfServiceLabel;
 	JTextField addDateOfServiceText;
-	JPanel addProviderNumberPanel;
 	JLabel addProviderNumberLabel;
 	JTextField addProviderNumberText;
-	JPanel addMemeberNumberPanel;
 	JLabel addMemeberNumberLabel;
 	JTextField addMemeberNumberText;
-	JPanel addServiceCodePanel;
 	JLabel addServiceCodeLabel;
 	JTextField addServiceCodeText;
+	
+	JLabel addFeeLabel;
+	JTextField addFeeText;
+	JLabel addCommentsLabel;
+	JTextField addCommentsText;
 	JButton submitDataBtn;
 	JButton billChocAnCancelBtn;
 	
@@ -79,6 +82,16 @@ public class ProviderMenu extends Menu implements ActionListener {
 		billChocAnPanel.add(addServiceCodeLabel);
 		addServiceCodeText = new JTextField(6);
 		billChocAnPanel.add(addServiceCodeText);
+		//fees
+		addFeeLabel = new JLabel("Fee: ");
+		billChocAnPanel.add(addFeeLabel);
+		addFeeText = new JTextField(16);
+		billChocAnPanel.add(addFeeText);
+		//comments
+		addCommentsLabel = new JLabel("Comments: ");
+		billChocAnPanel.add(addCommentsLabel);
+		addCommentsText = new JTextField(100);
+		billChocAnPanel.add(addCommentsText);
 		//submit
 		submitDataBtn = new JButton("Submit");
 		submitDataBtn.addActionListener(this);
@@ -90,22 +103,12 @@ public class ProviderMenu extends Menu implements ActionListener {
 		
 		
 	}
-	
-	public int validateMemberID(String memberID) {
-		for(Member member : terminal.getMembers()) {
-			if (member.getMemberNumber() == Integer.parseInt(memberID)) {
-				return 1;
-			} else {
-				return 0; //member not verified
-			}
-		}
-		return 0;
-	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getSource() == requestProviderDirectoryBtn) {
-			((Provider)terminal.getLoggedInEmployee()).getProviderDirectory();
+			((Provider)terminal.getLoggedInEmployee()).getProviderDirectory(terminal);
 		} else if(e.getSource() == providerDirectoryBackBtn) {
 			clear();
 			main.add(mainMenuPanel);
@@ -121,23 +124,17 @@ public class ProviderMenu extends Menu implements ActionListener {
 			main.add(mainMenuPanel);
 			setTitle("Provider");
 		} else if(e.getSource() == submitDataBtn) {
-			if(validateBillChocAnFields()) {
+			if(validateBillChocAnFields() && validateMemberNumber(addMemeberNumberText.getText()) 
+					&& validateProviderNumber(addProviderNumberText.getText()) 
+					&& validateServiceCode(addServiceCodeText.getText())) {
+				((Provider)terminal.getLoggedInEmployee()).createNewServiceRecord(terminal, addDateOfServiceText.getText(), 
+						addProviderNumberText.getText(), addMemeberNumberText.getText(),
+						addServiceCodeText.getText(), addFeeText.getText(), addCommentsText.getText());
 				
+				clear();
+				main.add(mainMenuPanel);
+				setTitle("Provider");
 			}
-			//if provider does not exist -> error
-			//if member does not exist -> error
-			//if service code does not exist -> error
-			//else -> write to service records -> reset to provider menu
-//			if(validateAddMemberFields()) {
-//				Member newMember = createMemberFromAddMemberFields(terminal.getMembers().getLast().getMemberNumber() + 1);
-//				((Operator)terminal.getLoggedInEmployee()).addMember(terminal, newMember);
-//				clear();
-//				main.add(editMembersPanel);
-//				setTitle("Edit Members");
-//			}
-//			clear();
-//			main.add(mainMenuPanel);
-//			setTitle("Provider");
 		} else if(e.getSource() == getLogoutBtn()) {
 			clear();
 			main.add(mainMenuPanel);
@@ -174,17 +171,33 @@ public class ProviderMenu extends Menu implements ActionListener {
 			if (member.getMemberNumber() == Integer.parseInt(memberID)) {
 				return true;
 			} else {
+				JOptionPane.showMessageDialog(this, "Invalid Member Number", "Error", JOptionPane.ERROR_MESSAGE);
 				return false; //member not verified
 			}
 		}
 		return false;
 	}
-	private Boolean validateProviderNumber(){
-		
+	private Boolean validateProviderNumber(String providerID){
+		for(Provider provider : terminal.getProviders()) {
+			if (provider.getProviderNumber() == Integer.parseInt(providerID)) {
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(this, "Invalid Provider Number", "Error", JOptionPane.ERROR_MESSAGE);
+				return false; //provider not verified
+			}
+		}
 		return false;
 	}
 	
-	private Boolean validateServiceCode() {
+	private Boolean validateServiceCode(String serviceCode) {
+		for(Service service : terminal.getServices()) {
+			if (service.getCode() == Integer.parseInt(serviceCode)) {
+				return true;
+			} else {
+				JOptionPane.showMessageDialog(this, "Invalid Service Code", "Error", JOptionPane.ERROR_MESSAGE);
+				return false; //service code not verified
+			}
+		}
 		return false;
 	}
 	
