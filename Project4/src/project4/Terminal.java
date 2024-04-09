@@ -242,6 +242,14 @@ public class Terminal implements ActionListener {
 		return providers.get(0);
 	}
 	
+	public Provider getProviderByName(String name) {
+		for(Employee employee : employees) {
+			if(employee.getEmployeeType() == Employee.PROVIDER && ((Provider)employee).getName().equals(name)) {
+				return (Provider)employee;
+			}
+		}
+		return null;
+	}
 	/*private void populateProviderComboBox(JComboBox<String> comboBox) {
 		comboBox.removeAllItems();
 		for(Employee employee : terminal.getEmployees()) {
