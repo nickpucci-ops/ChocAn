@@ -6,14 +6,14 @@ import java.text.SimpleDateFormat;
 public class Service  {
     private String name; 
     private int code;
-    private int fee; 
+    private float fee; 
     private Date dateProvided;
     private Date dateEntered;
     private Member member;
     private Provider provider;
     private String comments;
 
-    public Service(String name, int code, int fee, Date dateProvided, Date dateEntered, Member member, Provider provider, String comments) {
+    public Service(String name, int code, float fee, Date dateProvided, Date dateEntered, Member member, Provider provider, String comments) {
         this.name = name;
         this.code = code;
         this.fee = fee;
@@ -28,8 +28,12 @@ public class Service  {
     	return this.name;
     }
     
-    public Date getDate() {
+    public Date getDateProvided() {
     	return this.dateProvided;
+    }
+    
+    public Date getDateEntered() {
+    	return this.dateEntered;
     }
     
     public Provider getProvider() {
@@ -42,10 +46,6 @@ public class Service  {
     
     public int getCode() {
     	return this.code;
-    }
-
-    public static Date setDate() {
-        return new Date();
     }
 
     private boolean checkFormat(Date date) {
@@ -71,7 +71,11 @@ public class Service  {
         }
     }
     
-    public int getFee() {
+    public float getFee() {
     	return this.fee;
+    }
+    
+    public String getComments() {
+    	return comments;
     }
 }
