@@ -12,7 +12,7 @@ public class Manager extends Employee {
 		super(Employee.MANAGER, id, username);
 	}
 	public void getProviderReport(Terminal terminal, Provider provider) {
-		ProviderReport providerReport = new ProviderReport(provider, "ProviderReport.pdf");
+		ProviderReport providerReport = new ProviderReport(provider, "ProviderReport.pdf", terminal.getServicesForProvider(provider));
 		providerReport.open();
 	}
 	
