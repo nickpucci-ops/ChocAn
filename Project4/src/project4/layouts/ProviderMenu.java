@@ -106,7 +106,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 	}
 
 	/*
-	 * Method to read if any button has been activated and produce the desired output
+	 * Method to read if any button has been activated and then produce the desired output
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
