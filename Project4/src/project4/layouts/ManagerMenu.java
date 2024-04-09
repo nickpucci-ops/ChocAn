@@ -189,8 +189,7 @@ public class ManagerMenu extends Menu implements ActionListener {
 		comboBox.removeAllItems();
 		for(Employee employee : terminal.getEmployees()) {
 			if(employee.getEmployeeType() == Employee.PROVIDER) {
-				//TODO change this to getName()
-				comboBox.addItem(String.valueOf(((Provider)employee).getId()));
+				comboBox.addItem(String.valueOf(((Provider)employee).getName()));
 			}
 		}
 	}
@@ -200,7 +199,7 @@ public class ManagerMenu extends Menu implements ActionListener {
 	}
 	private Provider getSelectedProvider() {
 		String selectedProviderNumber = (String) providerChoiceBox.getSelectedItem();
-		return terminal.getProviderByNumber(selectedProviderNumber);
+		return terminal.getProviderByName((String)providerChoiceBox.getSelectedItem());
 	}
 	/*not needed
 	 * private Provider getSelectedProvider() {
