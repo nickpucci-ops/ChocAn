@@ -44,9 +44,6 @@ public class ManagerMenu extends Menu implements ActionListener {
 	JComboBox<String> providerChoiceBox;
 	JButton runProviderReportChoiceBtn;
 	
-	JPanel managerReportPanel;
-	JButton managerReportBackBtn;
-	
 	JPanel EFTPanel;
 	JButton EFTBackBtn;
 	JLabel EFTChoiceLabel;
@@ -66,9 +63,6 @@ public class ManagerMenu extends Menu implements ActionListener {
 		runProviderReportBtn = new JButton("Run Provider Report");
 		runProviderReportBtn.addActionListener(this);
 		mainMenuPanel.add(runProviderReportBtn);
-		runManagerReportBtn = new JButton("Run Manager Report");
-		runManagerReportBtn.addActionListener(this);
-		mainMenuPanel.add(runManagerReportBtn);
 		runEFTBtn = new JButton("Run EFT");
 		runEFTBtn.addActionListener(this);
 		mainMenuPanel.add(runEFTBtn);
@@ -93,10 +87,6 @@ public class ManagerMenu extends Menu implements ActionListener {
 		providerReportPanel.add(providerChoiceBox);
 		runProviderReportChoiceBtn = new JButton("Enter");
 		runProviderReportChoiceBtn.addActionListener(this);
-		
-		managerReportPanel = new JPanel();
-		managerReportBackBtn = new JButton("Back");
-		managerReportBackBtn.addActionListener(this);
 		
 		EFTPanel = new JPanel();
 		EFTChoiceLabel = new JLabel("Choose provider to run report: ");
@@ -130,12 +120,6 @@ public class ManagerMenu extends Menu implements ActionListener {
 			addFooterButton(runProviderReportChoiceBtn);
 			setTitle("Provider Report");
 		}
-		else if(e.getSource() == runManagerReportBtn) {
-			clear();
-			main.add(managerReportPanel);
-			addFooterButton(managerReportBackBtn);
-			setTitle("Manager Report");
-		}
 		else if(e.getSource() == runEFTBtn) {
 			clear();
 			main.add(EFTPanel);
@@ -144,10 +128,8 @@ public class ManagerMenu extends Menu implements ActionListener {
 			setTitle("EFT");
 		}
 		else if(e.getSource() == runSummaryReportBtn) {
-			clear();
-			main.add(summaryReportPanel);
-			addFooterButton(summaryReportBackBtn);
-			setTitle("Summary Report");
+			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
+			loggedInManager.getSummaryReport(terminal);
 		}
 		else if(e.getSource() == getLogoutBtn()) {
 			clear();
@@ -158,6 +140,16 @@ public class ManagerMenu extends Menu implements ActionListener {
 			Member selectedMember = getSelectedMember();
 			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
 			loggedInManager.getMemberReport(terminal, selectedMember);
+		}
+		else if(e.getSource() == runProviderReportChoiceBtn) {
+			Provider selectedProvider = getSelectedProvider();
+			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
+			loggedInManager.getProviderReport(terminal, selectedProvider);
+		}
+		else if(e.getSource() == runEFTReportChoiceBtn) {
+			Provider selectedProvider = getSelectedProvider();
+			Manager loggedInManager = (Manager) terminal.getLoggedInEmployee();
+			loggedInManager.getProviderReport(terminal, selectedProvider);
 		}
 		else {
 			clear();
@@ -188,6 +180,15 @@ public class ManagerMenu extends Menu implements ActionListener {
 		String selectedMemberName = (String) memberChoiceBox.getSelectedItem();
 		return terminal.getMemberByName(selectedMemberName);
 	}
+	private Provider getSelectedProvider() {
+		String selectedProviderNumber = (String) providerChoiceBox.getSelectedItem();
+		return terminal.getProviderByNumber(selectedProviderNumber);
+	}
+	/*not needed
+	 * private Provider getSelectedProvider() {
+		String selectedProviderNumer = (String) providerChoiceBox.getSelectedItem();
+		return terminal.getProviderByNumber(selectedProviderNumber);
+	}*/ 
 	
 	/*private ArrayList<Service> getMemberServices(Member member) {
 	    ArrayList<Service> memberServices = new ArrayList<>();

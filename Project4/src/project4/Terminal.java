@@ -28,6 +28,9 @@ public class Terminal implements ActionListener {
 	ArrayList<Employee> employees;
 	ArrayList<Member> members;
 	ArrayList<Service> services;
+	ArrayList<Provider> providers;
+	
+	
 	
 	Employee loggedInEmployee;
 	
@@ -71,6 +74,13 @@ public class Terminal implements ActionListener {
 		mainWindow.setTitle("ChocAn");
 		//mainWindow.pack();
 		mainWindow.setVisible(true);
+		
+		providers = new ArrayList<>();
+		for(Employee employee : employees) {
+			if(employee.getEmployeeType() == Employee.PROVIDER) {
+				providers.add((Provider)employee);
+			}
+		}
 		
 		
 	}
@@ -171,6 +181,7 @@ public class Terminal implements ActionListener {
 		}
 	}
 	
+	
 	private void writeData() {
 		try(Writer writer = new FileWriter("members.json")) {
 			Gson gson = new GsonBuilder().create();
@@ -201,6 +212,10 @@ public class Terminal implements ActionListener {
 		return members;
 	}
 	
+	public ArrayList<Provider> getProviders(){
+		return providers;
+	}
+	
 	public ArrayList<Service> getServices() {
 		return services;
 	}
@@ -218,6 +233,25 @@ public class Terminal implements ActionListener {
 		return members.get(0);
 	}
 	
+	public Provider getProviderByNumber(String number) {
+		for(Provider provider : providers) {
+			if(String.valueOf(provider.getProviderNumber()).equals(number)) {
+				return provider;
+			}
+		}
+		return providers.get(0);
+	}
+	
+	/*private void populateProviderComboBox(JComboBox<String> comboBox) {
+		comboBox.removeAllItems();
+		for(Employee employee : terminal.getEmployees()) {
+			if(employee.getEmployeeType() == Employee.PROVIDER) {
+				//TODO change this to getName()
+				comboBox.addItem(String.valueOf(((Provider)employee).getId()));
+			}
+		}
+	}*/
+	
 	public ArrayList<Service> getServicesForMember(Member member){
 		ArrayList<Service> memberServices = new ArrayList<>();
 		for (Service service : services) {
@@ -227,4 +261,16 @@ public class Terminal implements ActionListener {
 		}
 		return memberServices;
 	}
+	
+	public ArrayList<Service> getServicesForProvider(Provider provider){
+		ArrayList<Service> providerServices = new ArrayList<>();
+		for (Service service : services) {
+			if(service.getProvider().equals(provider)) {
+				providerServices.add(service);
+			}
+		}
+		return providerServices;
+		
+	}
+	
 }
