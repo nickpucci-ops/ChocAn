@@ -28,7 +28,7 @@ public class Manager extends Employee {
      * @param id The ID of the manager.
      * @param username The username of the manager.
      */
-    Manager(int id, String username) {
+    public Manager(int id, String username) {
         super(Employee.MANAGER, id, username);
     }
 

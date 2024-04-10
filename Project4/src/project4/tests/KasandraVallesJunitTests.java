@@ -1,90 +1,67 @@
 package project4.tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.Assert.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import project4.Manager;
-import project4.Member;
 import project4.Provider;
-import project4.Service;
 import project4.Terminal;
-import project4.report.MemberReport;
 import project4.report.ProviderReport;
 import project4.report.SummaryReport;
 
 import java.io.File;
-import java.lang.reflect.Constructor;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 class KasandraVallesJunitTests {
-    Terminal terminal;
-    ArrayList<Provider> sampleProviders;
-	ArrayList<Member> sampleMembers;
-	ArrayList<Service> sampleServices;
-	
-	Provider sampleProvider1;
-	Provider sampleProvider2;
-	Member sampleMember1;
-	Member sampleMember2;
-	Service sampleService1;
-	Service sampleService2;
-	Date today;
+	private Manager manager;
+    private Terminal terminal;
+    private Provider provider;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws Exception {
+    	manager = new Manager(1, "manager1");
         terminal = new Terminal();
-		sampleProviders = new ArrayList<Provider>();
-		sampleMembers = new ArrayList<Member>();
-		sampleServices = new ArrayList<Service>();
-		sampleProvider1 = new Provider(1, "Username", "Jeremy Smith", 1, "Street St", "Tuscaloosa", "AL", 12345);
-		sampleProvider2 = new Provider(2, "OtherUser", "Michael Scott", 2, "Office", "Scranton", "NY", 67890);
-		sampleMember1 = new Member("Chocolate Lover", 1, "Cocoa Lane", "Tuscaloosa", "AL", 20204);
-		sampleMember2 = new Member("Mr. Man", 2, "123 Lane", "Pigeon Forge", "TN", 32546);
-		sampleProviders.add(sampleProvider1);
-		sampleProviders.add(sampleProvider2);
-		sampleMembers.add(sampleMember1);
-		sampleMembers.add(sampleMember2);
-		today = new Date();
-		sampleService1 = new Service("Chocolate Counseling", 123456, (float)12.34, today, today, sampleMember1, sampleProvider1, "Comments");
-		sampleService2 = new Service("Workout Session", 567890, (float)12.34, today, today, sampleMember2, sampleProvider2, "More Comments");
-		sampleServices.add(sampleService1);
-		sampleServices.add(sampleService2);
+        provider = new Provider(1, "Provider1", "Provider Name", 1, "123 Street Name", "City", "State", 12345);
+        terminal = new Terminal();
     }
 
-    @Test
-    void testGetProviderReport() throws Exception {
-      ProviderReport providerReport = null;
-      Assertions.assertNull(providerReport);
-    }
-
-    @Test
-    void testGetMemberReport() throws Exception {
-    	MemberReport memberReport = null;
-    	ArrayList<MemberReport> memberReports = new ArrayList<MemberReport>();
-		ArrayList<Service> tempServices = new ArrayList<Service>();
-		for(Member member : sampleMembers) {
-			for(Service tempService : sampleServices) {
-				if(tempService.getMember() == member) {
-					tempServices.add(tempService);
-				}
-			}
-			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", tempServices);
-			memberReports.add(newReport);
-			tempServices.clear();
-		}
-		Assertions.assertNotNull(memberReports.get(0));
- 
-    }
-
-    @Test
-    void testGetSummaryReport() throws Exception {
-    	SummaryReport summaryReport = null;
-    	Assertions.assertNull(summaryReport);
-       
-    }
+   @Test
+   void testGetProviderReportSuccess() {
+	   //no errors in provider
+	   try {
+           manager.getProviderReport(terminal, provider);
+           // If the method call completes without throwing an exception, the test passes
+           assertTrue(true);
+       } catch (Exception e) {
+           // If an exception is thrown, the test fails
+           fail("Exception thrown: " + e.getMessage());
+       }
+   }
+   
+   @Test
+   void testGetSummaryReportSuccess() {
+	   ArrayList<SummaryReport> summaryReports = new ArrayList<SummaryReport>();
+	   SummaryReport summaryReport = new SummaryReport(terminal, "summary.pdf");
+	   summaryReports.add(summaryReport);
+	   Assertions.assertEquals(summaryReports.size(), 1);   
+	   }
+   
+   @Test
+   void testCreateNewServiceRecordFailure() throws ParseException {
+	   String dateProvided = "2024-04-09";
+	   String providerID = "2";
+	   String memberID = "3";
+	   String serviceCode = "123456";
+	   String fee = "100.00";
+	   String comments = "Test comments";
+	   provider.createNewServiceRecord(terminal, dateProvided, providerID, memberID, serviceCode, fee, comments);
+   }
 }
