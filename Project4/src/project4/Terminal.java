@@ -23,6 +23,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 
 public class Terminal implements ActionListener {
@@ -187,6 +189,22 @@ public class Terminal implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try(JsonReader reader = new JsonReader(new FileReader("services.json"))) {
+			Gson gson = new GsonBuilder().create();
+			services = new ArrayList<Service>(Arrays.asList(gson.fromJson(reader, Service[].class)));
+		} catch(FileNotFoundException e) {
+			services = new ArrayList<Service>();
+			SimpleDateFormat formatter = new SimpleDateFormat("MM-DD-YYYY");
+			try {
+				services.add(new Service("Dietitian", 598470, 89.99f, formatter.parse("04-09-2024"), formatter.parse("04-09-2024"), members.get(0), (Provider)employees.get(2), "test comment"));
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -204,6 +222,13 @@ public class Terminal implements ActionListener {
 			gson.toJson(employees, writer);
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try(Writer writer = new FileWriter("services.json")) {
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(services, writer);
+		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 	}

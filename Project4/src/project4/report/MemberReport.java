@@ -26,7 +26,7 @@ public class MemberReport extends Report {
 		for(Service service : services){
 			addLineWithTitle("Service Code: ", String.format("%06d", service.getCode()));
 			addLineWithTitle("Provider: ", service.getProvider().getName());
-			addLineWithTitle("Date: ", df.format(calobj.getTime()));
+			addLineWithTitle("Date: ", df.format(service.getDateProvided()));
 			addLine("");
 		}
 		

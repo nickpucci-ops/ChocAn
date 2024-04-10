@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Date;
+import java.util.Map.Entry;
 
 import javax.swing.*;
 
@@ -95,17 +96,16 @@ public class ProviderMenu extends Menu implements ActionListener {
 		//comments
 		addCommentsLabel = new JLabel("Comments: ");
 		billChocAnPanel.add(addCommentsLabel);
-		addCommentsText = new JTextField(100);
+		addCommentsText = new JTextField(16);
 		billChocAnPanel.add(addCommentsText);
 		//submit
 		submitDataBtn = new JButton("Submit");
 		submitDataBtn.addActionListener(this);
-		billChocAnPanel.add(submitDataBtn);
+		//billChocAnPanel.add(submitDataBtn);
 		//back
 		billChocAnCancelBtn = new JButton("Cancel");
 		billChocAnCancelBtn.addActionListener(this);
-		billChocAnPanel.add(billChocAnCancelBtn);
-		
+		//billChocAnPanel.add(billChocAnCancelBtn);		
 		
 	}
 
@@ -215,14 +215,12 @@ public class ProviderMenu extends Menu implements ActionListener {
 	 * @param serviceCode the service code entered by the user
 	 */
 	private Boolean validateServiceCode(String serviceCode) {
-		for(Service service : terminal.getServices()) {
-			if (service.getCode() == Integer.parseInt(serviceCode)) {
+		for(Entry<Integer, String> e : terminal.getServiceCodes().entrySet()) {
+			if(e.getKey() == Integer.parseInt(serviceCode)) {
 				return true;
-			} else {
-				JOptionPane.showMessageDialog(this, "Invalid Service Code", "Error", JOptionPane.ERROR_MESSAGE);
-				return false; //service code not verified
 			}
 		}
+		JOptionPane.showMessageDialog(this, "Invalid Service Code", "Error", JOptionPane.ERROR_MESSAGE);
 		return false;
 	}
 	

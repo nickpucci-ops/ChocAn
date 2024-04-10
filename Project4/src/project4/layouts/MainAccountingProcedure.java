@@ -156,7 +156,7 @@ public class MainAccountingProcedure extends Panel implements ActionListener {
 		sampleServices.add(sampleService);
 		sampleServices.add(sampleService);
 		for(Member member : terminal.getMembers()) {
-			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", sampleServices);
+			MemberReport newReport = new MemberReport(member, "Member_Report-" + member.getMemberNumber() + ".pdf", terminal.getServicesForMember(member));
 			memberReports.add(newReport);//terminal.getServicesForMember(member)
 		}
 	}
