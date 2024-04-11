@@ -39,7 +39,7 @@ public class Manager extends Employee {
      * @param provider The provider for whom the report is generated.
      */
     public void getProviderReport(Terminal terminal, Provider provider) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-DD-YYYY");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         ProviderReport providerReport = new ProviderReport(provider, provider.getName() + " - " + formatter.format(LocalDateTime.now()) + ".pdf", terminal.getServicesForProvider(provider));
         providerReport.open();
     }
@@ -51,7 +51,7 @@ public class Manager extends Employee {
      * @param member The member for whom the report is generated.
      */
     public void getMemberReport(Terminal terminal, Member member) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-DD-YYYY");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
         ArrayList<Service> memberServices = terminal.getServicesForMember(member);
         MemberReport memberReport = new MemberReport(member, member.getName() + " - " + formatter.format(LocalDateTime.now()) + ".pdf", memberServices);
         memberReport.open();

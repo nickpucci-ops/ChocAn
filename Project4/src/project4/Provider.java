@@ -35,8 +35,8 @@ public class Provider extends Employee{
 		PD.open();
 	}
 	
-	public void createNewServiceRecord(Terminal terminal, String dateProvided, String providerID, String memberID, String serviceCode, String fee, String comments) {
-		SimpleDateFormat formatter = new SimpleDateFormat("MM-DD-YYYY");
+	public Boolean createNewServiceRecord(Terminal terminal, String dateProvided, String providerID, String memberID, String serviceCode, String fee, String comments) {
+		SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 		Service service;
 		try {
 			service = new Service(terminal.getServiceCodes().get(Integer.parseInt(serviceCode)), Integer.parseInt(serviceCode), 
@@ -44,12 +44,15 @@ public class Provider extends Employee{
 					Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()), 
 					terminal.getMemberByNumber(memberID), terminal.getProviderByNumber(providerID), comments);
 			terminal.addService(service);
+			return true;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 	}
 	

@@ -20,7 +20,7 @@ public class ProviderReport extends Report{
 		addLineWithTitle("Street Address:", provider.getStreetAddress());
 		addLineWithTitle("City:", provider.getCity());
 		addLineWithTitle("State:", provider.getState());
-		addLineWithTitle("Zip Code:", String.format("%05d", 5));
+		addLineWithTitle("Zip Code:", String.format("%05d", provider.getZipCode()));
 		
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy"); 
 	    DateFormat dateTimeFormat = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss"); 
@@ -29,11 +29,11 @@ public class ProviderReport extends Report{
 		addLine(""); // Add a blank line for spacing
 		addLineWithTitle("Serivces:", "");
 		for(Service service : services){
-	        addLineWithTitle("Date of service:", df.format(calobj.getTime()));
-	        addLineWithTitle("Date recorded:", dateTimeFormat.format(calobj.getTime()));
+	        addLineWithTitle("Date of service:", df.format(service.getDateProvided()));
+	        addLineWithTitle("Date recorded:", dateTimeFormat.format(service.getDateEntered()));
 	        addLineWithTitle("Member Name:", "Bob");
-	        addLineWithTitle("Member Number:", String.format("%09d", 9));
-	        addLineWithTitle("Service Code:", String.format("%06d", 6));
+	        addLineWithTitle("Member Number:", String.format("%09d", service.getMember().getMemberNumber()));
+	        addLineWithTitle("Service Code:", String.format("%06d", service.getCode()));
 	        addLineWithTitle("Fee to be Paid:", String.format("$%.2f", service.getFee()));
 			totalConsultations++;
 			totalFee += service.getFee();

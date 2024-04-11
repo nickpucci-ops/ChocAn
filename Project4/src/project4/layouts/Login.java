@@ -41,13 +41,11 @@ public class Login extends JPanel implements ActionListener {
 		this.add(passwordLabel, c);
 		
 		userNameText = new JTextField(16);
-		userNameText.setText("1");
 		c.gridx = 1;
 		c.gridy = 0;
 		this.add(userNameText, c);
 		
 		passwordText = new JPasswordField(16);
-		passwordText.setText("password");
 		c.gridx = 1;
 		c.gridy = 1;
 		this.add(passwordText, c);

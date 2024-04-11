@@ -2,6 +2,8 @@ package project4.layouts;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map.Entry;
 
@@ -70,7 +72,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 		
 		billChocAnPanel = new JPanel(new GridLayout(0, 2));
 		//date service was provided
-		addDateOfServiceLabel = new JLabel("Date of service(MM DD YYYY): ");
+		addDateOfServiceLabel = new JLabel("Date of service(MM-DD-YYYY): ");
 		billChocAnPanel.add(addDateOfServiceLabel);
 		addDateOfServiceText = new JTextField(16);
 		billChocAnPanel.add(addDateOfServiceText);
@@ -140,7 +142,7 @@ public class ProviderMenu extends Menu implements ActionListener {
 				((Provider)terminal.getLoggedInEmployee()).createNewServiceRecord(terminal, addDateOfServiceText.getText(), 
 						addProviderNumberText.getText(), addMemeberNumberText.getText(),
 						addServiceCodeText.getText(), addFeeText.getText(), addCommentsText.getText());
-				
+				JOptionPane.showMessageDialog(this, "Successfully billed member!", "Success", JOptionPane.INFORMATION_MESSAGE);
 				clear();
 				main.add(mainMenuPanel);
 				setTitle("Provider");
@@ -175,6 +177,14 @@ public class ProviderMenu extends Menu implements ActionListener {
 			Integer.parseInt(addServiceCodeText.getText());
 		} catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "The service code field must be 6 digits", "Error", JOptionPane.ERROR_MESSAGE);
+			return false;
+		}
+		
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+			formatter.parse(addDateOfServiceText.getText()); 
+		} catch(ParseException e) {
+			JOptionPane.showMessageDialog(this, "The date must be in the form 'MM-DD-YYYY'", "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;

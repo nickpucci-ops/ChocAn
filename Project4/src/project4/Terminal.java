@@ -54,7 +54,6 @@ public class Terminal implements ActionListener {
 		
 		//MemberReport testReport = new MemberReport(members.get(0), "memReport.pdf");
 		//testReport.open();				
-		services = new ArrayList<Service>();
 		//ProviderReport TestProvider = new ProviderReport(new Provider(1, "provider1"), "test3.pdf"); 
 		//TestProvider.open(); 
 		
@@ -195,7 +194,7 @@ public class Terminal implements ActionListener {
 			services = new ArrayList<Service>(Arrays.asList(gson.fromJson(reader, Service[].class)));
 		} catch(FileNotFoundException e) {
 			services = new ArrayList<Service>();
-			SimpleDateFormat formatter = new SimpleDateFormat("MM-DD-YYYY");
+			SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 			try {
 				services.add(new Service("Dietitian", 598470, 89.99f, formatter.parse("04-09-2024"), formatter.parse("04-09-2024"), members.get(0), (Provider)employees.get(2), "test comment"));
 			} catch (ParseException e1) {
@@ -309,7 +308,7 @@ public class Terminal implements ActionListener {
 	public ArrayList<Service> getServicesForMember(Member member){
 		ArrayList<Service> memberServices = new ArrayList<>();
 		for (Service service : services) {
-			if (service.getMember().equals(member)) {
+			if (service.getMember().getMemberNumber() == member.getMemberNumber()) {
 				memberServices.add(service);
 			}
 		}
@@ -323,7 +322,7 @@ public class Terminal implements ActionListener {
 	public ArrayList<Service> getServicesForProvider(Provider provider){
 		ArrayList<Service> providerServices = new ArrayList<>();
 		for (Service service : services) {
-			if(service.getProvider().equals(provider)) {
+			if(service.getProvider().getProviderNumber() == provider.getProviderNumber()) {
 				providerServices.add(service);
 			}
 		}
