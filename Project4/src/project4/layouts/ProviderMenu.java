@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import javax.swing.*;
 
 import project4.Terminal;
+import project4.Employee;
 import project4.Member;
 import project4.Provider;
 import project4.Service;
@@ -187,12 +188,10 @@ public class ProviderMenu extends Menu implements ActionListener {
 		for(Member member : terminal.getMembers()) {
 			if (member.getMemberNumber() == Integer.parseInt(memberID)) {
 				return true;
-			} else {
-				JOptionPane.showMessageDialog(this, "Invalid Member Number", "Error", JOptionPane.ERROR_MESSAGE);
-				return false; //member not verified
-			}
+			} 
 		}
-		return false;
+		JOptionPane.showMessageDialog(this, "Invalid Member Number", "Error", JOptionPane.ERROR_MESSAGE);
+		return false; //member not verified
 	}
 	
 	/*
@@ -200,14 +199,12 @@ public class ProviderMenu extends Menu implements ActionListener {
 	 * @param providerID the provider number entered by the user
 	 */
 	private Boolean validateProviderNumber(String providerID){
-		for(Provider provider : terminal.getProviders()) {
-			if (provider.getProviderNumber() == Integer.parseInt(providerID)) {
+		for(Employee employee : terminal.getEmployees()) {
+			if (employee.getEmployeeType() == Employee.PROVIDER && ((Provider)employee).getProviderNumber() == Integer.parseInt(providerID)) {
 				return true;
-			} else {
-				JOptionPane.showMessageDialog(this, "Invalid Provider Number", "Error", JOptionPane.ERROR_MESSAGE);
-				return false; //provider not verified
-			}
+			} 
 		}
+		JOptionPane.showMessageDialog(this, "Invalid Provider Number", "Error", JOptionPane.ERROR_MESSAGE);
 		return false;
 	}
 	/*
