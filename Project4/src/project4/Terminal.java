@@ -178,12 +178,12 @@ public class Terminal implements ActionListener {
 			employees = new ArrayList<Employee>();
 			employees.add(new Operator(1, "operator1"));	
 			employees.add(new Manager(2, "manager1"));
-			employees.add(new Provider(3, "provider1", "name", 8 , "street", "city", "st", 12345));
+			employees.add(new Provider(3, "provider1", "name", 1 , "street", "city", "st", 12345));
 		} catch(JsonSyntaxException e) {
 			employees = new ArrayList<Employee>();
 			employees.add(new Operator(1, "operator1"));
 			employees.add(new Manager(2, "manager1"));
-			employees.add(new Provider(3, "provider1", "name", 8 , "street", "city", "st", 12345));
+			employees.add(new Provider(3, "provider1", "name", 1 , "street", "city", "st", 12345));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
