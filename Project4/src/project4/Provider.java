@@ -39,9 +39,10 @@ public class Provider extends Employee{
 		SimpleDateFormat formatter = new SimpleDateFormat("MM-DD-YYYY");
 		Service service;
 		try {
-			service = new Service(terminal.getServiceCodes().get(serviceCode), Integer.parseInt(serviceCode), Float.parseFloat(fee),
-					new SimpleDateFormat("MM-DD-YYYY").parse(dateProvided),
-					Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()), terminal.getMemberByNumber(memberID), terminal.getProviderByNumber(providerID), comments);
+			service = new Service(terminal.getServiceCodes().get(Integer.parseInt(serviceCode)), Integer.parseInt(serviceCode), 
+					Float.parseFloat(fee), formatter.parse(dateProvided),
+					Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()), 
+					terminal.getMemberByNumber(memberID), terminal.getProviderByNumber(providerID), comments);
 			terminal.addService(service);
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block

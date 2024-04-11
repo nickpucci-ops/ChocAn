@@ -214,12 +214,17 @@ public class OperatorMenu extends Menu implements ActionListener {
 		deleteMemberCancelBtn.addActionListener(this);
 		
 		addProviderPanel = new JPanel(new GridLayout(0, 2));
+		
 		addProviderNameLabel = new JLabel("Name: ");
 		addProviderPanel.add(addProviderNameLabel);
 		addProviderNameText = new JTextField(16);
 		addProviderPanel.add(addProviderNameText);
+		
 		addProviderUsernameLabel = new JLabel("Username: ");
+		addProviderPanel.add(addProviderUsernameLabel);
 		addProviderUsernameText = new JTextField(16);
+		addProviderPanel.add(addProviderUsernameText);
+		
 		addProviderAddressLabel = new JLabel("Address: ");
 		addProviderPanel.add(addProviderAddressLabel);
 		addProviderAddressText = new JTextField(16);
